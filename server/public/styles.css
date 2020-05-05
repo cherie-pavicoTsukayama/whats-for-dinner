@@ -6,4 +6,33 @@ height:100vh;
 background-color:#007171;
 border-radius:  20px;
 width:150px;
+font-family:Montserrat;
+font-weight: 700;
+}
+
+.match-text {
+font-family:Montserrat;
+font-weight: 900;
+color:#fe4a3b;
+}
+
+
+.logo-space {
+  background-color:yellow;
+  background-image: url('./images/Match-Icon.png');
+  background-size:cover;
+  height:15vh;
+}
+
+
+.match-background {
+background-color:green;
+}
+
+.row-background {
+  background-color:pink;
+}
+
+.column-background {
+  background-color:chartreuse;
 }
