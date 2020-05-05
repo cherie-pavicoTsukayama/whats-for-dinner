@@ -1,5 +1,9 @@
+body {
+  margin:0;
+}
+
 .landing-page-image {
-  background-image:url(./images/jay-wennington-N_Y88TWmGwA-unsplash.jpg);
+  background-image:url(./images/createJoinRoom-bgImage.jpg);
   height:100vh;
   max-width:100%;
   background-size:cover;
@@ -18,4 +22,5 @@ color: #128781;
 background-color: #EDEDEC;
 font-family:Montserrat;
 font-weight: 700;
+border:none;
 }
