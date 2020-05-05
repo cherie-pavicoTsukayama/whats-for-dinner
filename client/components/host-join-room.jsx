@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function HostJoinRoom(props) {
+export default function HostJoinRoom(onClickFunction) {
 
   return (
     <div className={'host-join-room m-0 d-flex flex-wrap justify-content-center align-items-center'}>
@@ -11,7 +11,7 @@ export default function HostJoinRoom(props) {
         </div>
         <div className="col-sm-6 mb-5 d-flex flex-wrap justify-content-center">
           <p className={'col-sm-12 text-center lead montserrat-400 grey-font'}><u>roomId auto populates</u></p>
-          <button type="button" className="btn btn-secondary grey-button m-3 lead">Join</button>
+          <button type="button" className="btn btn-secondary grey-button m-3 lead" onClick={ onClickFunction }>Join Room</button>
         </div>
       </div>
 
