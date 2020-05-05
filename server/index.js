@@ -19,7 +19,7 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/room/:entryKey', (req, res, next) => {
+app.get('/api/rooms/:entryKey', (req, res, next) => {
   const { entryKey } = req.params;
   const getRoom = `
     select "restaurants",
