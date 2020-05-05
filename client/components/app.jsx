@@ -9,19 +9,18 @@ export default class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   fetch('/api/health-check')
-  //     .then(res => res.json())
-  //     .then(data => this.setState({ message: data.message || data.error }))
-  //     .catch(err => this.setState({ message: err.message }))
-  //     .finally(() => this.setState({ isLoading: false }));
-  // }
+  componentDidMount() {
+    fetch('/api/health-check')
+      .then(res => res.json())
+      .then(data => this.setState({ message: data.message || data.error }))
+      .catch(err => this.setState({ message: err.message }))
+      .finally(() => this.setState({ isLoading: false }));
+  }
 
   render() {
-    return (<LandingPage />);
+    return this.state.isLoading
+      ? <h1>Testing connections...</h1>
+      : <h1>{this.state.message.toUpperCase()}</h1>;
+    // (<LandingPage />);
   }
 }
-
-// return this.state.isLoading
-//   ? <h1>Testing connections...</h1>
-//   : <h1>{this.state.message.toUpperCase()}</h1>;
