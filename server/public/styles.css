@@ -1,0 +1,19 @@
+.landing-page-image {
+  background-image:url(./images/jay-wennington-N_Y88TWmGwA-unsplash.jpg);
+  height:100vh;
+  max-width:100%;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content: flex-end;
+  flex-direction:column;
+}
+
+
+.grey-button {
+width:200px;
+color: #128781;
+background-color: #EDEDEC;
+}
