@@ -1,0 +1,9 @@
+.one-hundred-view-height {
+height:100vh;
+}
+
+.blue-rounded-button {
+background-color:#007171;
+border-radius:  20px;
+width:150px;
+}
