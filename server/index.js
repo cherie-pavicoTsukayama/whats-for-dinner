@@ -34,8 +34,34 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/restaurants', (req, res, next) => {
+  req.session.roomId = 1;
+  const roomId = req.session.roomId;
+  if (!req.session.roomId) {
+    throw new ClientError('There is no associated roomId with this session', 400);
+  }
+
+  const getRestaurantListSql = `
+    select "restaurants"
+      from "rooms"
+     where "roomId" = $1
+  `;
+  const value = [roomId];
+  db.query(getRestaurantListSql, value)
+    .then(result => {
+      const restaurants = result.rows[0];
+      if (!restaurants) {
+        return res.status(400).json({
+          error: `The room ${value[0]} you are looking for does not exist`
+        });
+      }
+      res.status(200).json(restaurants);
+    })
+    .catch(err => console.error(err));
+});
+
 app.use('/api', (req, res, next) => {
-  next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
+  next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
 
 app.use((err, req, res, next) => {
