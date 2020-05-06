@@ -34,7 +34,7 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .then(result => res.json(result.rows[0]))
     .catch(err => next(err));
 });
-app.get('/api/create-room', (req, res, next) => {
+app.post('/api/rooms', (req, res, next) => {
   if (!req.body.location) {
     res.status(400).json({
       error: 'Location is a required field. Please input city or zip.'
