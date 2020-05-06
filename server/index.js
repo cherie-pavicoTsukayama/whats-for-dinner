@@ -35,6 +35,30 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .catch(err => next(err));
 });
 app.get('/api/create-room', (req, res, next) => {
+  if (!req.body.location) {
+    res.status(400).json({
+      error: 'Location is a required field. Please input city or zip.'
+    });
+    return;
+  }
+  if (!req.body.category) {
+    res.status(400).json({
+      error: 'Category is a required field'
+    });
+    return;
+  }
+  if (!req.body.radius) {
+    res.status(400).json({
+      error: 'Distance is a required field'
+    });
+    return;
+  }
+  if (!req.body.price) {
+    res.status(400).json({
+      error: 'Price is a required field. Please enter number values 1-4'
+    });
+    return;
+  }
   if (!req.session.userId) {
     const makeUserIdSql = `
     insert into "users" ("userId")
@@ -57,26 +81,22 @@ app.get('/api/create-room', (req, res, next) => {
     }
   };
 
-  fetch('https://api.yelp.com/v3/businesses/search?term=burgers&location=irvine', options)
+  fetch('https://api.yelp.com/v3/businesses/search?term=burgers&location=92612&limit=10', options)
     .then(response => response.json())
     .then(data => {
+      const bytes = crypto.randomBytes(4).toString('hex');
 
-      let token;
-      crypto.randomBytes(4, function (err, buffer) {
-        token = buffer.toString('hex');
-        console.log('inside', token);
-      });
-      console.log(token);
-      const params = [data, 1234, true, req.session.userId];
+      const params = [data, bytes, true, req.session.userId];
       const makeRoomSql = `
       insert into "rooms" ("roomId", "restaurants", "entryKey", "isActive", "userId")
       values (default, $1, $2, $3, $4)
-      returning "roomId"
+      returning "restaurants", "roomId", "entryKey", "isActive", "userId"
       ;`;
       db.query(makeRoomSql, params)
         .then(result1 => {
           console.log(result1.rows[0]);
           req.session.roomId = result1.rows[0].roomId;
+          res.status(200).json(result1.rows[0]);
         });
     })
     .catch(err => next(err));
