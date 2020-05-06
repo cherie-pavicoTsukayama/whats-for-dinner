@@ -35,6 +35,19 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .catch(err => next(err));
 });
 app.get('/api/create-room', (req, res, next) => {
+  if (!req.session.userId) {
+    const makeUserIdSql = `
+    insert into "users" ("userId")
+      values (default)
+      returning *
+      ;
+    `;
+    db.query(makeUserIdSql)
+      .then(resultUser => {
+        req.session.userId = resultUser.rows[0].userId;
+      });
+  }
+
   const options = {
     method: 'GET',
     headers: {
@@ -51,27 +64,17 @@ app.get('/api/create-room', (req, res, next) => {
       crypto.randomBytes(4, function (err, buffer) {
         token = buffer.toString('hex');
       });
-
-      const generateRoomIdSql = `
-      insert into "rooms" ("roomId", "restaurants", "entryKey", "isActive")
-      values (default, $1, $2, $3)
+      const params = [data, token, true, req.session.userId];
+      const makeRoomSql = `
+      insert into "rooms" ("roomId", "restaurants", "entryKey", "isActive", "userId")
+      values (default, $1, $2, $3, $4)
       returning "roomId"
-      `;
-      db.query(generateRoomIdSql)
+      ;`;
+      db.query(makeRoomSql, params)
         .then(result1 => {
-          return { roomId: result1.rows[0].roomId };
+          console.log(result1.rows[0]);
+          req.session.roomId = result1.rows[0].roomId;
         });
-
-      // check if user id exists
-      let sql;
-      if (!req.session.userId) {
-        sql = `
-        insert into "users" ("userId")
-        values (default)
-        returning *
-        `;
-      }
-
     });
 });
 
