@@ -1,3 +1,8 @@
+
+body {
+  margin: 0;
+}
+
 .one-hundred-view-height {
 height:100vh;
 }
@@ -54,4 +59,58 @@ display:flex;
 
 .display-modal {
   display:block;
+
+.host-join-room {
+  position: relative;
+  height: 100vh;
+  background-image: url(./images/whats-for-dinner-onion-rings.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.darken-background {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.montserrat-400 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+.black-font {
+  color: black;
+}
+
+.grey-font {
+  color: #d2d2d2;
+}
+
+.white-transparent-background {
+  background-color: rgba(255, 255, 255, .7);
+}
+
+.landing-page-image {
+  background-image:url(./images/createJoinRoom-bgImage.jpg);
+  height:100vh;
+  max-width:100%;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content: flex-end;
+  flex-direction:column;
+}
+
+.grey-button {
+width:200px;
+color: #128781;
+background-color: #EDEDEC;
+font-family:'Montserrat', sans-serif;
+font-weight: 700;
+border:none;
+
 }
