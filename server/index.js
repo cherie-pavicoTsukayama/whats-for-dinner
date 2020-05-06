@@ -7,6 +7,7 @@ const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
 const fetch = require('node-fetch');
 const app = express();
+const crypto = require('crypto');
 
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
@@ -34,9 +35,6 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .catch(err => next(err));
 });
 app.get('/api/create-room', (req, res, next) => {
-  console.log('hit');
-  // first thing should validate that all form data was sent
-  // authorization key should be hidden in env
   const options = {
     method: 'GET',
     headers: {
@@ -44,12 +42,36 @@ app.get('/api/create-room', (req, res, next) => {
       'Content-Type': 'application/json'
     }
   };
-  // consider adding bearer here
-  // fetch would use {$req.body.city} etc...
+
   fetch('https://api.yelp.com/v3/businesses/search?term=burgers&location=irvine', options)
     .then(response => response.json())
     .then(data => {
-      res.json(data);
+
+      let token;
+      crypto.randomBytes(4, function (err, buffer) {
+        token = buffer.toString('hex');
+      });
+
+      const generateRoomIdSql = `
+      insert into "rooms" ("roomId", "restaurants", "entryKey", "isActive")
+      values (default, $1, $2, $3)
+      returning "roomId"
+      `;
+      db.query(generateRoomIdSql)
+        .then(result1 => {
+          return { roomId: result1.rows[0].roomId };
+        });
+
+      // check if user id exists
+      let sql;
+      if (!req.session.userId) {
+        sql = `
+        insert into "users" ("userId")
+        values (default)
+        returning *
+        `;
+      }
+
     });
 });
 
