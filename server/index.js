@@ -90,11 +90,10 @@ app.get('/api/create-room', (req, res, next) => {
       const makeRoomSql = `
       insert into "rooms" ("roomId", "restaurants", "entryKey", "isActive", "userId")
       values (default, $1, $2, $3, $4)
-      returning "restaurants", "roomId", "entryKey", "isActive", "userId"
+      returning "roomId", "entryKey", "isActive", "userId"
       ;`;
       db.query(makeRoomSql, params)
         .then(result1 => {
-          console.log(result1.rows[0]);
           req.session.roomId = result1.rows[0].roomId;
           res.status(200).json(result1.rows[0]);
         });
