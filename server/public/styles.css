@@ -59,6 +59,7 @@ display:flex;
 
 .display-modal {
   display:block;
+}
 
 .host-join-room {
   position: relative;
@@ -86,6 +87,10 @@ display:flex;
 
 .grey-font {
   color: #d2d2d2;
+}
+
+.brand-main-color {
+  color: #007E77;
 }
 
 .white-transparent-background {
