@@ -7,36 +7,24 @@ export default class VotingRoom extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      show: false
+      match: true
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
   }
 
   showModal() {
-    this.setState({ show: true });
+    this.setState({ match: true });
   }
 
   hideModal() {
-    this.setState({ show: false });
+    this.setState({ match: false });
   }
 
   render() {
     return (
       <div>
-        <div className="voting-room-picture one-hundred-view-height">
-          <button
-            type="button"
-            onClick={() => {
-              this.showModal();
-            }}
-            className="btn btn-secondary blue-rounded-button">
-            View Matches
-          </button>
-        </div >
-        <div>
-          <MatchConfirmed show={this.state.show} hideModal={this.hideModal} />
-        </div >
+        <MatchConfirmed match={this.state.match} hideModal={this.hideModal} />
       </div >
     );
   }

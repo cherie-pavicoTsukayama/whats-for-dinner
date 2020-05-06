@@ -29,20 +29,13 @@ color:#fe4a3b;
 height:50vh;
 background-color:white;
 border-radius:20px;
-  position:fixed;
-  background: white;
-  width: 80%;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  display:flex;
-}
-
-.voting-room-picture {
-  background-image: url('./images/match-logo.png');
-  background-size:cover;
-  background-repeat:no-repeat;
-  background-position: center;
+position:fixed;
+background: white;
+width: 80%;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
+display:flex;
 }
 
 .match-modal {

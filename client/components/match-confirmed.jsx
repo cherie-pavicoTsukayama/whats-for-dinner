@@ -3,7 +3,7 @@ import React from 'react';
 function MatchConfirmed(props) {
 
   let className = null;
-  if (props.show === false) {
+  if (props.match === false) {
     className = 'display-none';
   } else {
     className = 'display-modal';
