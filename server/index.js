@@ -107,6 +107,23 @@ app.get('/api/restaurants/:restaurantId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/restaurants/:restaurantId/reviews', (req, res, next) => {
+  const { restaurantId } = req.params;
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: process.env.YELP_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch(`https://api.yelp.com/v3/businesses/${restaurantId}/reviews`, options)
+    .then(result => result.json())
+    .then(data => {
+      return res.status(200).json(data);
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
