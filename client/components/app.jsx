@@ -1,24 +1,13 @@
 import React from 'react';
-import MatchConfirmed from './match-confirmed';
+import VotingRoom from './voting-room';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message: null,
-      isLoading: true,
-      show: false
+      isLoading: true
     };
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
-  }
-
-  showModal() {
-    this.setState({ show: true });
-  }
-
-  hideModal() {
-    this.setState({ show: false });
   }
 
   componentDidMount() {
@@ -32,20 +21,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="app-test-picture one-hundred-view-height">
-          <button
-            type="button"
-            onClick={() => {
-              this.showModal();
-            }}
-            className="btn btn-secondary blue-rounded-button">
-            View Matches
-          </button>
-        </div >
-        <div>
-          <MatchConfirmed show={this.state.show} hideModal={this.hideModal} />
-        </div >
-      </div >
+        <VotingRoom />
+      </div>
     );
   }
 }

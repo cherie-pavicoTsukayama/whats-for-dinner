@@ -18,34 +18,28 @@ color:#fe4a3b;
 }
 
 .match-logo {
-  background-image: url('./images/match-logo-4.png');
+  background-image: url('./images/match-logo.png');
   background-size:cover;
   background-repeat:no-repeat;
   background-position: center;
   height:20vh;
 }
 
-/* .match-background {
-  background-color:#808080;
-} */
-
 .match-modal-interior-container {
 height:50vh;
 background-color:white;
 border-radius:20px;
-/* border:solid black 1px; */
   position:fixed;
   background: white;
   width: 80%;
-  /* height: auto; */
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
   display:flex;
 }
 
-.app-test-picture {
-  background-image: url('./images/match-logo-4.png');
+.voting-room-picture {
+  background-image: url('./images/match-logo.png');
   background-size:cover;
   background-repeat:no-repeat;
   background-position: center;
