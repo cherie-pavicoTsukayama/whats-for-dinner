@@ -5,7 +5,7 @@ const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
-
+const fetch = require('node-fetch');
 const app = express();
 
 app.use(staticMiddleware);
@@ -32,6 +32,25 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
   db.query(getRoom, value)
     .then(result => res.json(result.rows[0]))
     .catch(err => next(err));
+});
+app.get('/api/create-room', (req, res, next) => {
+  console.log('hit');
+  // first thing should validate that all form data was sent
+  // authorization key should be hidden in env
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: process.env.YELP_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+  // consider adding bearer here
+  // fetch would use {$req.body.city} etc...
+  fetch('https://api.yelp.com/v3/businesses/search?term=burgers&location=irvine', options)
+    .then(response => response.json())
+    .then(data => {
+      res.json(data);
+    });
 });
 
 app.use('/api', (req, res, next) => {
