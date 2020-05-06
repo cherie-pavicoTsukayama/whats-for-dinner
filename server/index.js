@@ -5,6 +5,7 @@ const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -64,8 +65,50 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/restaurants', (req, res, next) => {
+  const roomId = req.session.roomId;
+  if (!req.session.roomId) {
+    throw new ClientError('There is no associated roomId with this session', 400);
+  }
+
+  const getRestaurantListSql = `
+    select "restaurants"
+      from "rooms"
+     where "roomId" = $1
+  `;
+  const value = [roomId];
+  db.query(getRestaurantListSql, value)
+    .then(result => {
+      const restaurants = result.rows[0];
+      if (!restaurants) {
+        return res.status(400).json({
+          error: `The room ${value[0]} you are looking for does not exist`
+        });
+      }
+      res.status(200).json(restaurants);
+    })
+    .catch(err => console.error(err));
+});
+
+app.get('/api/restaurants/:restaurantId', (req, res, next) => {
+  const { restaurantId } = req.params;
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: process.env.YELP_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch(`https://api.yelp.com/v3/businesses/${restaurantId}`, options)
+    .then(result => result.json())
+    .then(data => {
+      return res.status(200).json(data);
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
-  next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
+  next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
 
 app.use((err, req, res, next) => {
