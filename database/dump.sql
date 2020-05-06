@@ -77,7 +77,7 @@ CREATE TABLE public."likedRestaurants" (
 
 CREATE TABLE public.rooms (
     "roomId" integer NOT NULL,
-    restaurants text NOT NULL,
+    restaurants json NOT NULL,
     "isActive" boolean NOT NULL,
     "entryKey" text NOT NULL,
     "userId" integer NOT NULL
@@ -160,6 +160,7 @@ COPY public."likedRestaurants" ("roomId", "restaurantId", "userId") FROM stdin;
 --
 
 COPY public.rooms ("roomId", restaurants, "isActive", "entryKey", "userId") FROM stdin;
+1	[{"a": 1}, {"b": 2}, {"c": 3}]	t	key123	1
 \.
 
 
@@ -168,6 +169,14 @@ COPY public.rooms ("roomId", restaurants, "isActive", "entryKey", "userId") FROM
 --
 
 COPY public.users ("userId") FROM stdin;
+1
+2
+3
+4
+5
+6
+7
+8
 \.
 
 
@@ -175,14 +184,14 @@ COPY public.users ("userId") FROM stdin;
 -- Name: rooms_roomId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."rooms_roomId_seq"', 1, false);
+SELECT pg_catalog.setval('public."rooms_roomId_seq"', 1, true);
 
 
 --
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 1, false);
+SELECT pg_catalog.setval('public."users_userId_seq"', 8, true);
 
 
 --

@@ -27,10 +27,40 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
       from "rooms"
      where "entryKey" = $1
   `;
-
   const value = [entryKey];
   db.query(getRoom, value)
-    .then(result => res.json(result.rows[0]))
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(`cannot find room corresponding to 'entryKey': ${entryKey}`, 400);
+      } else if (!req.session.userId) {
+        const createUserIdSql = `
+        insert into "users" ("userId")
+        values (default)
+        returning *
+        `;
+        return (
+          db.query(createUserIdSql)
+            .then(result2 => {
+              return {
+                userId: result2.rows[0].userId,
+                roomId: result.rows[0].roomId,
+                restaurants: result.rows[0].restaurants
+              };
+            })
+        );
+      } else {
+        return {
+          userId: req.session.userId,
+          roomId: result.rows[0].roomId,
+          restaurants: result.rows[0].restaurants
+        };
+      }
+    })
+    .then(result => {
+      req.session.userId = result.userId;
+      req.session.roomId = result.roomId;
+      res.json(result);
+    })
     .catch(err => next(err));
 });
 
