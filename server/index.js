@@ -74,7 +74,7 @@ app.get('/api/restaurants/:restaurantId', (req, res, next) => {
     .then(data => {
       return res.status(200).json(data);
     })
-    .catch(err => console.error(err));
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
