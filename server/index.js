@@ -45,7 +45,8 @@ app.get('/api/create-room', (req, res, next) => {
     db.query(makeUserIdSql)
       .then(resultUser => {
         req.session.userId = resultUser.rows[0].userId;
-      });
+      })
+      .catch(err => next(err));
   }
 
   const options = {
@@ -63,8 +64,10 @@ app.get('/api/create-room', (req, res, next) => {
       let token;
       crypto.randomBytes(4, function (err, buffer) {
         token = buffer.toString('hex');
+        console.log('inside', token);
       });
-      const params = [data, token, true, req.session.userId];
+      console.log(token);
+      const params = [data, 1234, true, req.session.userId];
       const makeRoomSql = `
       insert into "rooms" ("roomId", "restaurants", "entryKey", "isActive", "userId")
       values (default, $1, $2, $3, $4)
@@ -75,7 +78,8 @@ app.get('/api/create-room', (req, res, next) => {
           console.log(result1.rows[0]);
           req.session.roomId = result1.rows[0].roomId;
         });
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
