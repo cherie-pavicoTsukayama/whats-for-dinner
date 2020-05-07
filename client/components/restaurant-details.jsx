@@ -4,12 +4,13 @@ export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hours: null
+      hours: []
     };
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
     this.renderIsOpen = this.renderIsOpen.bind(this);
     this.renderHours = this.renderHours.bind(this);
+    this.convertDayOfTheWeek = this.convertDayOfTheWeek.bind(this);
   }
 
   renderStarRating() {
@@ -81,17 +82,44 @@ export default class RestaurantDetail extends React.Component {
 
   }
 
-  renderHours() {
-    return (
-      <div className="w-80 d-felx row justify-content-center">
-        <div className="col-2 mr-3">
-          <p className="montserrat-700">Mon</p>
+  convertDayOfTheWeek(weekDay) {
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    let day = null;
+    if (weekDay.length !== 0) {
+      day = weekDay.day;
+    }
+    return days[day];
+  }
+
+  converTime() {
+
+  }
+
+  renderHours(hours) {
+    const renderHours = hours.map(weekDay => {
+
+      return (
+        <div key={weekDay.day} className="w-80 d-felx row justify-content-center">
+          <div className="col-2 mr-3">
+            <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+          </div>
+          <div className="col">
+            <p className="text-center montserrat-500 m-0">11:00am - 9:30pm</p>
+          </div>
         </div>
-        <div className="col">
-          <p className="text-center montserrat-500">11:00am - 9:30pm</p>
-        </div>
-      </div>
-    );
+      );
+    });
+    // return (
+    //   <div className="w-80 d-felx row justify-content-center">
+    //     <div className="col-2 mr-3">
+    //       <p className="montserrat-700">{this.convertDayOfTheWeek(hours)}</p>
+    //     </div>
+    //     <div className="col">
+    //       <p className="text-center montserrat-500">11:00am - 9:30pm</p>
+    //     </div>
+    //   </div>
+    // );
+    return renderHours;
   }
 
   componentDidMount() {
@@ -107,14 +135,14 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
           </div>
-          <div className="pt-4 pb-4">
+          <div className="pt-4 pb-5">
             {this.renderAddress()}
           </div>
-          <div className="col-12 d-flex justify-content-center pb-4">
+          <div className="col-12 d-flex justify-content-center pb-3">
             {this.renderIsOpen()}
           </div>
-          <div className="col-12 w-100 d-flex justify-content-center">
-            {this.renderHours()}
+          <div className="col-12 w-100 d-flex flex-wrap justify-content-center">
+            {this.renderHours(this.state.hours)}
           </div>
 
         </div>
