@@ -2,25 +2,14 @@ import React from 'react';
 
 export default function UserJoinRoom(props) {
   return (
-    <div className={'user-join-room m-0 d-flex flex-wrap justify-content-center align-items-center'}>
+    <div className={'user-join-room d-flex align-items-center'}>
       <div className={'darken-background'}></div>
-      <div className={'col-sm-12 m-0 p-0'}>
-        <div className={'col-sm-12 white-transparent-background pt-3 pb-3 mb-5'}>
-          <p className={'text-center montserrat-400 black-font-p  lead mb-0'}>
-            Your Room
-            <br />
-            With Entry Key <span><u> {props.entryKey}</u></span>
-            <br />
-            Has Been Created
-          </p>
+      <form onSubmit={props.joinRoom} className={'col-sm-12 p-0 d-flex flex-column align-items-center'}>
+        <div className={'col-sm-12 white-transparent-background py-3 mb-5 d-flex justify-content-center'}>
+          <input className="user-join-input" type="text" placeholder="Entry Key" maxLength="8"/>
         </div>
-        <div className="col-sm-12 d-flex flex-wrap justify-content-center">
-          <h2 className="col-sm-12 text-center montserrat-400 grey-font">
-            <u>Entry Key</u>
-          </h2>
-          <button type="button" className="btn btn-secondary grey-button m-3 lead" onClick={props.joinRoom}>Join Room</button>
-        </div>
-      </div>
+        <button type="submit" className="btn btn-secondary grey-button m-3">Join Room</button>
+      </form>
     </div>
   );
 }
