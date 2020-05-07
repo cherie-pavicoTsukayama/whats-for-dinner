@@ -114,3 +114,22 @@ font-weight: 700;
 border:none;
 
 }
+
+.user-join-input {
+  width: 200px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #128781;
+  outline: none;
+  text-align: center;
+  color: #128781;
+  font-family:'Montserrat', sans-serif;
+}
+.text-align-center{
+  text-align: center;
+}
+
+.radio-buttons{
+  border: 10px solid #128781;
+  background-color:  #128781;
+}
