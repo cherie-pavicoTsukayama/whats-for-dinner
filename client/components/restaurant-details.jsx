@@ -3,6 +3,9 @@ import React from 'react';
 export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      hours: null
+    };
     this.starRating = this.starRating.bind(this);
     this.address = this.address.bind(this);
   }
@@ -41,12 +44,28 @@ export default class RestaurantDetail extends React.Component {
     return displayAddress;
   }
 
+  getRestaurantDetails() {
+    const restaurantId = this.props.restaurants[0].id;
+    fetch(`/api/restaurants/${restaurantId}`)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          hours: data.hours
+        });
+      })
+      .catch(err => console.error(err));
+  }
+
+  componentDidMount() {
+    this.getRestaurantDetails();
+  }
+
   render() {
     return (
 
       <div>
         <div className="d-flex flex-wrap justify-content-center mt-4">
-          <h1 className="  montserrat-400 brand-main-color">{this.props.restaurants[0].name}</h1>
+          <h1 className="montserrat-400 brand-blue">{this.props.restaurants[0].name}</h1>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.starRating()}
           </div>
