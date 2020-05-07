@@ -193,7 +193,14 @@ app.post('/api/rooms', (req, res, next) => {
 });
 
 app.post('/api/restaurants/liked', (req, res, next) => {
-
+  const likedRestaurantSql = `
+  insert into "likedRestaurants" ("roomId", "restaurantId", "userId")
+  values ($1, $2, $3)
+  `;
+  const params = [req.session.roomId, req.body.restaurantId, req.session.userId];
+  db.query(likedRestaurantSql, params)
+    .then(result => res.sendStatus(201))
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
