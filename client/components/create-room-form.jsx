@@ -36,23 +36,28 @@ class CreateRoomForm extends React.Component {
       <div className='container'>
         <form onSubmit={() => { this.props.createRoom(this.state); event.preventDefault(); }}>
           <div className='form-group mt-2 mb-2'>
-            <p>Name</p>
-            <input type="text" className='form-control' id='name' onChange={this.handleName} />
+            <p>Location</p>
+            <input type="text" className='form-control' id='location' onChange={this.handlelocation} />
 
           </div>
           <div className='form-group mt-2 mb-2'>
-            <p>Credit Card</p>
-            <input type="number" className='form-control' id='creditCard' onChange={this.handleCredit} />
+            <p>Distance</p>
+            <input type="number" className='form-control' id='radius' onChange={this.handleRadius} />
 
           </div>
           <div className='form-group mt-2 mb-2'>
-            <p>Shipping Address</p>
-            <textarea className='form-control' name="shippingAddress" id="shippingAddress" cols="30" rows="10" onChange={this.handleShipping}></textarea>
+            <p>Category</p>
+            <input type="number" className='form-control' id='category' onChange={this.handleCategory} />
+
+          </div>
+          <div className='form-group mt-2 mb-2'>
+            <p>Price</p>
+            <input type="number" className='form-control' id='price' onChange={this.handlePrice} />
 
           </div>
           <div className='row d-flex justify-content-between mt-2 mb-2'>
             <p onClick={() => { this.props.setView('catalog', {}); }}>&lt; Continue Shopping</p>
-            <button type='submit' className='btn btn-primary'>Place Order</button>
+            <button type='submit' className='btn btn-primary'>Create Room</button>
           </div>
         </form>
 
@@ -62,3 +67,5 @@ class CreateRoomForm extends React.Component {
   }
 
 }
+
+export default CreateRoomForm;

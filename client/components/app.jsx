@@ -1,7 +1,7 @@
 import React from 'react';
 
 import VotingRoom from './voting-room';
-
+import CreateRoomForm from './create-room-form';
 
 import LandingPage from './landing-page';
 
@@ -45,9 +45,7 @@ export default class App extends React.Component {
       : <h1>{this.state.message.toUpperCase()}</h1>,
     <div>
 
-    
-
-      <LandingPage />
+      <CreateRoomForm />
     </div >
 
     );
