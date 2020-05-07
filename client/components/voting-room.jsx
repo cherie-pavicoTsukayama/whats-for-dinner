@@ -24,8 +24,10 @@ export default class VotingRoom extends React.Component {
   render() {
     return (
       <div>
-        <MatchConfirmed match={this.state.match} hideModal={this.hideModal} />
+
       </div >
     );
   }
 }
+
+{ /* <MatchConfirmed match={this.state.match} hideModal={this.hideModal} /> */ }
