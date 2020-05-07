@@ -10,7 +10,7 @@ export default function HostJoinRoom(props) {
           <p className={'text-center montserrat-400 black-font-p  lead mb-0'}>
             Your Room
             <br />
-            With Entry Key <span><u> { props.entryKey}</u></span>
+            With Entry Key <span><u> { props.entryKey }</u></span>
             <br />
             Has Been Created
           </p>

@@ -119,3 +119,8 @@ font-weight: 700;
 border:none;
 
 }
+
+.star-rating {
+  width: 60%;
+  max-width: 200px;
+}
