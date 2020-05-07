@@ -81,6 +81,11 @@ display:flex;
   font-weight: 400;
 }
 
+.montserrat-500 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
 .black-font {
   color: black;
 }
@@ -121,6 +126,11 @@ border:none;
 }
 
 .star-rating {
-  width: 60%;
+  width: 50%;
   max-width: 200px;
+}
+
+.address {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }

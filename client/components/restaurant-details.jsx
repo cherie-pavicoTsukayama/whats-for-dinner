@@ -4,6 +4,7 @@ export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
     this.starRating = this.starRating.bind(this);
+    this.address = this.address.bind(this);
   }
 
   starRating() {
@@ -32,6 +33,14 @@ export default class RestaurantDetail extends React.Component {
     }
   }
 
+  address() {
+    const address = this.props.restaurants[0].location.display_address;
+    const displayAddress = address.map(line => {
+      return <p key={line[0]} className="m-0 p-0 montserrat-500 address">{line}</p>;
+    });
+    return displayAddress;
+  }
+
   render() {
     return (
 
@@ -41,7 +50,9 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.starRating()}
           </div>
-          <p></p>
+          <div className="pt-4 pb-4">
+            {this.address()}
+          </div>
         </div>
       </div>
     );
