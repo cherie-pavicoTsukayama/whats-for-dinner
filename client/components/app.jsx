@@ -15,7 +15,7 @@ export default class App extends React.Component {
 
   joinRoom(entryKey) {
     fetch(`/api/rooms/${entryKey}`)
-      .then(result => result.json())
+      .then(response => response.json())
       .then(data => {
         this.setState({
           restaurants: data.restaurants,
@@ -23,7 +23,6 @@ export default class App extends React.Component {
         });
       })
       .catch(err => console.error(err));
-
   }
 
   componentDidMount() {
