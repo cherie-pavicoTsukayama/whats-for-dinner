@@ -192,6 +192,10 @@ app.post('/api/rooms', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/restaurants/liked', (req, res, next) => {
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
