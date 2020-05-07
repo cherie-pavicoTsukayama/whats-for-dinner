@@ -4,12 +4,12 @@ export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hours: null,
-      isOpen: null
+      hours: null
     };
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
-    this.isOpen = this.isOpen.bind(this);
+    this.renderIsOpen = this.renderIsOpen.bind(this);
+    this.renderHours = this.renderHours.bind(this);
   }
 
   renderStarRating() {
@@ -64,7 +64,7 @@ export default class RestaurantDetail extends React.Component {
       .catch(err => console.error(err));
   }
 
-  isOpen() {
+  renderIsOpen() {
     if (this.state.isOpen) {
       return (
         <div className="open-closed-feature bg-orange p-1">
@@ -79,6 +79,19 @@ export default class RestaurantDetail extends React.Component {
       );
     }
 
+  }
+
+  renderHours() {
+    return (
+      <div className="w-80 d-felx row justify-content-center">
+        <div className="col-2 mr-3">
+          <p className="montserrat-700">Mon</p>
+        </div>
+        <div className="col">
+          <p className="text-center montserrat-500">11:00am - 9:30pm</p>
+        </div>
+      </div>
+    );
   }
 
   componentDidMount() {
@@ -98,8 +111,12 @@ export default class RestaurantDetail extends React.Component {
             {this.renderAddress()}
           </div>
           <div className="col-12 d-flex justify-content-center pb-4">
-            {this.isOpen()}
+            {this.renderIsOpen()}
           </div>
+          <div className="col-12 w-100 d-flex justify-content-center">
+            {this.renderHours()}
+          </div>
+
         </div>
       </div>
     );
