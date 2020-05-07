@@ -1,12 +1,34 @@
 import React from 'react';
+
+import VotingRoom from './voting-room';
+
+
 import LandingPage from './landing-page';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message: null,
-      isLoading: true
+      isLoading: true,
+      entryKey: 'abc123',
+      view: 'landingPage'
     };
+
+    this.joinRoom = this.joinRoom.bind(this);
+  }
+
+  joinRoom() {
+    fetch(`/api/rooms/${this.state.entryKey}`)
+      .then(result => result.json())
+      .then(data => {
+        this.setState({
+          restaurants: data.restaurants,
+          view: 'viewRestaurants'
+        });
+      })
+      .catch(err => console.error(err));
+
   }
 
   componentDidMount() {
@@ -22,6 +44,9 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{this.state.message.toUpperCase()}</h1>,
     <div>
+
+    
+
       <LandingPage />
     </div >
 
