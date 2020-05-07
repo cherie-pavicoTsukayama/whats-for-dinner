@@ -7,15 +7,14 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      entryKey: 'abc123',
       view: 'landingPage'
     };
 
     this.joinRoom = this.joinRoom.bind(this);
   }
 
-  joinRoom() {
-    fetch(`/api/rooms/${this.state.entryKey}`)
+  joinRoom(entryKey) {
+    fetch(`/api/rooms/${entryKey}`)
       .then(result => result.json())
       .then(data => {
         this.setState({

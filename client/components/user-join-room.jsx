@@ -7,6 +7,7 @@ export default class UserJoinRoom extends React.Component {
       input: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -15,11 +16,17 @@ export default class UserJoinRoom extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const entryKey = this.state.input;
+    this.props.joinRoom(entryKey);
+  }
+
   render() {
     return (
       <div className={'user-join-room d-flex align-items-center'}>
         <div className={'darken-background'}></div>
-        <form className={'col-sm-12 p-0 d-flex flex-column align-items-center'}>
+        <form onSubmit={this.handleSubmit} className={'col-sm-12 p-0 d-flex flex-column align-items-center'}>
           <div className={'col-sm-12 white-transparent-background py-3 mb-5 d-flex justify-content-center'}>
             <input
               className="user-join-input"
