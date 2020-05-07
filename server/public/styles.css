@@ -130,6 +130,7 @@ border:none;
 }
 
 .radio-buttons{
-  border: 10px solid #128781;
-  background-color:  #128781;
+  border: solid 2px #128781;
+  border-radius: 50%;
+  height:20px;
 }

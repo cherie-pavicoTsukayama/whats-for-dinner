@@ -57,13 +57,19 @@ class CreateRoomForm extends React.Component {
                 <label className='mr-3  ml-3 font-weight-bold' htmlFor="25">any</label>
               </div>
               <div className='d-flex justify-content-center'>
-                <input className='mr-4 ml-4 radio-buttons' type="radio" id='1' name='distance' value={1609} onChange={this.onRadioChange} />
+                <div>
+                  <input className= 'mr-4 ml-4' type="radio" id='1' name='distance' value={1609} onChange={this.onRadioChange} />
+                </div>
+                <div>
+                  <input className='mr-4 ml-4' type="radio" id='5' name='distance' value={8045} onChange={this.onRadioChange} />
+                </div>
+                <div>
+                  <input className='mr-4 ml-4' type="radio" id='20' name='distance' value={32180} onChange={this.onRadioChange} />
+                </div>
 
-                <input className='mr-4 ml-4' type="radio" id='5' name='distance' value={8045} onChange={this.onRadioChange} />
-
-                <input className='mr-4 ml-4' type="radio" id='20' name='distance' value={32180} onChange={this.onRadioChange} />
-
-                <input className='mr-4 ml-4' type="radio" id='25' name='distance' value={39999} onChange={this.onRadioChange} />
+                <div>
+                  <input className='mr-4 ml-4' type="radio" id='25' name='distance' value={39999} onChange={this.onRadioChange} />
+                </div>
 
               </div>
             </div>
