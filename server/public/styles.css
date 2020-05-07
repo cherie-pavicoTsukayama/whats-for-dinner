@@ -108,7 +108,7 @@ display:flex;
 .grey-button {
 width:200px;
 color: #128781;
-background-color: #EDEDEC;
+background-color: white;
 font-family:'Montserrat', sans-serif;
 font-weight: 700;
 border:none;
@@ -132,8 +132,4 @@ border:none;
   text-align: center;
   color: #128781;
   font-family:'Montserrat', sans-serif;
-}
-
-::placeholder {
-  color: #128781;
 }
