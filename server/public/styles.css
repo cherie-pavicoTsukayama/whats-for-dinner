@@ -134,3 +134,17 @@ border:none;
   font-size: 1.3rem;
   line-height: 1.7rem;
 }
+
+.open-closed-feature {
+  width: 40%;
+  color: white;
+  border-radius: 25px;
+}
+
+.bg-orange {
+  background-color: #FE4A3B;
+}
+
+.bg-green {
+  background-color: #007E77;
+}

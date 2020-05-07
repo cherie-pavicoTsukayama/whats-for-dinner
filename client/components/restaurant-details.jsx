@@ -4,13 +4,15 @@ export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hours: null
+      hours: null,
+      isOpen: null
     };
-    this.starRating = this.starRating.bind(this);
-    this.address = this.address.bind(this);
+    this.renderStarRating = this.renderStarRating.bind(this);
+    this.renderAddress = this.renderAddress.bind(this);
+    this.isOpen = this.isOpen.bind(this);
   }
 
-  starRating() {
+  renderStarRating() {
     const rating = this.props.restaurants[0].rating;
     switch (rating) {
       case 1:
@@ -36,7 +38,7 @@ export default class RestaurantDetail extends React.Component {
     }
   }
 
-  address() {
+  renderAddress() {
     const address = this.props.restaurants[0].location.display_address;
     const displayAddress = address.map(line => {
       return <p key={line[0]} className="m-0 p-0 montserrat-500 address">{line}</p>;
@@ -62,6 +64,23 @@ export default class RestaurantDetail extends React.Component {
       .catch(err => console.error(err));
   }
 
+  isOpen() {
+    if (this.state.isOpen) {
+      return (
+        <div className="open-closed-feature bg-orange p-1">
+          <p className="text-center montserrat-400 lead m-0">Open Now</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="open-closed-feature bg-green p-1">
+          <p className="text-center montserrat-400 lead m-0">Closed Now</p>
+        </div>
+      );
+    }
+
+  }
+
   componentDidMount() {
     this.getRestaurantDetails();
   }
@@ -73,10 +92,13 @@ export default class RestaurantDetail extends React.Component {
         <div className="d-flex flex-wrap justify-content-center mt-4">
           <h1 className="montserrat-400 brand-blue">{this.props.restaurants[0].name}</h1>
           <div className="col-12 d-flex justify-content-center mt-2">
-            {this.starRating()}
+            {this.renderStarRating()}
           </div>
           <div className="pt-4 pb-4">
-            {this.address()}
+            {this.renderAddress()}
+          </div>
+          <div className="col-12 d-flex justify-content-center pb-4">
+            {this.isOpen()}
           </div>
         </div>
       </div>
