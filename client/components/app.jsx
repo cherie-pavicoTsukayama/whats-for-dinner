@@ -1,8 +1,4 @@
 import React from 'react';
-
-import VotingRoom from './voting-room';
-
-
 import LandingPage from './landing-page';
 
 export default class App extends React.Component {
@@ -11,15 +7,14 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      entryKey: 'abc123',
       view: 'landingPage'
     };
 
     this.joinRoom = this.joinRoom.bind(this);
   }
 
-  joinRoom() {
-    fetch(`/api/rooms/${this.state.entryKey}`)
+  joinRoom(entryKey) {
+    fetch(`/api/rooms/${entryKey}`)
       .then(result => result.json())
       .then(data => {
         this.setState({
@@ -44,12 +39,8 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{this.state.message.toUpperCase()}</h1>,
     <div>
-
-    
-
       <LandingPage />
     </div >
-
     );
   }
 }

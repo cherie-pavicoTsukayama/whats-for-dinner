@@ -15,7 +15,7 @@ export default function HostJoinRoom(props) {
             Has Been Created
           </p>
         </div>
-        <div className="col-sm-6 mb-5 d-flex flex-wrap justify-content-center">
+        <div className="col-sm-12 d-flex flex-wrap justify-content-center">
           <h2 className={'col-sm-12 text-center montserrat-400 grey-font'}>
             <u>{props.entryKey}</u>
           </h2>
