@@ -13,7 +13,6 @@ class CreateRoomForm extends React.Component {
     };
     this.handleLocation = this.handleLocation.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
-    this.handleRadius = this.handleRadius.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
   }
@@ -24,10 +23,6 @@ class CreateRoomForm extends React.Component {
 
   handleCategory(event) {
     this.setState({ category: event.target.value });
-  }
-
-  handleRadius(event) {
-    this.setState({ radius: event.target.value });
   }
 
   handlePrice(event) {
@@ -58,17 +53,42 @@ class CreateRoomForm extends React.Component {
               </div>
               <div className='d-flex justify-content-center'>
                 <div>
-                  <input className= 'mr-4 ml-4' type="radio" id='1' name='distance' value={1609} onChange={this.onRadioChange} />
+                  <input
+                    className= 'mr-4 ml-4'
+                    type="radio"
+                    id='1'
+                    name='distance'
+                    value={1609}
+                    onChange={this.onRadioChange} />
                 </div>
                 <div>
-                  <input className='mr-4 ml-4' type="radio" id='5' name='distance' value={8045} onChange={this.onRadioChange} />
+                  <input
+                    className='mr-4 ml-4'
+                    type="radio"
+                    id='5'
+                    name='distance'
+                    value={8045}
+                    onChange={this.onRadioChange} />
                 </div>
                 <div>
-                  <input className='mr-4 ml-4' type="radio" id='20' name='distance' value={32180} onChange={this.onRadioChange} />
+                  <input
+                    className='mr-4 ml-4'
+                    type="radio"
+                    id='20'
+                    name='distance'
+                    value={32180}
+                    onChange={this.onRadioChange} />
                 </div>
 
                 <div>
-                  <input className='mr-4 ml-4' type="radio" id='25' name='distance' value={39999} onChange={this.onRadioChange} />
+                  <input
+                    className='mr-4 ml-4'
+                    type="radio"
+                    id='25'
+                    name='distance'
+                    value={39999}
+                    onChange={this.onRadioChange}
+                  />
                 </div>
 
               </div>
@@ -76,7 +96,12 @@ class CreateRoomForm extends React.Component {
             <div className='form-group mt-2 mb-2'>
               <p className='text-align-center'>Category(state test): {this.state.category}</p>
 
-              <select placeholder='Category' className='form-control  color' name="category" id="category" onChange={this.handleCategory}>
+              <select
+                placeholder='Category'
+                className='form-control  color'
+                name="category"
+                id="category"
+                onChange={this.handleCategory}>
                 <option value="pizza">Pizza</option>
                 <option value="mexican">Mexican</option>
                 <option value="chinese">Chinese</option>
