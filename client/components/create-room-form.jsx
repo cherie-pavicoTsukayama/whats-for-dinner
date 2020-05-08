@@ -49,12 +49,12 @@ class CreateRoomForm extends React.Component {
 
             </div>
             <div className='form-group mt-5 mb-2'>
-              <p className='text-align-center'> distance(state test): {this.state.radius}</p>
+              <p className='text-align-center'> Distance(state test): {this.state.radius}</p>
               <div className='d-flex justify-content-center'>
-                <label className='mr-3 ml-3 font-weight-bold' htmlFor="25">1 mi</label>
-                <label className='mr-3 ml-3 font-weight-bold' htmlFor="25">5 mi</label>
-                <label className='mr-3 ml-3 font-weight-bold' htmlFor="25">20 mi</label>
-                <label className='mr-3  ml-3 font-weight-bold' htmlFor="25">any</label>
+                <label className='mr-3 ml-3 font-weight-bold color' htmlFor="25">1 mi</label>
+                <label className='mr-3 ml-3 font-weight-bold color' htmlFor="25">5 mi</label>
+                <label className='mr-3 ml-3 font-weight-bold color' htmlFor="25">20 mi</label>
+                <label className='mr-3  ml-3 font-weight-bold color' htmlFor="25">any</label>
               </div>
               <div className='d-flex justify-content-center'>
                 <div>
@@ -76,7 +76,7 @@ class CreateRoomForm extends React.Component {
             <div className='form-group mt-2 mb-2'>
               <p className='text-align-center'>Category(state test): {this.state.category}</p>
 
-              <select placeholder='Category' className='form-control' name="category" id="category" onChange={this.handleCategory}>
+              <select placeholder='Category' className='form-control  color' name="category" id="category" onChange={this.handleCategory}>
                 <option value="pizza">Pizza</option>
                 <option value="mexican">Mexican</option>
                 <option value="chinese">Chinese</option>
@@ -101,9 +101,14 @@ class CreateRoomForm extends React.Component {
               </select>
 
             </div>
-            <div className='form-group mt-2 mb-2'>
-              <p>Price</p>
-              <input type="number" className='form-control' id='price' onChange={this.handlePrice} />
+            <div className='form-group mt-4 mb-4'>
+
+              <div className='d-flex justify-content-around'>
+                <button className='price shadow'>$</button>
+                <button className='price shadow'>$$</button>
+                <button className='price shadow'>$$$</button>
+                <button className='price shadow'>$$$$</button>
+              </div>
 
             </div>
             <div className='row d-flex justify-content-center mt-4 mb-2'>
@@ -112,6 +117,7 @@ class CreateRoomForm extends React.Component {
           </form>
 
         </div>
+
       );
     }
     if (this.state.view === 'join') {

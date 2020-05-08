@@ -130,7 +130,23 @@ border:none;
 }
 
 .radio-buttons{
-  border: solid 2px #128781;
+  border: solid 1px #128781;
   border-radius: 50%;
   height:20px;
 }
+
+.border-color{
+  border: 2px solid #128781;
+  outline: none;
+}
+.color{
+  color:#128781;
+}
+ .price {
+   width: 5rem;
+   border-radius:20px;
+   border: grey 1px solid;
+   color:#128781;
+   background-color: white;
+
+ }
