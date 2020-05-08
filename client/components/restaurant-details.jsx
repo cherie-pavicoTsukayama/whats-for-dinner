@@ -189,15 +189,17 @@ export default class RestaurantDetail extends React.Component {
             <div className="row align-items-center">
               <img className="user-image mr-2" src={review.user.image_url} alt="" />
               <div className="mt-2">
-                <p className="user-name mb-0 p-0 montserrat-400">{review.user.name}</p>
+                <p className="user-name mb-0 p-0 montserrat-400">{review.user.name}
+                </p>
                 {this.renderUserStarRating(review)}
               </div>
             </div>
             <div className="row">
               {this.convertDate(review)}
-              <p>{this.renderReviewText(review)}  </p>
+              {this.renderReviewText(review)}
             </div>
           </div>
+
         );
       });
     }
@@ -214,7 +216,6 @@ export default class RestaurantDetail extends React.Component {
 
   render() {
     return (
-
       <div>
         <div className="d-flex flex-wrap justify-content-center mt-4 container">
           <h1 className="montserrat-400 brand-blue text-center">{this.props.restaurants.name}</h1>
@@ -230,10 +231,14 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
             {this.renderHours(this.state.hours)}
           </div>
-          <div className="col-12 mt-3">
+          <div className="col-12 mt-3 mb-5">
             {this.renderReviews(this.state.reviews)}
           </div>
-
+        </div>
+        <div className={'col d-flex justify-content-start align-items-center bg-green pl-5 pr-0 footer'}>
+          <button>
+            <i className={'fas fa-caret-left white fa-3x'}></i>
+          </button>
         </div>
       </div>
     );
