@@ -16,6 +16,7 @@ export default class App extends React.Component {
     };
 
     this.joinRoom = this.joinRoom.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   joinRoom() {
@@ -29,6 +30,24 @@ export default class App extends React.Component {
       })
       .catch(err => console.error(err));
 
+  }
+
+  createRoom(room) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(room)
+    };
+    fetch('/api/rooms', options)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          entryKey: json.entryKey
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   componentDidMount() {
@@ -45,7 +64,7 @@ export default class App extends React.Component {
       : <h1>{this.state.message.toUpperCase()}</h1>,
     <div>
 
-      <CreateRoomForm />
+      <CreateRoomForm joinRoom={this.joinRoom} createRoom={this.createRoom}/>
     </div >
 
     );

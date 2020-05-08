@@ -195,7 +195,7 @@ class CreateRoomForm extends React.Component {
     if (this.state.view === 'join') {
       return (
         <div>
-          <HostJoinRoom></HostJoinRoom>
+          <HostJoinRoom joinRoom={this.props.joinRoom}></HostJoinRoom>
         </div>
       );
     }
