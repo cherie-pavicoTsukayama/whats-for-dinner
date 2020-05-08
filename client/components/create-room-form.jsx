@@ -7,8 +7,8 @@ class CreateRoomForm extends React.Component {
     this.state = {
       location: '',
       category: '',
-      radius: 0,
-      price: 1,
+      radius: '',
+      price: '',
       view: 'form'
     };
     this.handleLocation = this.handleLocation.bind(this);
@@ -65,22 +65,38 @@ class CreateRoomForm extends React.Component {
     if (this.state.price === '1,2,3,4') {
       $4 = 'price-selected';
     }
+    let mi1 = '';
+    if (this.state.radius === '1609') {
+      mi1 = 'radius-selected';
+    }
+    let mi5 = '';
+    if (this.state.radius === '8045') {
+      mi5 = 'radius-selected';
+    }
+    let mi20 = '';
+    if (this.state.radius === '32180') {
+      mi20 = 'radius-selected';
+    }
+    let miAny = '';
+    if (this.state.radius === '39999') {
+      miAny = 'radius-selected';
+    }
     if (this.state.view === 'form') {
       return (
         <div className='container montserrat-400'>
           <form onSubmit={() => { this.props.createRoom(this.state); event.preventDefault(); }}>
             <div className='form-group mt-5 mb-2 d-flex justify-content-center'>
-
-              <input placeholder='location' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
+              <i className="fas fa-2x fa-map-marker-alt"></i>
+              <input placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
 
             </div>
             <div className='form-group mt-5 mb-2'>
-              <p className='text-align-center'> Distance(state test): {this.state.radius}</p>
+              {/* <p className='text-align-center'> Distance(state test): {this.state.radius}</p> */}
               <div className='d-flex justify-content-center'>
-                <label className='mr-3 ml-3 font-weight-bold color' htmlFor="25">1 mi</label>
-                <label className='mr-3 ml-3 font-weight-bold color' htmlFor="25">5 mi</label>
-                <label className='mr-3 ml-3 font-weight-bold color' htmlFor="25">20 mi</label>
-                <label className='mr-3  ml-3 font-weight-bold color' htmlFor="25">any</label>
+                <label className={`mr-3 ml-3 font-weight-bold ${mi1}`} htmlFor="25">1 mi</label>
+                <label className={`mr-3 ml-3 font-weight-bold ${mi5}`} htmlFor="25">5 mi</label>
+                <label className={`mr-3 ml-3 font-weight-bold ${mi20}`} htmlFor="25">20 mi</label>
+                <label className={`mr-3  ml-3 font-weight-bold ${miAny}`} htmlFor="25">any</label>
               </div>
               <div className='d-flex justify-content-center'>
                 <div>
@@ -89,7 +105,7 @@ class CreateRoomForm extends React.Component {
                     type="radio"
                     id='1'
                     name='distance'
-                    value={1609}
+                    value='1609'
                     onChange={this.onRadioChange} />
                 </div>
                 <div>
@@ -98,7 +114,7 @@ class CreateRoomForm extends React.Component {
                     type="radio"
                     id='5'
                     name='distance'
-                    value={8045}
+                    value='8045'
                     onChange={this.onRadioChange} />
                 </div>
                 <div>
@@ -107,7 +123,7 @@ class CreateRoomForm extends React.Component {
                     type="radio"
                     id='20'
                     name='distance'
-                    value={32180}
+                    value='32180'
                     onChange={this.onRadioChange} />
                 </div>
 
@@ -117,7 +133,7 @@ class CreateRoomForm extends React.Component {
                     type="radio"
                     id='25'
                     name='distance'
-                    value={39999}
+                    value='39999'
                     onChange={this.onRadioChange}
                   />
                 </div>
@@ -125,7 +141,7 @@ class CreateRoomForm extends React.Component {
               </div>
             </div>
             <div className='form-group mt-2 mb-2'>
-              <p className='text-align-center'>Category(state test): {this.state.category}</p>
+              {/* <p className='text-align-center'>Category(state test): {this.state.category}</p> */}
 
               <select
                 placeholder='Category'
@@ -158,7 +174,7 @@ class CreateRoomForm extends React.Component {
 
             </div>
             <div className='form-group mt-4 mb-4'>
-              <p>Price(State test):{this.state.price}</p>
+              {/* <p>Price(State test):{this.state.price}</p> */}
               <div className='d-flex justify-content-around'>
                 <div className={`price shadow text-align-center ${$1}`} onClick={this.handle$}>$</div>
                 <div className={`price shadow text-align-center ${$2}`} onClick={this.handle$$}>$$</div>
