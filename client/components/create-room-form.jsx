@@ -85,13 +85,13 @@ class CreateRoomForm extends React.Component {
       return (
         <div className='container montserrat-400'>
           <form onSubmit={() => { this.props.createRoom(this.state); event.preventDefault(); }}>
-            <div className='form-group mt-5 mb-2 d-flex justify-content-center'>
+            <div className='form-group mt-5 mb-2 d-flex justify-content-center push-down'>
               <i className="fas fa-2x fa-map-marker-alt"></i>
               <input placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
 
             </div>
-            <div className='form-group mt-5 mb-2'>
-              {/* <p className='text-align-center'> Distance(state test): {this.state.radius}</p> */}
+            <div className='form-group mt-5 mb-2 push-down'>
+              <p className='text-align-center'> Distance</p>
               <div className='d-flex justify-content-center'>
                 <label className={`mr-3 ml-3 font-weight-bold ${mi1}`} htmlFor="25">1 mi</label>
                 <label className={`mr-3 ml-3 font-weight-bold ${mi5}`} htmlFor="25">5 mi</label>
@@ -140,7 +140,7 @@ class CreateRoomForm extends React.Component {
 
               </div>
             </div>
-            <div className='form-group mt-2 mb-2'>
+            <div className='form-group mt-2 mb-2 push-down-more'>
               {/* <p className='text-align-center'>Category(state test): {this.state.category}</p> */}
 
               <select
@@ -173,7 +173,7 @@ class CreateRoomForm extends React.Component {
               </select>
 
             </div>
-            <div className='form-group mt-4 mb-4'>
+            <div className='form-group mt-4 mb-4 push-down-more-more'>
               {/* <p>Price(State test):{this.state.price}</p> */}
               <div className='d-flex justify-content-around'>
                 <div className={`price shadow text-align-center ${$1}`} onClick={this.handle$}>$</div>
@@ -183,8 +183,8 @@ class CreateRoomForm extends React.Component {
               </div>
 
             </div>
-            <div className='row d-flex justify-content-center mt-4 mb-2'>
-              <button type='submit' className='btn btn-secondary grey-button'>Create Room</button>
+            <div className='row d-flex justify-content-center mt-4 mb-2 push-down-most'>
+              <button type='submit' className='btn btn-secondary grey-button shadow'>Create Room</button>
             </div>
           </form>
 
