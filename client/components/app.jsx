@@ -1,7 +1,6 @@
 import React from 'react';
+import LandingPage from './landing-page';
 // import VotingRoom from './voting-room';
-// import LandingPage from './landing-page';
-import VotingRoom from './voting-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -62,8 +61,9 @@ export default class App extends React.Component {
       : <h1>{this.state.message.toUpperCase()}</h1>,
 
     <div>
-      <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-        incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/>
+      <LandingPage />
+      {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
+        incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
     </div >
 
     );
