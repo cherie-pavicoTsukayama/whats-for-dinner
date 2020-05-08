@@ -242,11 +242,6 @@ export default class MatchedDetails extends React.Component {
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
-        <div className={'col d-flex justify-content-start align-items-center bg-green pl-5 pr-0 footer'}>
-          <button>
-            <i className={'fas fa-caret-left white fa-3x'}></i>
-          </button>
-        </div>
       </div>
     );
   }
