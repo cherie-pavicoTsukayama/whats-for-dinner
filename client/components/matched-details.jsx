@@ -1,4 +1,5 @@
 import React from 'react';
+import Carousel from './matched-carousel';
 
 export default class MatchedDetails extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class MatchedDetails extends React.Component {
     this.renderUserStarRating = this.renderUserStarRating.bind(this);
     this.convertDate = this.convertDate.bind(this);
     this.renderReviewText = this.renderReviewText.bind(this);
+    this.renderImageCarousel = this.renderImageCarousel.bind(this);
   }
 
   renderStarRating() {
@@ -100,7 +102,8 @@ export default class MatchedDetails extends React.Component {
           hours: data[0].hours[0].open,
           isOpen: data[0].hours[0].is_open_now,
           reviews: data[1].reviews,
-          photos: data[0].photos
+          photos: data[0].photos,
+          url: data[0].url
         });
       })
       .catch(err => console.error(err));
@@ -121,6 +124,14 @@ export default class MatchedDetails extends React.Component {
       );
     }
 
+  }
+
+  renderImageCarousel(photos) {
+    let carousel = null;
+    if (photos.length !== 0) {
+      carousel = <Carousel images={photos} />;
+    }
+    return carousel;
   }
 
   convertDayOfTheWeek(weekDay) {
@@ -194,7 +205,7 @@ export default class MatchedDetails extends React.Component {
     if (reviews.length !== 0) {
       renderReviews = reviews.map(review => {
         return (
-          <div key={review.id} className="mb-5">
+          <div key={review.id} className="mb-5 container">
             <div className="row align-items-center">
               <img className="user-image mr-2" src={review.user.image_url} alt="" />
               <div className="mt-2">
@@ -229,22 +240,28 @@ export default class MatchedDetails extends React.Component {
         <div className="container">
           <div className="col match-logo"></div>
         </div>
-        <div className="d-flex flex-wrap justify-content-center mt-4 container">
+        <div className="d-flex flex-wrap justify-content-center mt-4">
           <h1 className="montserrat-400 brand-blue text-center">{this.state.name}</h1>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
           </div>
-          <div className="pt-4 pb-5">
+          <div className="pt-4 pb-4">
             {this.renderAddress()}
           </div>
+          <div className="d-flex flex-wrap justify-content-center mb-5">
+            {this.renderImageCarousel(this.state.photos)}
+            <form action={this.state.url} target="_blank">
+              <button type="submit" className="btn pointer match-website-button shadow-sm">View on Yelp</button>
+            </form>
 
+          </div>
           <div className="col-12 d-flex justify-content-center pb-3">
             {this.renderIsOpen()}
           </div>
           <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
             {this.renderHours(this.state.hours)}
           </div>
-          <div className="col-12 mt-3 mb-5">
+          <div className="mt-3 mb-5 ml-3 mr-3">
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
