@@ -1,7 +1,6 @@
 import React from 'react';
-import MatchedDetails from './matched-details';
 // import VotingRoom from './voting-room';
-// import LandingPage from './landing-page';
+import LandingPage from './landing-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,7 +9,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: 'landingPage',
-      currentRestaurant: 6,
+      currentRestaurant: 0,
       restaurants: null,
       matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
     };
@@ -45,8 +44,7 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{message.toUpperCase()}</h1>,
     <div>
-      <MatchedDetails restaurantId={this.state.matchedRestaurantId}/>
-      {/* <LandingPage /> */}
+      <LandingPage />
     </div >
     );
   }
