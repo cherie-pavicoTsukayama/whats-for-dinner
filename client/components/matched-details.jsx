@@ -6,7 +6,8 @@ export default class MatchedDetails extends React.Component {
     this.state = {
       hours: [],
       reviews: [],
-      address: []
+      address: [],
+      photos: []
     };
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
@@ -98,7 +99,8 @@ export default class MatchedDetails extends React.Component {
           address: data[0].location.display_address,
           hours: data[0].hours[0].open,
           isOpen: data[0].hours[0].is_open_now,
-          reviews: data[1].reviews
+          reviews: data[1].reviews,
+          photos: data[0].photos
         });
       })
       .catch(err => console.error(err));
@@ -224,6 +226,9 @@ export default class MatchedDetails extends React.Component {
   render() {
     return (
       <div>
+        <div className="container">
+          <div className="col match-logo"></div>
+        </div>
         <div className="d-flex flex-wrap justify-content-center mt-4 container">
           <h1 className="montserrat-400 brand-blue text-center">{this.state.name}</h1>
           <div className="col-12 d-flex justify-content-center mt-2">
@@ -232,6 +237,7 @@ export default class MatchedDetails extends React.Component {
           <div className="pt-4 pb-5">
             {this.renderAddress()}
           </div>
+
           <div className="col-12 d-flex justify-content-center pb-3">
             {this.renderIsOpen()}
           </div>
