@@ -9,7 +9,8 @@ class CreateRoomForm extends React.Component {
       category: '',
       radius: '',
       price: '',
-      view: 'form'
+      view: 'form',
+      entryKey: ''
     };
     this.handleLocation = this.handleLocation.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
@@ -18,6 +19,8 @@ class CreateRoomForm extends React.Component {
     this.handle$$$ = this.handle$$$.bind(this);
     this.handle$$$$ = this.handle$$$$.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
+    this.isCreateRoomButtonDisabled = this.isCreateRoomButtonDisabled.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   handleLocation(event) {
@@ -46,6 +49,33 @@ class CreateRoomForm extends React.Component {
 
   onRadioChange(event) {
     this.setState({ radius: event.target.value });
+  }
+
+  isCreateRoomButtonDisabled() {
+    if (this.state.radius && this.state.location && this.state.category && this.state.price) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  createRoom(room) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(room)
+    };
+    fetch('/api/rooms', options)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          entryKey: json.entryKey,
+          view: 'join'
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -87,7 +117,7 @@ class CreateRoomForm extends React.Component {
           <form onSubmit={() => { this.props.createRoom(this.state); event.preventDefault(); }}>
             <div className='form-group mt-5 mb-2 d-flex justify-content-center push-down'>
               <i className="fas fa-2x fa-map-marker-alt"></i>
-              <input placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
+              <input required placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
 
             </div>
             <div className='form-group mt-5 mb-2 push-down'>
@@ -144,6 +174,7 @@ class CreateRoomForm extends React.Component {
               {/* <p className='text-align-center'>Category(state test): {this.state.category}</p> */}
 
               <select
+                required
                 placeholder='Category'
                 className='form-control  color'
                 name="category"
@@ -184,7 +215,7 @@ class CreateRoomForm extends React.Component {
 
             </div>
             <div className='row d-flex justify-content-center mt-4 mb-2 push-down-most'>
-              <button type='submit' className='btn btn-secondary grey-button shadow'>Create Room</button>
+              <button disabled={this.isCreateRoomButtonDisabled()} type='submit' className='btn btn-secondary grey-button shadow'>Create Room</button>
             </div>
           </form>
 
@@ -195,7 +226,7 @@ class CreateRoomForm extends React.Component {
     if (this.state.view === 'join') {
       return (
         <div>
-          <HostJoinRoom joinRoom={this.props.joinRoom}></HostJoinRoom>
+          <HostJoinRoom joinRoom={this.props.joinRoom} entryKey={this.state.entryKey} setView={this.props.setView}></HostJoinRoom>
         </div>
       );
     }
