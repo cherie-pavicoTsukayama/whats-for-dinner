@@ -15,6 +15,7 @@ export default class RestaurantDetail extends React.Component {
     this.convertTime = this.convertTime.bind(this);
     this.renderReviews = this.renderReviews.bind(this);
     this.renderUserStarRating = this.renderUserStarRating.bind(this);
+    this.convertDate = this.convertDate.bind(this);
   }
 
   renderStarRating() {
@@ -155,44 +156,44 @@ export default class RestaurantDetail extends React.Component {
     return renderHours;
   }
 
-  convertDate() {
-
+  convertDate(review) {
+    const date = review.time_created.slice(0, 10).split('-');
+    const [year, month, day] = date;
+    const convertedDate = `${month}/${day}/${year}`;
+    return (
+      <p className="mb-2 mt-2 montserrat-100 review-date">{convertedDate}</p>
+    );
   }
 
   renderReviews(reviews) {
-    let review = null;
+    let renderReviews = null;
     if (reviews.length !== 0) {
-      review = reviews;
-      // console.log(review);
-      // const renderReviews = reviews.map(review => {
-      //   return (
-      //     <div key={review.id}>
-      //       <div className="user-image">
-      //         <img className="object-fit-fill" src={review.user.image_url} alt="" />
-      //       </div>
-      //     </div>
-      //   );
-      return (
-        <div key={review.id}>
-          <div className="row align-items-center">
-            <img className="user-image mr-2" src={review[0].user.image_url} alt="" />
-            <div className="mt-2">
-              <p className="user-name mb-0 p-0 montserrat-400">{review[0].user.name}</p>
-              {this.renderUserStarRating(review[0])}
+      renderReviews = reviews.map(review => {
+        return (
+          <div key={review.id} className="mb-5">
+            <div className="row align-items-center">
+              <img className="user-image mr-2" src={review.user.image_url} alt="" />
+              <div className="mt-2">
+                <p className="user-name mb-0 p-0 montserrat-400">{review.user.name}</p>
+                {this.renderUserStarRating(review)}
+              </div>
+            </div>
+            <div className="row">
+              {this.convertDate(review)}
+              <p>{review.text}</p>
             </div>
           </div>
-          <div className="row">
-            <p>date</p>
-            <p>{review[0].text}</p>
-          </div>
-        </div>
-      );
-
+        );
+      });
     }
-
+    return renderReviews;
   }
 
   componentDidMount() {
+    this.getRestaurantDetails();
+  }
+
+  compoenentDidUpdate() {
     this.getRestaurantDetails();
   }
 

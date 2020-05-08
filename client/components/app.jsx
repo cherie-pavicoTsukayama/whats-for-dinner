@@ -11,7 +11,7 @@ export default class App extends React.Component {
       isLoading: true,
       entryKey: 'abc123',
       view: 'landingPage',
-      currentRestaurant: 0,
+      currentRestaurant: 3,
       restaurants: [
         {
           id: 'DGy688y4F0WAj2-CpxRALw',
@@ -478,7 +478,6 @@ export default class App extends React.Component {
         });
       })
       .catch(err => console.error(err));
-
   }
 
   componentDidMount() {
