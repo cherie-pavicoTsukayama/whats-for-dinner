@@ -1,7 +1,8 @@
 import React from 'react';
-// import VotingRoom from './voting-room';
-// import LandingPage from './landing-page';
-import RestaurantDetails from './restaurant-details';
+
+import VotingRoom from './voting-room';
+import LandingPage from './landing-page';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,7 +10,6 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      entryKey: 'abc123',
       view: 'landingPage',
       currentRestaurant: 6,
       restaurants: null
@@ -18,9 +18,9 @@ export default class App extends React.Component {
     this.joinRoom = this.joinRoom.bind(this);
   }
 
-  joinRoom() {
-    fetch(`/api/rooms/${this.state.entryKey}`)
-      .then(result => result.json())
+  joinRoom(entryKey) {
+    fetch(`/api/rooms/${entryKey}`)
+      .then(response => response.json())
       .then(data => {
         this.setState({
           restaurants: data.restaurants,
@@ -44,9 +44,8 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{message.toUpperCase()}</h1>,
     <div>
-      <RestaurantDetails restaurants={restaurants[currentRestaurant]}/>
+      <LandingPage />
     </div >
-
     );
   }
 }
