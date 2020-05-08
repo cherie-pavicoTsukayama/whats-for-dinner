@@ -11,6 +11,7 @@ export default class App extends React.Component {
     };
 
     this.joinRoom = this.joinRoom.bind(this);
+    this.setView = this.setView.bind(this);
   }
 
   setView(screen) {
@@ -45,7 +46,7 @@ export default class App extends React.Component {
         ? <h1>Testing connections...</h1>
         : <h1>{this.state.message.toUpperCase()}</h1>,
       <div>
-        <LandingPage />
+        <LandingPage setViewState={this.setView}/>
       </div >
     );
   }
