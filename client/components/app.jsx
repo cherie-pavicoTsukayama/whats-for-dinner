@@ -13,6 +13,12 @@ export default class App extends React.Component {
     this.joinRoom = this.joinRoom.bind(this);
   }
 
+  setView(screen) {
+    this.setState({
+      view: screen
+    });
+  }
+
   joinRoom(entryKey) {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
@@ -34,12 +40,13 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (this.state.isLoading
-      ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message.toUpperCase()}</h1>,
-    <div>
-      <LandingPage />
-    </div >
+    return (
+      this.state.isLoading
+        ? <h1>Testing connections...</h1>
+        : <h1>{this.state.message.toUpperCase()}</h1>,
+      <div>
+        <LandingPage />
+      </div >
     );
   }
 }
