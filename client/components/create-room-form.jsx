@@ -13,7 +13,10 @@ class CreateRoomForm extends React.Component {
     };
     this.handleLocation = this.handleLocation.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
-    this.handlePrice = this.handlePrice.bind(this);
+    this.handle$ = this.handle$.bind(this);
+    this.handle$$ = this.handle$$.bind(this);
+    this.handle$$$ = this.handle$$$.bind(this);
+    this.handle$$$$ = this.handle$$$$.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
   }
 
@@ -25,8 +28,20 @@ class CreateRoomForm extends React.Component {
     this.setState({ category: event.target.value });
   }
 
-  handlePrice(event) {
-    this.setState({ price: event.target.value });
+  handle$(event) {
+    this.setState({ price: '1' });
+  }
+
+  handle$$(event) {
+    this.setState({ price: '1,2' });
+  }
+
+  handle$$$(event) {
+    this.setState({ price: '1,2,3' });
+  }
+
+  handle$$$$(event) {
+    this.setState({ price: '1,2,3,4' });
   }
 
   onRadioChange(event) {
@@ -127,12 +142,12 @@ class CreateRoomForm extends React.Component {
 
             </div>
             <div className='form-group mt-4 mb-4'>
-
+              <p>Price(State test):{this.state.price}</p>
               <div className='d-flex justify-content-around'>
-                <button className='price shadow'>$</button>
-                <button className='price shadow'>$$</button>
-                <button className='price shadow'>$$$</button>
-                <button className='price shadow'>$$$$</button>
+                <div className='price shadow text-align-center' onClick={this.handle$}>$</div>
+                <div className='price shadow text-align-center' onClick={this.handle$$}>$$</div>
+                <div className='price shadow text-align-center' onClick={this.handle$$$}>$$$</div>
+                <div className='price shadow text-align-center' onClick={this.handle$$$$}>$$$$</div>
               </div>
 
             </div>
