@@ -493,7 +493,7 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{this.state.message.toUpperCase()}</h1>,
     <div>
-      <RestaurantDetails restaurants={this.state.restaurants[6]}/>
+      <RestaurantDetails restaurants={this.state.restaurants[1]}/>
     </div >
 
     );

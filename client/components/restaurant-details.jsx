@@ -4,7 +4,8 @@ export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hours: []
+      hours: [],
+      reviews: []
     };
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
@@ -12,6 +13,8 @@ export default class RestaurantDetail extends React.Component {
     this.renderHours = this.renderHours.bind(this);
     this.convertDayOfTheWeek = this.convertDayOfTheWeek.bind(this);
     this.convertTime = this.convertTime.bind(this);
+    this.renderReviews = this.renderReviews.bind(this);
+    this.renderUserStarRating = this.renderUserStarRating.bind(this);
   }
 
   renderStarRating() {
@@ -36,6 +39,32 @@ export default class RestaurantDetail extends React.Component {
       case 5 :
         return <img className="star-rating" src="./images/5-stars.png" alt="" />;
       default :
+        break;
+    }
+  }
+
+  renderUserStarRating(user) {
+    const rating = user.rating;
+    switch (rating) {
+      case 1:
+        return <img className="user-star-rating" src="./images/1-stars.png" alt="" />;
+      case 1.5:
+        return <img className="user-star-rating" src="./images/1-and-a-half-stars.png" alt="" />;
+      case 2:
+        return <img className="user-star-rating" src="./images/2-stars.png" alt="" />;
+      case 2.5:
+        return <img className="user-star-rating" src="./images/2-and-a-half-stars.png" alt="" />;
+      case 3:
+        return <img className="user-star-rating" src="./images/3-stars.png" alt="" />;
+      case 3.5:
+        return <img className="user-star-rating" src="./images/3-and-a-half-stars.png" alt="" />;
+      case 4:
+        return <img className="user-star-rating" src="./images/4-stars.png" alt="" />;
+      case 4.5:
+        return <img className="user-star-rating" src="./images/4-and-a-half-stars.png" alt="" />;
+      case 5:
+        return <img className="user-star-rating" src="./images/5-stars.png" alt="" />;
+      default:
         break;
     }
   }
@@ -123,6 +152,43 @@ export default class RestaurantDetail extends React.Component {
     return renderHours;
   }
 
+  convertDate() {
+
+  }
+
+  renderReviews(reviews) {
+    let review = null;
+    if (reviews.length !== 0) {
+      review = reviews;
+      // console.log(review);
+      // const renderReviews = reviews.map(review => {
+      //   return (
+      //     <div key={review.id}>
+      //       <div className="user-image">
+      //         <img className="object-fit-fill" src={review.user.image_url} alt="" />
+      //       </div>
+      //     </div>
+      //   );
+      return (
+        <div key={review.id}>
+          <div className="row align-items-center">
+            <img className="user-image mr-2" src={review[0].user.image_url} alt="" />
+            <div className="mt-2">
+              <p className="user-name mb-0 p-0 montserrat-400">{review[0].user.name}</p>
+              {this.renderUserStarRating(review[0])}
+            </div>
+          </div>
+          <div className="row">
+            <p>date</p>
+            <p>{review[0].text}</p>
+          </div>
+        </div>
+      );
+
+    }
+
+  }
+
   componentDidMount() {
     this.getRestaurantDetails();
   }
@@ -142,8 +208,11 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 d-flex justify-content-center pb-3">
             {this.renderIsOpen()}
           </div>
-          <div className="col-12 w-100 d-flex flex-wrap justify-content-center">
+          <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
             {this.renderHours(this.state.hours)}
+          </div>
+          <div className="col-12 mt-3">
+            {this.renderReviews(this.state.reviews)}
           </div>
 
         </div>
