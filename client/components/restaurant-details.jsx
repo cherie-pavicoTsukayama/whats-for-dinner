@@ -16,6 +16,7 @@ export default class RestaurantDetail extends React.Component {
     this.renderReviews = this.renderReviews.bind(this);
     this.renderUserStarRating = this.renderUserStarRating.bind(this);
     this.convertDate = this.convertDate.bind(this);
+    this.renderReviewText = this.renderReviewText.bind(this);
   }
 
   renderStarRating() {
@@ -165,6 +166,20 @@ export default class RestaurantDetail extends React.Component {
     );
   }
 
+  renderReviewText(review) {
+    const reviewTextHadTrailingDots = review.text.slice(0, -3);
+    const reviewTextHadNoTrailingDots = review.text;
+    let reviewText = null;
+    if (review.text.slice(-3) === '...') {
+      reviewText = reviewTextHadTrailingDots;
+    } else {
+      reviewText = reviewTextHadNoTrailingDots;
+    }
+    return (
+      <p>{reviewText + '...'}<a href={review.url} target="blank">read more</a></p>
+    );
+  }
+
   renderReviews(reviews) {
     let renderReviews = null;
     if (reviews.length !== 0) {
@@ -180,7 +195,7 @@ export default class RestaurantDetail extends React.Component {
             </div>
             <div className="row">
               {this.convertDate(review)}
-              <p>{review.text}</p>
+              <p>{this.renderReviewText(review)}  </p>
             </div>
           </div>
         );
