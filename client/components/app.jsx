@@ -11,6 +11,7 @@ export default class App extends React.Component {
       isLoading: true,
       entryKey: 'abc123',
       view: 'landingPage',
+      currentRestaurant: 0,
       restaurants: [
         {
           id: 'DGy688y4F0WAj2-CpxRALw',
@@ -489,11 +490,12 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (this.state.isLoading
+    const { isLoading, message, restaurants, currentRestaurant } = this.state;
+    return (isLoading
       ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message.toUpperCase()}</h1>,
+      : <h1>{message.toUpperCase()}</h1>,
     <div>
-      <RestaurantDetails restaurants={this.state.restaurants[1]}/>
+      <RestaurantDetails restaurants={restaurants[currentRestaurant]}/>
     </div >
 
     );

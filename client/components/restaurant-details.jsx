@@ -71,8 +71,8 @@ export default class RestaurantDetail extends React.Component {
 
   renderAddress() {
     const address = this.props.restaurants.location.display_address;
-    const displayAddress = address.map(line => {
-      return <p key={line[0]} className="m-0 p-0 montserrat-500 address text-center">{line}</p>;
+    const displayAddress = address.map((line, index) => {
+      return <p key={index} className="m-0 p-0 montserrat-500 address text-center">{line}</p>;
     });
     return displayAddress;
   }
@@ -126,7 +126,10 @@ export default class RestaurantDetail extends React.Component {
     let end = '';
     if (start <= 1200) {
       const minutes = weekDay.start.slice(2);
-      const hours = weekDay.start.slice(0, 2);
+      let hours = weekDay.start.slice(0, 2);
+      if (hours[0] === '0') {
+        hours = hours[1];
+      }
       start = `${hours}:${minutes} am`;
     }
     const closingMinutes = weekDay.end.slice(2);
@@ -139,7 +142,7 @@ export default class RestaurantDetail extends React.Component {
   renderHours(hours) {
     const renderHours = hours.map(weekDay => {
       return (
-        <div key={weekDay.day} className=" col-12 w-80 d-felx row justify-content-center">
+        <div key={weekDay.day} className=" col-12 w-80 d-flex justify-content-center">
           <div className="col-3 ml-2">
             <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
           </div>
