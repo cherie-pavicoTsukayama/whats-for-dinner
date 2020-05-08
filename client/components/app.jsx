@@ -1,5 +1,8 @@
 import React from 'react';
+
+import VotingRoom from './voting-room';
 import LandingPage from './landing-page';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -7,7 +10,9 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'landingPage'
+      view: 'landingPage',
+      currentRestaurant: 6,
+      restaurants: null
     };
 
     this.joinRoom = this.joinRoom.bind(this);
@@ -34,9 +39,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (this.state.isLoading
+    const { isLoading, message, restaurants, currentRestaurant } = this.state;
+    return (isLoading
       ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message.toUpperCase()}</h1>,
+      : <h1>{message.toUpperCase()}</h1>,
     <div>
       <LandingPage />
     </div >
