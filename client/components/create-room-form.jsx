@@ -49,6 +49,22 @@ class CreateRoomForm extends React.Component {
   }
 
   render() {
+    let $1 = '';
+    if (this.state.price === '1') {
+      $1 = 'price-selected';
+    }
+    let $2 = '';
+    if (this.state.price === '1,2') {
+      $2 = 'price-selected';
+    }
+    let $3 = '';
+    if (this.state.price === '1,2,3') {
+      $3 = 'price-selected';
+    }
+    let $4 = '';
+    if (this.state.price === '1,2,3,4') {
+      $4 = 'price-selected';
+    }
     if (this.state.view === 'form') {
       return (
         <div className='container montserrat-400'>
@@ -144,10 +160,10 @@ class CreateRoomForm extends React.Component {
             <div className='form-group mt-4 mb-4'>
               <p>Price(State test):{this.state.price}</p>
               <div className='d-flex justify-content-around'>
-                <div className='price shadow text-align-center' onClick={this.handle$}>$</div>
-                <div className='price shadow text-align-center' onClick={this.handle$$}>$$</div>
-                <div className='price shadow text-align-center' onClick={this.handle$$$}>$$$</div>
-                <div className='price shadow text-align-center' onClick={this.handle$$$$}>$$$$</div>
+                <div className={`price shadow text-align-center ${$1}`} onClick={this.handle$}>$</div>
+                <div className={`price shadow text-align-center ${$2}`} onClick={this.handle$$}>$$</div>
+                <div className={`price shadow text-align-center ${$3}`} onClick={this.handle$$$}>$$$</div>
+                <div className={`price shadow text-align-center ${$4}`} onClick={this.handle$$$$}>$$$$</div>
               </div>
 
             </div>

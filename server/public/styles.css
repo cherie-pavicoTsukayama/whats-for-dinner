@@ -146,6 +146,10 @@ border:none;
    width: 5rem;
    border-radius:20px;
    border: grey 1px solid;
-   color:#128781;
+
    background-color: white;
+ }
+ .price-selected{
+   border: 2px solid #128781;
+   color:#128781;
  }
