@@ -114,7 +114,7 @@ class CreateRoomForm extends React.Component {
     if (this.state.view === 'form') {
       return (
         <div className='container montserrat-400'>
-          <form onSubmit={() => { this.props.createRoom(this.state); event.preventDefault(); }}>
+          <form onSubmit={() => { this.createRoom(this.state); event.preventDefault(); }}>
             <div className='form-group mt-5 mb-2 d-flex justify-content-center push-down'>
               <i className="fas fa-2x fa-map-marker-alt"></i>
               <input required placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
@@ -171,7 +171,6 @@ class CreateRoomForm extends React.Component {
               </div>
             </div>
             <div className='form-group mt-2 mb-2 push-down-more'>
-              {/* <p className='text-align-center'>Category(state test): {this.state.category}</p> */}
 
               <select
                 required
@@ -205,7 +204,7 @@ class CreateRoomForm extends React.Component {
 
             </div>
             <div className='form-group mt-4 mb-4 push-down-more-more'>
-              {/* <p>Price(State test):{this.state.price}</p> */}
+
               <div className='d-flex justify-content-around'>
                 <div className={`price shadow text-align-center ${$1}`} onClick={this.handle$}>$</div>
                 <div className={`price shadow text-align-center ${$2}`} onClick={this.handle$$}>$$</div>
