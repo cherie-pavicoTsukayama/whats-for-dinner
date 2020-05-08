@@ -115,19 +115,17 @@ border:none;
 }
 
 .leave-room-button {
-width:170px;
-color: #d2d2d2;
+width:160px;
+color: #8A8A8A;
 background-color: #E5E5E5;
 font-family:'Montserrat', sans-serif;
 font-weight: 700;
 border:none;
 border-radius:20px;
 height:4vh;
+text-align:center;
 }
 
-.star-image {
-  height:10vh;
-}
 
 .brand-blue {
   background-color:#007e77;
@@ -137,8 +135,50 @@ height:4vh;
   color:white;
 }
 
+.view-height-ten {
+  height:10vh;
+}
 
-.restaurant-room {
-  height:100vh;
-  width:100%;
+.view-height-five{
+  height:5vh;
+}
+
+.view-height-four {
+  height:4vh;
+}
+.view-height-fifteen {
+  height:15vh;
+}
+.view-height-fifty {
+  height:50vh;
+}
+
+.montserrat-seven-hundred {
+font-family:'Montserrat', sans-serif;
+font-weight: 700;
+}
+
+.restaurant-title {
+  font-family:'Montserrat', sans-serif;
+font-weight: 400;
+font-size:2.25rem;
+color:#007e77;
+}
+
+.review-star-image {
+  max-width: 200px;
+}
+
+.match-image-container {
+position:relative;
+}
+
+.match-button-container {
+  position:absolute;
+  z-index:2;
+}
+
+.food-choice-arrow {
+  color: white;
+  opacity:.5;
 }

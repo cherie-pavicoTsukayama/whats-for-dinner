@@ -4,28 +4,28 @@ export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentImageIndex: 0,
-      autoStartId: null
+      currentImageIndex: 0
+      // autoStartId: null
     };
     // this.loopThroughImages = this.loopThroughImages.bind(this);
     this.handleClickNext = this.handleClickNext.bind(this);
-    this.handleClickDot = this.handleClickDot.bind(this);
+    // this.handleClickDot = this.handleClickDot.bind(this);
     this.handleClickBack = this.handleClickBack.bind(this);
   }
 
-  ThroughImages() {
-    const currentImageIndex = this.state.currentImageIndex;
-    const newImageIndex = currentImageIndex + 1;
-    if ((this.props.images.length - 1) === currentImageIndex) {
-      this.setState({
-        currentImageIndex: 0
-      });
-    } else {
-      this.setState({
-        currentImageIndex: newImageIndex
-      });
-    }
-  }
+  // ThroughImages() {
+  //   const currentImageIndex = this.state.currentImageIndex;
+  //   const newImageIndex = currentImageIndex + 1;
+  //   if ((this.props.images.length - 1) === currentImageIndex) {
+  //     this.setState({
+  //       currentImageIndex: 0
+  //     });
+  //   } else {
+  //     this.setState({
+  //       currentImageIndex: newImageIndex
+  //     });
+  //   }
+  // }
 
   handleClickNext() {
     const currentImageIndex = this.state.currentImageIndex;
@@ -40,12 +40,12 @@ export default class Carousel extends React.Component {
     });
   }
 
-  handleClickDot(event) {
-    const newImageIndex = event.target.id;
-    this.setState({
-      currentImageIndex: parseInt(newImageIndex)
-    });
-  }
+  // handleClickDot(event) {
+  //   const newImageIndex = event.target.id;
+  //   this.setState({
+  //     currentImageIndex: parseInt(newImageIndex)
+  //   });
+  // }
 
   handleClickBack() {
     const currentImageIndex = this.state.currentImageIndex;
@@ -65,47 +65,43 @@ export default class Carousel extends React.Component {
 
   render() {
     return (
-      <div className={'d-flex flex-column align-content-between restaurant-room'}>
-        <div className={'row h-10'}>
-          <div className={'col mb-1'}>
-            <button type="button" className="btn btn-secondary leave-room-button">View Matches</button>
+      <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+        <div className={'col-sm pl-2 pr-0 mt-3'}>
+          <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+        </div>
+
+        <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 mb-4'}>
+          <div className={' restaurant-title '}>Restaurant Name</div>
+          <div className={'mt-2'}>
+            <img src={'/images/1-start.png'} className={'img-fluid review-star-image pb-1'} alt="Yelp Star Review Rating"/>
           </div>
         </div>
 
-        <div className={'row h-20'}>
-          <div className={'col d-flex justify-content-center align-items-center flex-column'}>
-            <div>Restaurant Name</div>
-            <div><img src={'https://images.nymag.com/news/intelligencer/intelposts120326_starstruck_560.jpg'} className={'img-fluid star-image'} alt=""/> </div>
+        <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+          <div className={'col pl-0 pr-0 view-height-fifty'}>
+            <img src={this.props.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />
           </div>
-        </div>
-
-        <div className={'row d-flex flex-wrap justify-content-center h-50'}>
-          <button className='btn'>
-            <i className={'fas fa-chevron-left'} onClick={this.handleClickBack}></i>
-          </button>
-          <div className={'col'}>
-            <img src={this.props.images[this.state.currentImageIndex]} alt="" className={' h-100 w-100'} />
-          </div>
-          <button className={'btn'}>
-            <i className={'fas fa-chevron-right'} onClick={this.handleClickNext}></i>
-          </button>
-        </div>
-
-        <div className={'row h-10'}>
-          <div className={'col d-flex justify-content-center'}>
-            <button type="button" className="btn btn-secondary grey-button m-3 shadow">Info</button>
-          </div>
-        </div>
-
-        <div className={'row brand-blue h-10'}>
-          <div className={'col d-flex justify-content-between'}>
+          <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
             <button className='btn'>
-              <i className={'fas fa-chevron-left white'} onClick={this.handleClickBack}></i>
+              <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={this.handleClickBack}></i>
             </button>
             <button className={'btn'}>
-              <i className={'fas fa-chevron-right white'} onClick={this.handleClickNext}></i>
+              <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={this.handleClickNext}></i>
             </button>
           </div>
+        </div>
+
+        <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
+          <button type="button" className="btn btn-secondary grey-button m-3 shadow-sm">Info</button>
+        </div>
+
+        <div className={'col d-flex justify-content-center brand-blue  pl-0 pr-0'}>
+          <button className='btn'>
+            <i className={'fas fa-caret-left white fa-5x'} onClick={this.handleClickBack}></i>
+          </button>
+          <button className={'btn'}>
+            <i className={'fas fa-caret-right white fa-5x'} onClick={this.handleClickNext}></i>
+          </button>
         </div>
 
       </div>

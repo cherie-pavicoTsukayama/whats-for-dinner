@@ -1,7 +1,8 @@
 import React from 'react';
-import VotingRoom from './voting-room';
-import LandingPage from './landing-page';
+// import VotingRoom from './voting-room';
+// import LandingPage from './landing-page';
 import Carousel from './carousel';
+import VotingRoom from './voting-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -501,7 +502,8 @@ export default class App extends React.Component {
       : <h1>{this.state.message.toUpperCase()}</h1>,
     <div>
       {/* <LandingPage /> */}
-      <Carousel restaurants={this.state.restaurants} images={images} />
+      <VotingRoom restaurants={this.state.restaurants} images={images} />
+      {/* <Carousel restaurants={this.state.restaurants} images={images} /> */}
     </div >
 
     );
