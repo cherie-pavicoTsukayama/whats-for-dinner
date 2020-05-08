@@ -203,6 +203,10 @@ app.post('/api/restaurants/liked', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/restaurants/liked/:restaurantId', (req, res, next) => {
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
