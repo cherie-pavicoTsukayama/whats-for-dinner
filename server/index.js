@@ -204,7 +204,16 @@ app.post('/api/restaurants/liked', (req, res, next) => {
 });
 
 app.delete('/api/restaurants/liked/:restaurantId', (req, res, next) => {
-
+  const deleteSql = `
+  delete from "likedRestaurants"
+  where "roomId" = $1
+    and "restaurantId" = $2
+    and "userId" = $3
+  `;
+  const params = [req.session.roomId, req.params.restaurantId, req.session.userId];
+  db.query(deleteSql, params)
+    .then(result => res.sendStatus(204))
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
