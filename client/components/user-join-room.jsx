@@ -23,11 +23,15 @@ export default class UserJoinRoom extends React.Component {
   }
 
   render() {
+    let invalidKeyMessage;
+    if (this.props.errorMessage) {
+      invalidKeyMessage = <p className="m-0 mt-2 red">{this.props.errorMessage}</p>;
+    }
     return (
       <div className={'user-join-room d-flex align-items-center'}>
         <div className={'darken-background'}></div>
         <form onSubmit={this.handleSubmit} className={'col-sm-12 p-0 d-flex flex-column align-items-center'}>
-          <div className={'col-sm-12 white-transparent-background py-3 mb-5 d-flex justify-content-center'}>
+          <div className={'col-sm-12 white-transparent-background py-3 mb-5 d-flex flex-column align-items-center'}>
             <input
               required
               className="user-join-input"
@@ -37,6 +41,7 @@ export default class UserJoinRoom extends React.Component {
               placeholder="Entry Key"
               maxLength="8"
               aria-label="Room Entry Key"/>
+            {invalidKeyMessage}
           </div>
           <button type="submit" className="btn btn-secondary grey-button m-3">Join Room</button>
         </form>

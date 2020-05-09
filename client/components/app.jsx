@@ -80,7 +80,8 @@ export default class App extends React.Component {
         break;
       case 'join room':
         currentView = <UserJoinRoom
-          joinRoom={this.joinRoom}/>;
+          joinRoom={this.joinRoom}
+          errorMessage={this.state.errorMessage}/>;
     }
     const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     return (
@@ -88,7 +89,9 @@ export default class App extends React.Component {
         ? <h1>Testing connections...</h1>
         : <h1>{message.toUpperCase()}</h1>,
       <div>
-        {currentView}
+        <UserJoinRoom
+          joinRoom={this.joinRoom}
+          errorMessage={this.state.errorMessage} />
       </div >
 
       // <div>
