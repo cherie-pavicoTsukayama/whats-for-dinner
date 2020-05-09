@@ -121,11 +121,33 @@ display:flex;
 
 .grey-button {
 width:200px;
-color: #128781;
+color: #007E77;
 background-color: white;
 font-family:'Montserrat', sans-serif;
 font-weight: 700;
 border:none;
+}
+
+.match-website-button {
+width: 150px;
+color: #007E77;
+background-image: linear-gradient(#f0f0f0 0%, #fff 50%, #d1d1d1 100%);
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+border: none;
+}
+
+.match-website-button:active {
+  transform: scale(.9);
+  color: #007E77;
+}
+
+.match-website-button:focus {
+  color: #007E77;
+}
+
+.pointer:hover {
+  cursor: pointer;
 }
 
 .leave-room-button {
@@ -188,7 +210,7 @@ text-align:center;
 }
 
 .match-image-container {
-position:relative;
+  position:relative;
 }
 
 .match-button-container {
@@ -203,6 +225,7 @@ position:relative;
 
 .restaurant-button-choice {
   max-height:90px;
+}
 
 .user-join-room {
   position: relative;
@@ -276,4 +299,10 @@ position:relative;
    height: 70px;
    position: fixed;
    bottom: -2px;
+ }
+
+ .figure-image {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
  }

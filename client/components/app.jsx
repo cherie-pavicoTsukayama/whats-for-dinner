@@ -10,7 +10,8 @@ export default class App extends React.Component {
       isLoading: true,
       view: 'landingPage',
       currentRestaurant: 0,
-      restaurants: null
+      restaurants: null,
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
