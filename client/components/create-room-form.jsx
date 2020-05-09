@@ -10,8 +10,8 @@ class CreateRoomForm extends React.Component {
       radius: '',
       price: '',
       //Change this back to 'form' after testing is successful
-      view: 'join',
-      entryKey: 'e0ddc663'
+      view: 'form',
+      entryKey: null
     };
     this.handleLocation = this.handleLocation.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
