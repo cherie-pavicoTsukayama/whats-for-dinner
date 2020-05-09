@@ -1,5 +1,5 @@
 import React from 'react';
-import RestaurantDetails from './restaurant-details';
+// import RestaurantDetails from './restaurant-details';
 // import MatchConfirmed from './match-confirmed';
 
 export default class VotingRoom extends React.Component {
@@ -53,7 +53,6 @@ export default class VotingRoom extends React.Component {
     fetch(`/api/restaurants/${this.props.restaurant.id}`)
       .then(result => result.json())
       .then(data => {
-        console.log('data:', data)
         this.setState({
           details: data,
           photos: data.photos
@@ -138,9 +137,12 @@ export default class VotingRoom extends React.Component {
         <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
           <button type="button" className="btn btn-secondary grey-button m-3 shadow-sm">Info</button>
         </div>
-        <div className={'col d-flex justify-content-center brand-blue  pl-0 pr-0 restaurant-button-choice'}>
+        <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice'}>
           <button className='btn '>
             <i className={'fas fa-caret-left white fa-5x'} onClick={() => { this.props.decrementRestaurant(); }} ></i>
+          </button>
+          <button className="btn">
+            <i className="fas fa-heart fa-3x white"></i>
           </button>
           <button className={'btn'}>
             <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
