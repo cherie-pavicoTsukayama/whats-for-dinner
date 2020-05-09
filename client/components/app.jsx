@@ -11,7 +11,7 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'create room',
+      view: 'landing page',
       currentRestaurant: 0,
       restaurants: null,
       matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
