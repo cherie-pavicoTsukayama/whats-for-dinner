@@ -29,12 +29,14 @@ export default class UserJoinRoom extends React.Component {
         <form onSubmit={this.handleSubmit} className={'col-sm-12 p-0 d-flex flex-column align-items-center'}>
           <div className={'col-sm-12 white-transparent-background py-3 mb-5 d-flex justify-content-center'}>
             <input
+              required
               className="user-join-input"
               value={this.state.input}
               onChange={this.handleChange}
               type="text"
               placeholder="Entry Key"
-              maxLength="8"/>
+              maxLength="8"
+              aria-label="Room Entry Key"/>
           </div>
           <button type="submit" className="btn btn-secondary grey-button m-3">Join Room</button>
         </form>
