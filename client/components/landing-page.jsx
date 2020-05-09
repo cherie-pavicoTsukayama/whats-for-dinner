@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Landingpage() {
+function LandingPage() {
 
   return (
     <div className="landing-page-image pb-5 img-fluid">
@@ -10,4 +10,4 @@ function Landingpage() {
   );
 }
 
-export default Landingpage;
+export default LandingPage;

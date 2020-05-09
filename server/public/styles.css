@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
 }
@@ -60,6 +59,7 @@ display:flex;
 .display-modal {
   display:block;
 }
+
 .host-join-room {
   position: relative;
   height: 100vh;
@@ -80,12 +80,26 @@ display:flex;
   font-weight: 400;
 }
 
+.montserrat-500 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.montserrat-700 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
 .black-font {
   color: black;
 }
 
 .grey-font {
   color: #d2d2d2;
+}
+
+.brand-blue {
+  color: #007E77;
 }
 
 .white-transparent-background {
@@ -107,12 +121,119 @@ display:flex;
 
 .grey-button {
 width:200px;
-color: #128781;
-background-color: #EDEDEC;
+color: #007E77;
+background-color: white;
 font-family:'Montserrat', sans-serif;
 font-weight: 700;
 border:none;
+}
 
+.match-website-button {
+width: 150px;
+color: #007E77;
+background-image: linear-gradient(#f0f0f0 0%, #fff 50%, #d1d1d1 100%);
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+border: none;
+}
+
+.match-website-button:active {
+  transform: scale(.9);
+  color: #007E77;
+}
+
+.match-website-button:focus {
+  color: #007E77;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.leave-room-button {
+width:160px;
+color: #8A8A8A;
+background-color: #E5E5E5;
+font-family:'Montserrat', sans-serif;
+font-weight: 700;
+border:none;
+border-radius:20px;
+height:4vh;
+text-align:center;
+}
+
+.brand-blue {
+  background-color:#007e77;
+}
+
+.white {
+  color:white;
+}
+
+.view-height-ten {
+  height:10vh;
+}
+
+.view-height-five{
+  height:5vh;
+}
+
+.view-height-four {
+  height:4vh;
+}
+.view-height-fifteen {
+  height:15vh;
+}
+.view-height-fifty {
+  height:50vh;
+}
+
+.view-height-forty-five {
+    height:45vh;
+}
+
+.montserrat-seven-hundred {
+font-family:'Montserrat', sans-serif;
+font-weight: 700;
+}
+
+.restaurant-title {
+  font-family:'Montserrat', sans-serif;
+font-weight: 400;
+font-size:2.25rem;
+color:#007e77;
+text-align:center;
+}
+
+.review-star-image {
+  max-width: 200px;
+}
+
+.match-image-container {
+  position:relative;
+}
+
+.match-button-container {
+  position:absolute;
+  z-index:2;
+}
+
+.food-choice-arrow {
+  color: white;
+  opacity:.5;
+}
+
+.restaurant-button-choice {
+  max-height:90px;
+}
+
+.user-join-room {
+  position: relative;
+  height: 100vh;
+  background-image: url(./images/foodphoto3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .user-join-input {
@@ -125,6 +246,7 @@ border:none;
   color: #128781;
   font-family:'Montserrat', sans-serif;
 }
+
 .text-align-center{
   text-align: center;
 }
@@ -172,4 +294,63 @@ top: 7rem;
  .push-down-most{
 position: relative;
 top: 9rem;
+
+.star-rating {
+  width: 50%;
+  max-width: 200px;
+}
+
+.user-star-rating {
+  width: 70%;
+  max-width: 100px;
+}
+
+.address {
+  font-size: 1.3rem;
+  line-height: 1.7rem;
+}
+
+.open-closed-feature {
+  width: 50%;
+  color: white;
+  border-radius: 25px;
+}
+
+.bg-orange {
+  background-color: #FE4A3B;
+}
+
+.bg-green {
+  background-color: #007E77;
+}
+
+.white {
+  color: white;
+}
+.user-image {
+  height: 75px;
+  width: 75px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+ .user-name {
+   line-height: 1rem;
+   font-size: 1.3rem;
+ }
+
+ .review-date {
+   font-size: 1rem;
+   color: #a1a1a1;
+ }
+
+ .footer {
+   height: 70px;
+   position: fixed;
+   bottom: -2px;
+ }
+
+ .figure-image {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
  }

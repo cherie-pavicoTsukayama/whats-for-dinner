@@ -1,8 +1,6 @@
 import React from 'react';
-
 import VotingRoom from './voting-room';
 import CreateRoomForm from './create-room-form';
-
 import LandingPage from './landing-page';
 
 export default class App extends React.Component {
@@ -11,16 +9,33 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      entryKey: 'abc123',
-      view: 'landingPage'
+      view: 'landingPage',
+      currentRestaurant: 0,
+      restaurants: null,
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
     };
-
+    this.incrementRestaurant = this.incrementRestaurant.bind(this);
+    this.decrementRestaurant = this.decrementRestaurant.bind(this);
     this.joinRoom = this.joinRoom.bind(this);
   }
 
-  joinRoom() {
-    fetch(`/api/rooms/${this.state.entryKey}`)
-      .then(result => result.json())
+  incrementRestaurant() {
+    this.setState({ currentRestaurant: this.state.currentRestaurant + 1 });
+    if (this.state.currentRestaurant === this.state.restaurants.length - 1) {
+      this.setState({ currentRestaurant: 0 });
+    }
+  }
+  
+  decrementRestaurant() {
+    this.setState({ currentRestaurant: this.state.currentRestaurant - 1 });
+    if (this.state.currentRestaurant === 0) {
+      this.setState({ currentRestaurant: this.state.restaurants.length - 1 });
+    }
+  }
+  
+  joinRoom(entryKey) {
+    fetch(`/api/rooms/${entryKey}`)
+      .then(response => response.json())
       .then(data => {
         this.setState({
           restaurants: data.restaurants,
@@ -28,7 +43,6 @@ export default class App extends React.Component {
         });
       })
       .catch(err => console.error(err));
-
   }
 
   componentDidMount() {
@@ -40,14 +54,16 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (this.state.isLoading
+    const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
+    return (isLoading
       ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message.toUpperCase()}</h1>,
+      : <h1>{message.toUpperCase()}</h1>,
     <div>
-
-      <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
+      //<CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
+      <LandingPage />
+      {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
+        incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
     </div >
-
     );
   }
 }
