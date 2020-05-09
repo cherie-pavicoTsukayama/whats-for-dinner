@@ -2,8 +2,8 @@ import React from 'react';
 import VotingRoom from './voting-room';
 import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
-// import HostJoinRoom from './host-join-room';
 import UserJoinRoom from './user-join-room';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -89,12 +89,12 @@ export default class App extends React.Component {
           currentView = <VotingRoom currentRestaurant={currentRestaurant}
             decrementRestaurant={this.decrementRestaurant}
             incrementRestaurant={this.incrementRestaurant}
-            restaurant={restaurants[currentRestaurant]} />;
+            restaurant={restaurants[currentRestaurant]}
+            />;
         }
 
         break;
     }
-
 
     return (
       isLoading

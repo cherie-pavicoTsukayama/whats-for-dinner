@@ -18,7 +18,7 @@ function MatchConfirmed(props) {
         </div>
         <div className="row mt-3">
           <div className="col secondary-div">
-            <button type="button" onClick={() => { props.hideModal(); }} className="btn btn-secondary blue-rounded-button">View Matches</button>
+            <button type="button" onClick={() => { props.hideModal(); }} className="btn btn-secondary blue-rounded-button">View Match!</button>
           </div>
         </div>
       </div>

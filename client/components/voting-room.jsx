@@ -1,6 +1,6 @@
 import React from 'react';
 import RestaurantDetails from './restaurant-details';
-// import MatchConfirmed from './match-confirmed';
+import MatchConfirmed from './match-confirmed';
 
 export default class VotingRoom extends React.Component {
   constructor(props) {
@@ -128,6 +128,7 @@ export default class VotingRoom extends React.Component {
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+          <MatchConfirmed match={true} />
           <div className={'col-sm pl-2 pr-0 mt-3'}>
             <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
           </div>
@@ -170,7 +171,10 @@ export default class VotingRoom extends React.Component {
       );
     } else if (this.state.view === 'info') {
       return (
-        <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+        <div>
+          <MatchConfirmed match={this.state.match} />
+          <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+        </div>
       );
     }
   }
