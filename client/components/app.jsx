@@ -35,14 +35,14 @@ export default class App extends React.Component {
       this.setState({ currentRestaurant: 0 });
     }
   }
-  
+
   decrementRestaurant() {
     this.setState({ currentRestaurant: this.state.currentRestaurant - 1 });
     if (this.state.currentRestaurant === 0) {
       this.setState({ currentRestaurant: this.state.restaurants.length - 1 });
     }
   }
-  
+
   joinRoom(entryKey) {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
@@ -76,24 +76,21 @@ export default class App extends React.Component {
       case 'join room':
         currentView = <UserJoinRoom joinRoom={this.joinRoom}/>;
     }
+    const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     return (
-      const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
-    return (isLoading
-      ? <h1>Testing connections...</h1>
-      : <h1>{message.toUpperCase()}</h1>,
+      isLoading
+        ? <h1>Testing connections...</h1>
+        : <h1>{message.toUpperCase()}</h1>,
       <div>
         {currentView}
       </div >
 
-    
-      
-    <div>
-      //<CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
-      <LandingPage />
-      {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-        incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
-    </div >
-
+      // <div>
+      //   //<CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
+      //   <LandingPage />
+      //   {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
+      //     incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
+      // </div >
     );
   }
 }
