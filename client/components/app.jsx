@@ -14,8 +14,8 @@ export default class App extends React.Component {
       view: 'create room',
       currentRestaurant: 0,
       restaurants: null,
-      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
-
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
+      errorMessage: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -47,11 +47,15 @@ export default class App extends React.Component {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
       .then(data => {
-        // console.log(data.restaurants.businesses)
-        this.setState({
-          restaurants: data.restaurants.businesses,
-          view: 'view restaurants'
-        });
+        if (data.error) {
+          this.setState({ errorMessage: 'Invalid Entry Key' });
+        } else {
+          this.setState({
+            restaurants: data.restaurants.businesses,
+            view: 'voting room',
+            errorMessage: ''
+          });
+        }
       })
       .catch(err => console.error(err));
   }
@@ -76,9 +80,11 @@ export default class App extends React.Component {
         currentView = <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>;
         break;
       case 'join room':
-        currentView = <UserJoinRoom joinRoom={this.joinRoom}/>;
+        currentView = <UserJoinRoom
+          joinRoom={this.joinRoom}
+          errorMessage={this.state.errorMessage}/>;
         break;
-      case 'view restaurants':
+      case 'voting room':
         currentView = <VotingRoom currentRestaurant={currentRestaurant}
           decrementRestaurant={this.decrementRestaurant}
           incrementRestaurant={this.incrementRestaurant}
