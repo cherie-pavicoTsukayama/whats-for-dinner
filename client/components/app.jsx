@@ -1,5 +1,7 @@
 import React from 'react';
 import LandingPage from './landing-page';
+import HostJoinRoom from './host-join-room';
+import UserJoinRoom from './user-join-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -7,7 +9,7 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'landingPage'
+      view: 'landing page'
     };
 
     this.joinRoom = this.joinRoom.bind(this);
@@ -26,7 +28,7 @@ export default class App extends React.Component {
       .then(data => {
         this.setState({
           restaurants: data.restaurants,
-          view: 'viewRestaurants'
+          view: 'view restaurants'
         });
       })
       .catch(err => console.error(err));
@@ -41,12 +43,24 @@ export default class App extends React.Component {
   }
 
   render() {
+    let currentView;
+    switch (this.state.view) {
+      case 'landing page':
+        currentView = <LandingPage setViewState={this.setView}/>;
+        break;
+      case 'create room':
+        // need to be create room screen
+        currentView = <HostJoinRoom/>;
+        break;
+      case 'join room':
+        currentView = <UserJoinRoom joinRoom={this.joinRoom}/>;
+    }
     return (
       this.state.isLoading
         ? <h1>Testing connections...</h1>
         : <h1>{this.state.message.toUpperCase()}</h1>,
       <div>
-        <LandingPage setViewState={this.setView}/>
+        {currentView}
       </div >
     );
   }
