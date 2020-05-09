@@ -8,7 +8,7 @@ export default class VotingRoom extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'info',
+      view: 'voting room',
       match: true,
       currentImageIndex: 0,
       details: null,
@@ -21,6 +21,8 @@ export default class VotingRoom extends React.Component {
     this.renderStarRating = this.renderStarRating.bind(this);
     this.getDetails = this.getDetails.bind(this);
     this.renderPhoto = this.renderPhoto.bind(this);
+    this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
+    this.handleClickInfo = this.handleClickInfo.bind(this);
   }
 
   renderStarRating() {
@@ -104,6 +106,18 @@ export default class VotingRoom extends React.Component {
     }
   }
 
+  handleClickBackToVotingRoom() {
+    this.setState({
+      view: 'voting room'
+    });
+  }
+
+  handleClickInfo() {
+    this.setState({
+      view: 'info'
+    });
+  }
+
   componentDidMount() {
     this.getDetails();
   }
@@ -135,7 +149,12 @@ export default class VotingRoom extends React.Component {
             </div>
           </div>
           <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
-            <button type="button" className="btn btn-secondary grey-button m-3 shadow-sm">Info</button>
+            <button
+              type="button"
+              className="btn btn-secondary grey-button m-3 shadow-sm"
+              onClick={this.handleClickInfo}>
+                Info
+            </button>
           </div>
           <div className={'col d-flex justify-content-center brand-blue  pl-0 pr-0 restaurant-button-choice'}>
             <button className='btn '>
@@ -149,7 +168,7 @@ export default class VotingRoom extends React.Component {
       );
     } else if (this.state.view === 'info') {
       return (
-        <RestaurantDetails restaurants={this.props.restaurant} />
+        <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
       );
     }
   }
