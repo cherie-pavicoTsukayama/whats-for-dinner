@@ -10,13 +10,15 @@ export default class VotingRoom extends React.Component {
       view: 'restaurantRoom',
       match: true,
       currentImageIndex: 0,
-      details: null
+      details: ''
     };
+    console.log(props)
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
     this.handleClickBackImage = this.handleClickBackImage.bind(this);
     this.renderStarRating = this.renderStarRating.bind(this);
+    this.getDetails = this.getDetails.bind(this);
   }
 
   renderStarRating() {
@@ -49,6 +51,7 @@ export default class VotingRoom extends React.Component {
     fetch(`/api/restaurants/${this.props.restaurant.id}`)
       .then(result => result.json())
       .then(data => {
+        console.log(data)
         this.setState({
           details: data
         });
@@ -90,8 +93,11 @@ export default class VotingRoom extends React.Component {
     });
   }
 
-  render() {
+  componentDidMount() {
+    this.getDetails();
+  }
 
+  render() {
     return (
       <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
         <div className={'col-sm pl-2 pr-0 mt-3'}>
@@ -103,7 +109,7 @@ export default class VotingRoom extends React.Component {
             {this.renderStarRating()}
           </div>
         </div>
-        <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+        {/* <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
           <div className={'col pl-0 pr-0 view-height-forty-five'}>
             <img src={this.props.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />
           </div>
@@ -126,9 +132,9 @@ export default class VotingRoom extends React.Component {
           <button className={'btn'}>
             <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
           </button>
-        </div>
+        </div> */}
 
       </div>
     );
-  }
+    }
 }
