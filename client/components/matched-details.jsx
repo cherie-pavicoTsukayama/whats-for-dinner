@@ -235,36 +235,48 @@ export default class MatchedDetails extends React.Component {
   }
 
   render() {
+    let restaurantDetails = null;
+    if (this.state.photos.length !== 0) {
+      restaurantDetails =
+      (<div className="d-flex flex-wrap justify-content-center mt-4">
+        <h1 className="montserrat-400 brand-blue-text text-center">{this.state.name}</h1>
+        <div className="col-12 d-flex justify-content-center mt-2">
+          {this.renderStarRating()}
+        </div>
+        <div className="pt-4 pb-4">
+          {this.renderAddress()}
+        </div>
+        <div className="d-flex flex-wrap justify-content-center mb-5">
+          {this.renderImageCarousel(this.state.photos)}
+          <form action={this.state.url} target="_blank">
+            <button type="submit" className="btn pointer match-website-button shadow-sm">View on Yelp</button>
+          </form>
+
+        </div>
+        <div className="col-12 d-flex justify-content-center pb-3">
+          {this.renderIsOpen()}
+        </div>
+        <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
+          {this.renderHours(this.state.hours)}
+        </div>
+        <div className="mt-3 mb-5 ml-3 mr-3">
+          {this.renderReviews(this.state.reviews)}
+        </div>
+      </div>);
+    } else {
+      restaurantDetails =
+        (<div className="d-flex h-100 justify-content-center container align-content-center">
+          <img src="./images/loading.gif" alt="" className="align-self-center" />
+        </div>
+        );
+    }
+
     return (
       <div>
         <div className="container">
           <div className="col match-logo"></div>
         </div>
-        <div className="d-flex flex-wrap justify-content-center mt-4">
-          <h1 className="montserrat-400 brand-blue text-center">{this.state.name}</h1>
-          <div className="col-12 d-flex justify-content-center mt-2">
-            {this.renderStarRating()}
-          </div>
-          <div className="pt-4 pb-4">
-            {this.renderAddress()}
-          </div>
-          <div className="d-flex flex-wrap justify-content-center mb-5">
-            {this.renderImageCarousel(this.state.photos)}
-            <form action={this.state.url} target="_blank">
-              <button type="submit" className="btn pointer match-website-button shadow-sm">View on Yelp</button>
-            </form>
-
-          </div>
-          <div className="col-12 d-flex justify-content-center pb-3">
-            {this.renderIsOpen()}
-          </div>
-          <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
-            {this.renderHours(this.state.hours)}
-          </div>
-          <div className="mt-3 mb-5 ml-3 mr-3">
-            {this.renderReviews(this.state.reviews)}
-          </div>
-        </div>
+        {restaurantDetails}
       </div>
     );
   }

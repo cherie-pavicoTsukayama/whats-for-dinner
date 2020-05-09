@@ -2,8 +2,8 @@ import React from 'react';
 import VotingRoom from './voting-room';
 import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
-// import HostJoinRoom from './host-join-room';
 import UserJoinRoom from './user-join-room';
+import MatchDetails from './matched-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class App extends React.Component {
       isLoading: true,
       view: 'landing page',
       currentRestaurant: 0,
-      restaurants: null,
+      restaurants: [],
       matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
       errorMessage: ''
     };
@@ -85,10 +85,17 @@ export default class App extends React.Component {
           errorMessage={this.state.errorMessage}/>;
         break;
       case 'voting room':
-        currentView = <VotingRoom currentRestaurant={currentRestaurant}
-          decrementRestaurant={this.decrementRestaurant}
-          incrementRestaurant={this.incrementRestaurant}
-          restaurant={restaurants[currentRestaurant]} />;
+        if (this.state.restaurants.length !== 0) {
+          currentView = <VotingRoom currentRestaurant={currentRestaurant}
+            decrementRestaurant={this.decrementRestaurant}
+            incrementRestaurant={this.incrementRestaurant}
+            restaurant={restaurants[currentRestaurant]}
+            setView={this.setView}
+          />;
+        }
+        break;
+      case 'match details':
+        currentView = <MatchDetails restaurantId={this.state.matchedRestaurantId} />;
         break;
     }
 
