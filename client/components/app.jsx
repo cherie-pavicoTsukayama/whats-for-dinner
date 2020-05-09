@@ -14,8 +14,8 @@ export default class App extends React.Component {
       view: 'landing page',
       currentRestaurant: 0,
       restaurants: null,
-      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
-
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
+      errorMessage: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -47,10 +47,15 @@ export default class App extends React.Component {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          restaurants: data.restaurants,
-          view: 'view restaurants'
-        });
+        if (data.error) {
+          this.setState({ errorMessage: 'Invalid Entry Key' });
+        } else {
+          this.setState({
+            restaurants: data.restaurants,
+            view: 'view restaurants',
+            errorMessage: ''
+          });
+        }
       })
       .catch(err => console.error(err));
   }
@@ -74,7 +79,9 @@ export default class App extends React.Component {
         currentView = <HostJoinRoom/>;
         break;
       case 'join room':
-        currentView = <UserJoinRoom joinRoom={this.joinRoom}/>;
+        currentView = <UserJoinRoom
+          joinRoom={this.joinRoom}
+          errorMessage={this.state.errorMessage}/>;
     }
     const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     return (
