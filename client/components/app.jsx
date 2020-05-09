@@ -3,7 +3,7 @@ import VotingRoom from './voting-room';
 import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 import UserJoinRoom from './user-join-room';
-
+import MatchDetails from './matched-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -90,9 +90,12 @@ export default class App extends React.Component {
             decrementRestaurant={this.decrementRestaurant}
             incrementRestaurant={this.incrementRestaurant}
             restaurant={restaurants[currentRestaurant]}
-            />;
+            setView={this.setView}
+          />;
         }
-
+        break;
+      case 'match details':
+        currentView = <MatchDetails restaurantId={this.state.matchedRestaurantId} />;
         break;
     }
 

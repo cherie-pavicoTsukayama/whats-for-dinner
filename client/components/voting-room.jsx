@@ -68,6 +68,7 @@ export default class VotingRoom extends React.Component {
   }
 
   hideModal() {
+    this.props.setView('match details');
     this.setState({ match: false });
   }
 
@@ -128,7 +129,7 @@ export default class VotingRoom extends React.Component {
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
-          <MatchConfirmed match={true} />
+          <MatchConfirmed match={true} setView={this.props.setView} hide={this.hideModal}/>
           <div className={'col-sm pl-2 pr-0 mt-3'}>
             <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
           </div>
@@ -140,7 +141,7 @@ export default class VotingRoom extends React.Component {
           </div>
           <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
             <div className={'col pl-0 pr-0 view-height-forty-five'}>
-              {this.renderPhoto()};
+              {this.renderPhoto()}
             </div>
             <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
               <button className='btn'>

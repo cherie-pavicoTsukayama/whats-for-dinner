@@ -44,7 +44,7 @@ display:flex;
 
 .match-modal {
   display:flex;
- position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width:100%;
@@ -215,8 +215,8 @@ text-align:center;
 }
 
 .match-button-container {
-  position:absolute;
-  z-index:2;
+  /* position:absolute; */
+  z-index: 2;
 }
 
 .food-choice-arrow {
