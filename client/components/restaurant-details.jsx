@@ -218,7 +218,7 @@ export default class RestaurantDetail extends React.Component {
     return (
       <div>
         <div className="d-flex flex-wrap justify-content-center mt-4 container">
-          <h1 className="montserrat-400 brand-blue text-center">{this.props.restaurants.name}</h1>
+          <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
           </div>

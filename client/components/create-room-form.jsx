@@ -9,9 +9,8 @@ class CreateRoomForm extends React.Component {
       category: '',
       radius: '',
       price: '',
-      //Change this back to 'form' after testing is successful
       view: 'form',
-      entryKey: null
+      entryKey: ''
     };
     this.handleLocation = this.handleLocation.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
@@ -175,11 +174,11 @@ class CreateRoomForm extends React.Component {
 
               <select
                 required
+                placeholder='Category'
                 className='form-control  color'
                 name="category"
                 id="category"
                 onChange={this.handleCategory}>
-                <option value="">Select A Category</option>
                 <option value="pizza">Pizza</option>
                 <option value="mexican">Mexican</option>
                 <option value="chinese">Chinese</option>
@@ -226,12 +225,7 @@ class CreateRoomForm extends React.Component {
     if (this.state.view === 'join') {
       return (
         <div>
-          <HostJoinRoom
-            joinRoom={this.props.joinRoom}
-            entryKey={this.state.entryKey}
-            // setView={this.props.setView}
-          >
-          </HostJoinRoom>
+          <HostJoinRoom joinRoom={this.props.joinRoom} entryKey={this.state.entryKey} setView={this.props.setView}></HostJoinRoom>
         </div>
       );
     }
