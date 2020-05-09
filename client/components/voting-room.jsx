@@ -1,4 +1,5 @@
 import React from 'react';
+import RestaurantDetails from './restaurant-details';
 // import MatchConfirmed from './match-confirmed';
 
 export default class VotingRoom extends React.Component {
@@ -7,18 +8,19 @@ export default class VotingRoom extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'restaurantRoom',
+      view: 'view restaurant',
       match: true,
       currentImageIndex: 0,
-      details: ''
+      details: null,
+      photos: []
     };
-    console.log(props)
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
     this.handleClickBackImage = this.handleClickBackImage.bind(this);
     this.renderStarRating = this.renderStarRating.bind(this);
     this.getDetails = this.getDetails.bind(this);
+    this.renderPhoto = this.renderPhoto.bind(this);
   }
 
   renderStarRating() {
@@ -51,9 +53,10 @@ export default class VotingRoom extends React.Component {
     fetch(`/api/restaurants/${this.props.restaurant.id}`)
       .then(result => result.json())
       .then(data => {
-        console.log(data)
+        console.log('data:', data)
         this.setState({
-          details: data
+          details: data,
+          photos: data.photos
         });
       })
       .catch(err => console.error(err));
@@ -70,7 +73,7 @@ export default class VotingRoom extends React.Component {
   handleClickNextImage() {
     const currentImageIndex = this.state.currentImageIndex;
     let newImageIndex = null;
-    if (currentImageIndex === this.props.images.length - 1) {
+    if (currentImageIndex === this.state.photos.length - 1) {
       newImageIndex = 0;
     } else {
       newImageIndex = currentImageIndex + 1;
@@ -93,11 +96,21 @@ export default class VotingRoom extends React.Component {
     });
   }
 
+  renderPhoto() {
+    if (this.state.photos.length !== 0) {
+      return <img
+        src={this.state.details.photos[this.state.currentImageIndex]}
+        alt="Yelp Restaurant Business Image"
+        className={' h-100 w-100 '} />;
+    }
+  }
+
   componentDidMount() {
     this.getDetails();
   }
 
   render() {
+
     return (
       <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
         <div className={'col-sm pl-2 pr-0 mt-3'}>
@@ -109,9 +122,9 @@ export default class VotingRoom extends React.Component {
             {this.renderStarRating()}
           </div>
         </div>
-        {/* <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+        <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
           <div className={'col pl-0 pr-0 view-height-forty-five'}>
-            <img src={this.props.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />
+            {this.renderPhoto()};
           </div>
           <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
             <button className='btn'>
@@ -132,9 +145,13 @@ export default class VotingRoom extends React.Component {
           <button className={'btn'}>
             <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
           </button>
-        </div> */}
-
+        </div>
       </div>
     );
-    }
+    // } else if (this.state.view === 'info') {
+    //   return (
+    //     <RestaurantDetails restaurants={this.props.restaurant} />
+    //   );
+    // }
+  }
 }

@@ -47,7 +47,7 @@ export default class App extends React.Component {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data.restaurants.businesses)
+        // console.log(data.restaurants.businesses)
         this.setState({
           restaurants: data.restaurants.businesses,
           view: 'view restaurants'
