@@ -1,5 +1,6 @@
 import React from 'react';
 import VotingRoom from './voting-room';
+import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 
 export default class App extends React.Component {
@@ -58,6 +59,7 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{message.toUpperCase()}</h1>,
     <div>
+      //<CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
       <LandingPage />
       {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
         incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
