@@ -103,6 +103,8 @@ export default class VotingRoom extends React.Component {
         src={this.state.details.photos[this.state.currentImageIndex]}
         alt="Yelp Restaurant Business Image"
         className={' h-100 w-100 '} />;
+    } else {
+      return null;
     }
   }
 
