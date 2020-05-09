@@ -81,16 +81,16 @@ export default class App extends React.Component {
       isLoading
         ? <h1>Testing connections...</h1>
         : <h1>{message.toUpperCase()}</h1>,
-      <div>
-        {currentView}
-      </div >
-
       // <div>
-      //   //<CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
-      //   <LandingPage />
-      //   {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-      //     incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
+      //   {currentView}
       // </div >
+
+      <div>
+        <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
+        {/* <LandingPage /> */}
+        {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
+          incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
+      </div >
     );
   }
 }

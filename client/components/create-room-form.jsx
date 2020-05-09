@@ -174,11 +174,11 @@ class CreateRoomForm extends React.Component {
 
               <select
                 required
-                placeholder='Category'
                 className='form-control  color'
                 name="category"
                 id="category"
                 onChange={this.handleCategory}>
+                <option value="">Select a Category</option>
                 <option value="pizza">Pizza</option>
                 <option value="mexican">Mexican</option>
                 <option value="chinese">Chinese</option>

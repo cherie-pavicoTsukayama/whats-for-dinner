@@ -216,6 +216,24 @@ app.delete('/api/restaurants/liked/:restaurantId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
+  const determineMatchSql = `
+  select count(restaurantId), roomId
+  from likedRestaurants
+  where roomId=$1
+  group by roomId
+  having count(restaurantId)>1
+  `
+  const params = [req.params.]
+  // `
+  // select count(roomId), restaurantId
+  // from likedRestaurants
+  // where roomId=$1
+  // group by restaurantId
+  // having count(roomId) > 1
+  // `
+})
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
