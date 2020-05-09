@@ -89,9 +89,7 @@ export default class App extends React.Component {
         ? <h1>Testing connections...</h1>
         : <h1>{message.toUpperCase()}</h1>,
       <div>
-        <UserJoinRoom
-          joinRoom={this.joinRoom}
-          errorMessage={this.state.errorMessage} />
+        {currentView}
       </div >
 
       // <div>
