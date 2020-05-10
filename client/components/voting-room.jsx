@@ -152,14 +152,14 @@ export default class VotingRoom extends React.Component {
 
     if (this.state.view === 'voting room') {
       return (
-        <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+        <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
           <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
           <div className={'col-sm pl-2 pr-0 mt-3'}>
             <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
           </div>
-          <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 mb-2'}>
+          <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header'}>
             <div className={'restaurant-title'}>{this.props.restaurant.name}</div>
-            <div className={'mt-2'}>
+            <div>
               {this.renderStarRating()}
             </div>
           </div>
@@ -176,17 +176,17 @@ export default class VotingRoom extends React.Component {
               </button>
             </div>
           </div>
-          <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
+          <div className={'col-sm d-flex justify-content-center  pl-0 pr-0 view-restaurant-button-container'}>
             <button
               type="button"
-              className="btn btn-secondary grey-button m-3 shadow-sm"
+              className="btn btn-secondary grey-button m-3 shadow"
               onClick={this.handleClickInfo}>
                 Info
             </button>
           </div>
           <div className={'col d-flex justify-content-around brand-blue  pl-0 pr-0 restaurant-button-choice'}>
             <button className='btn '>
-              <i className={'fas fa-caret-left white fa-5x'} onClick={ this.props.decrementRestaurant } ></i>
+              <i className={'fas fa-caret-left white fa-3x'} onClick={ this.props.decrementRestaurant } ></i>
             </button>
             <button className="btn">
               <i
@@ -196,7 +196,7 @@ export default class VotingRoom extends React.Component {
               </i>
             </button>
             <button className={'btn'}>
-              <i className={'fas fa-caret-right white fa-5x'} onClick={ this.props.incrementRestaurant }> </i>
+              <i className={'fas fa-caret-right white fa-3x'} onClick={ this.props.incrementRestaurant }> </i>
             </button>
           </div>
         </div>
