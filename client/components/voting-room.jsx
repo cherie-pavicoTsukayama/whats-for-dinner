@@ -55,7 +55,7 @@ export default class VotingRoom extends React.Component {
     const restaurantId = this.props.restaurant.id;
     fetch(`/api/restaurants/${restaurantId}`)
       .then(result => result.json())
-      .then(data => this.setState({ images: data.photos || [] }))
+      .then(data => this.setState({ images: data.photos || this.props.restaurant.image_url }))
       .catch(err => console.error(err));
   }
 
@@ -96,7 +96,45 @@ export default class VotingRoom extends React.Component {
   }
 
   getCurrentImages() {
-    return <img src={this.state.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />;
+    if (this.state.images.length === 0) {
+      return (
+        <div className="col d-flex flex-wrap justify-content-center">
+          <img src="./images/loading.gif" alt="" />
+        </div>
+      );
+    } else if (this.state.images.length === 1 || typeof this.state.images === 'string') {
+      return (
+        <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+          <div className={'col pl-0 pr-0 view-height-forty-five'}>
+            <div className={'col pl-0 pr-0 view-height-forty-five'}>
+              <img src={this.state.images}
+                alt="Yelp Restaurant Business Image"
+                className={' h-100 w-100 view-restaurant-image'} />
+            </div>
+          </div>
+        </div>
+      );
+    } else if (typeof this.state.images !== 'string') {
+      return (
+        <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+          <div className={'col pl-0 pr-0 view-height-forty-five'}>
+            <div className={'col pl-0 pr-0 view-height-forty-five'}>
+              <img src={this.state.images[this.state.currentImageIndex]}
+                alt="Yelp Restaurant Business Image"
+                className={' h-100 w-100 view-restaurant-image'} />
+            </div>
+          </div>
+          <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
+            <button className='btn'>
+              <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={this.handleClickBackImage}></i>
+            </button>
+            <button className={'btn'}>
+              <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={this.handleClickNextImage}></i>
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 
   handleHeartClick() {
@@ -166,14 +204,6 @@ export default class VotingRoom extends React.Component {
           <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
             <div className={'col pl-0 pr-0 view-height-forty-five'}>
               {this.getCurrentImages()}
-            </div>
-            <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
-              <button className='btn'>
-                <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={ this.handleClickBackImage}></i>
-              </button>
-              <button className={'btn'}>
-                <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={ this.handleClickNextImage}></i>
-              </button>
             </div>
           </div>
           <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
