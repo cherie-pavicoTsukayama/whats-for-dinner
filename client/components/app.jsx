@@ -4,6 +4,7 @@ import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 import UserJoinRoom from './user-join-room';
 import MatchDetails from './matched-details';
+import LeaveRoom from './leave-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -69,20 +70,19 @@ export default class App extends React.Component {
   }
 
   render() {
-    // const { message, isLoading } = this.state;
     const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     let currentView;
-    switch (this.state.view) {
+    switch (view) {
       case 'landing page':
-        currentView = <LandingPage setViewState={this.setView}/>;
+        currentView = <LandingPage setViewState={this.setView} />;
         break;
       case 'create room':
-        currentView = <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>;
+        currentView = <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView} />;
         break;
       case 'join room':
         currentView = <UserJoinRoom
           joinRoom={this.joinRoom}
-          errorMessage={this.state.errorMessage}/>;
+          errorMessage={this.state.errorMessage} />;
         break;
       case 'voting room':
         if (this.state.restaurants.length !== 0) {
@@ -105,13 +105,7 @@ export default class App extends React.Component {
         : <h1>{message.toUpperCase()}</h1>,
       <div>
         {currentView}
-      </div >
-
-      // <div>
-      //   <LandingPage />
-      //   {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-      //     incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
-      // </div >
+      </div>
     );
   }
 }
