@@ -125,7 +125,13 @@ export default class VotingRoom extends React.Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ restaurantId: this.props.restaurant.id })
       };
-      fetch('/api/liked-restaurants', request);
+      fetch('/api/liked-restaurants', request)
+        .then(response => {
+          if (response.ok) {
+            this.setState({ isLiked: true });
+          }
+        })
+        .catch(err => console.error(err));
     }
   }
 
