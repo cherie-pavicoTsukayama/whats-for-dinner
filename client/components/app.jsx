@@ -1,6 +1,6 @@
 import React from 'react';
 import VotingRoom from './voting-room';
-import LandingPage from './landing-page';
+// import LandingPage from './landing-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,14 +23,14 @@ export default class App extends React.Component {
       this.setState({ currentRestaurant: 0 });
     }
   }
-  
+
   decrementRestaurant() {
     this.setState({ currentRestaurant: this.state.currentRestaurant - 1 });
     if (this.state.currentRestaurant === 0) {
       this.setState({ currentRestaurant: this.state.restaurants.length - 1 });
     }
   }
-  
+
   joinRoom(entryKey) {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
@@ -57,9 +57,9 @@ export default class App extends React.Component {
       ? <h1>Testing connections...</h1>
       : <h1>{message.toUpperCase()}</h1>,
     <div>
-      <LandingPage />
-      {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-        incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
+      {/* <LandingPage /> */}
+      <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
+        incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/>
     </div >
     );
   }
