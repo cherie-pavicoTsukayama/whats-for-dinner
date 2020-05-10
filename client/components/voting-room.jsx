@@ -113,6 +113,14 @@ export default class VotingRoom extends React.Component {
           }
         })
         .catch(err => console.error(err));
+    } else {
+      fetch(`/api/liked-restaurants/${this.props.restaurant.id}`, { method: 'DELETE' })
+        .then(response => {
+          if (response.ok) {
+            this.setState({ isLiked: false });
+          }
+        })
+        .catch(err => console.error(err));
     }
   }
 
@@ -127,7 +135,7 @@ export default class VotingRoom extends React.Component {
     }
     if (this.props.restaurant.id !== prevProps.restaurant.id) {
       this.checkIsLiked();
-    }   
+    }
   }
 
   handleClickBackToVotingRoom() {
@@ -149,7 +157,7 @@ export default class VotingRoom extends React.Component {
     } else {
       heartColor = 'red';
     }
-        
+
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
@@ -188,13 +196,13 @@ export default class VotingRoom extends React.Component {
             <button className='btn '>
               <i className={'fas fa-caret-left white fa-5x'} onClick={ this.props.decrementRestaurant } ></i>
             </button>
-             <button className="btn">
-            <i
-              className={`fas fa-heart fa-3x ${heartColor}`}
-              onClick={() => this.handleHeartClick()}
-            >
-            </i>
-          </button>
+            <button className="btn">
+              <i
+                className={`fas fa-heart fa-3x ${heartColor}`}
+                onClick={() => this.handleHeartClick()}
+              >
+              </i>
+            </button>
             <button className={'btn'}>
               <i className={'fas fa-caret-right white fa-5x'} onClick={ this.props.incrementRestaurant }> </i>
             </button>
