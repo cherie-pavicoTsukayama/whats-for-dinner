@@ -284,19 +284,19 @@ display:flex;
   color:#128781;
 }
 
-push-down{
+.push-down{
   position: relative;
   top: 2rem;
 }
 
 .push-down-more{
   position: relative;
-  top: 5rem;
+  top: 4rem;
 }
 
 .push-down-more-more{
   position: relative;
-  top: 7rem;
+  top: 6rem;
 }
 
 .push-down-most{
