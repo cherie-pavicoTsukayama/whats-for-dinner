@@ -12,7 +12,8 @@ export default class VotingRoom extends React.Component {
       match: true,
       currentImageIndex: 0,
       details: null,
-      photos: []
+      photos: [],
+      isLiked: null
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
