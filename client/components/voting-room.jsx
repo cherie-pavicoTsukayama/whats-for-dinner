@@ -120,6 +120,11 @@ export default class VotingRoom extends React.Component {
 
   componentDidMount() {
     this.getDetails();
+    this.checkIsLiked();
+  }
+
+  componentDidUpdate() {
+    this.checkIsLiked();
   }
 
   render() {
