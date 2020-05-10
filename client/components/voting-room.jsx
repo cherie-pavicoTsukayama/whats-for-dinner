@@ -147,6 +147,12 @@ export default class VotingRoom extends React.Component {
   }
 
   render() {
+    let heartColor;
+    if (!this.state.isLiked) {
+      heartColor = 'white';
+    } else {
+      heartColor = 'red';
+    }
 
     return (
       <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
@@ -180,7 +186,7 @@ export default class VotingRoom extends React.Component {
             <i className={'fas fa-caret-left white fa-5x'} onClick={() => { this.props.decrementRestaurant(); }} ></i>
           </button>
           <button className="btn">
-            <i className="fas fa-heart fa-3x white"></i>
+            <i className={`fas fa-heart fa-3x ${heartColor}`}></i>
           </button>
           <button className={'btn'}>
             <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
