@@ -4,7 +4,7 @@ import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 import UserJoinRoom from './user-join-room';
 import MatchDetails from './matched-details';
-import LeaveRoom from './leave-room';
+// import LeaveRoom from './leave-room';
 
 export default class App extends React.Component {
   constructor(props) {
