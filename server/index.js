@@ -193,7 +193,23 @@ app.post('/api/rooms', (req, res, next) => {
 });
 
 app.get('/api/liked-restaurants', (req, res, next) => {
-
+  const likedRestaurantSql = `
+  select *
+  from "likedRestaurants"
+ where "roomId" = $1
+   and "restaurantId" = $2
+   and "userId" = $3
+  `;
+  const params = [req.session.roomId, req.body.restaurantId, req.session.userId];
+  db.query(likedRestaurantSql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(`cannot find entry with 'restaurantId': ${req.body.restaurantId}`, 404);
+      } else {
+        res.sendStatus(200);
+      }
+    })
+    .catch(err => next(err));
 });
 
 app.post('/api/restaurants/liked', (req, res, next) => {
