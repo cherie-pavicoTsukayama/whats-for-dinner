@@ -2,8 +2,8 @@ import React from 'react';
 import VotingRoom from './voting-room';
 import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
-// import HostJoinRoom from './host-join-room';
 import UserJoinRoom from './user-join-room';
+import MatchDetails from './matched-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -69,10 +69,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    // const { message, isLoading } = this.state;
-    const { message, isLoading, currentRestaurant, restaurants } = this.state;
+    const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     let currentView;
-    switch (this.state.view) {
+    switch (view) {
       case 'landing page':
         currentView = <LandingPage setViewState={this.setView}/>;
         break;
@@ -85,10 +84,17 @@ export default class App extends React.Component {
           errorMessage={this.state.errorMessage}/>;
         break;
       case 'voting room':
-        currentView = <VotingRoom currentRestaurant={currentRestaurant}
-          decrementRestaurant={this.decrementRestaurant}
-          incrementRestaurant={this.incrementRestaurant}
-          restaurant={restaurants[currentRestaurant]} />;
+        if (this.state.restaurants.length !== 0) {
+          currentView = <VotingRoom currentRestaurant={currentRestaurant}
+            decrementRestaurant={this.decrementRestaurant}
+            incrementRestaurant={this.incrementRestaurant}
+            restaurant={restaurants[currentRestaurant]}
+            setView={this.setView}
+          />;
+        }
+        break;
+      case 'match details':
+        currentView = <MatchDetails restaurantId={this.state.matchedRestaurantId} />;
         break;
     }
 
@@ -98,13 +104,7 @@ export default class App extends React.Component {
         : <h1>{message.toUpperCase()}</h1>,
       <div>
         {currentView}
-      </div >
-
-      // <div>
-      //   <LandingPage />
-      //   {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-      //     incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
-      // </div >
+      </div>
     );
   }
 }

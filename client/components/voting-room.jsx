@@ -1,6 +1,6 @@
 import React from 'react';
-// import RestaurantDetails from './restaurant-details';
-// import MatchConfirmed from './match-confirmed';
+import RestaurantDetails from './restaurant-details';
+import MatchConfirmed from './match-confirmed';
 
 export default class VotingRoom extends React.Component {
   constructor(props) {
@@ -8,20 +8,21 @@ export default class VotingRoom extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'view restaurant',
-      match: true,
+      view: 'voting room',
+      match: false,
       currentImageIndex: 0,
-      details: null,
-      photos: [],
-      isLiked: null
+      isLiked: null,
+      images: []
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
     this.handleClickBackImage = this.handleClickBackImage.bind(this);
     this.renderStarRating = this.renderStarRating.bind(this);
-    this.getDetails = this.getDetails.bind(this);
-    this.renderPhoto = this.renderPhoto.bind(this);
+    this.getRestaurantDetails = this.getRestaurantDetails.bind(this);
+    this.getCurrentImages = this.getCurrentImages.bind(this);
+    this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
+    this.handleClickInfo = this.handleClickInfo.bind(this);
   }
 
   renderStarRating() {
@@ -50,15 +51,11 @@ export default class VotingRoom extends React.Component {
     }
   }
 
-  getDetails() {
-    fetch(`/api/restaurants/${this.props.restaurant.id}`)
+  getRestaurantDetails() {
+    const restaurantId = this.props.restaurant.id;
+    fetch(`/api/restaurants/${restaurantId}`)
       .then(result => result.json())
-      .then(data => {
-        this.setState({
-          details: data,
-          photos: data.photos
-        });
-      })
+      .then(data => this.setState({ images: data.photos || [] }))
       .catch(err => console.error(err));
   }
 
@@ -80,42 +77,26 @@ export default class VotingRoom extends React.Component {
   }
 
   hideModal() {
+    this.props.setView('match details');
     this.setState({ match: false });
   }
 
   handleClickNextImage() {
-    const currentImageIndex = this.state.currentImageIndex;
-    let newImageIndex = null;
-    if (currentImageIndex === this.state.photos.length - 1) {
-      newImageIndex = 0;
-    } else {
-      newImageIndex = currentImageIndex + 1;
+    this.setState({ currentImageIndex: this.state.currentImageIndex + 1 });
+    if (this.state.currentImageIndex === this.state.images.length - 1) {
+      this.setState({ currentImageIndex: 0 });
     }
-    this.setState({
-      currentImageIndex: newImageIndex
-    });
   }
 
   handleClickBackImage() {
-    const currentImageIndex = this.state.currentImageIndex;
-    let newImageIndex = null;
-    if (currentImageIndex === 0) {
-      newImageIndex = this.props.images.length - 1;
-    } else {
-      newImageIndex = currentImageIndex - 1;
+    this.setState({ currentImageIndex: this.state.currentImageIndex - 1 });
+    if (this.state.currentImageIndex === 0) {
+      this.setState({ currentImageIndex: this.state.images.length - 1 });
     }
-    this.setState({
-      currentImageIndex: newImageIndex
-    });
   }
 
-  renderPhoto() {
-    if (this.state.photos.length !== 0) {
-      return <img
-        src={this.state.details.photos[this.state.currentImageIndex]}
-        alt="Yelp Restaurant Business Image"
-        className={' h-100 w-100 '} />;
-    }
+  getCurrentImages() {
+    return <img src={this.state.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />;
   }
 
   handleHeartClick() {
@@ -136,14 +117,29 @@ export default class VotingRoom extends React.Component {
   }
 
   componentDidMount() {
-    this.getDetails();
+    this.getRestaurantDetails();
     this.checkIsLiked();
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.restaurant !== prevProps.restaurant) {
+      this.getRestaurantDetails();
+    }
     if (this.props.restaurant.id !== prevProps.restaurant.id) {
       this.checkIsLiked();
-    }
+    }   
+  }
+
+  handleClickBackToVotingRoom() {
+    this.setState({
+      view: 'voting room'
+    });
+  }
+
+  handleClickInfo() {
+    this.setState({
+      view: 'info'
+    });
   }
 
   render() {
@@ -153,55 +149,65 @@ export default class VotingRoom extends React.Component {
     } else {
       heartColor = 'red';
     }
-
-    return (
-      <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
-        <div className={'col-sm pl-2 pr-0 mt-3'}>
-          <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
-        </div>
-        <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 mb-2'}>
-          <div className={'restaurant-title'}>{this.props.restaurant.name}</div>
-          <div className={'mt-2'}>
-            {this.renderStarRating()}
+        
+    if (this.state.view === 'voting room') {
+      return (
+        <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
+          <div className={'col-sm pl-2 pr-0 mt-3'}>
+            <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
           </div>
-        </div>
-        <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
-          <div className={'col pl-0 pr-0 view-height-forty-five'}>
-            {this.renderPhoto()};
+          <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 mb-2'}>
+            <div className={'restaurant-title'}>{this.props.restaurant.name}</div>
+            <div className={'mt-2'}>
+              {this.renderStarRating()}
+            </div>
           </div>
-          <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
-            <button className='btn'>
-              <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={this.handleClickBackImage}></i>
+          <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+            <div className={'col pl-0 pr-0 view-height-forty-five'}>
+              {this.getCurrentImages()}
+            </div>
+            <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
+              <button className='btn'>
+                <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={ this.handleClickBackImage}></i>
+              </button>
+              <button className={'btn'}>
+                <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={ this.handleClickNextImage}></i>
+              </button>
+            </div>
+          </div>
+          <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
+            <button
+              type="button"
+              className="btn btn-secondary grey-button m-3 shadow-sm"
+              onClick={this.handleClickInfo}>
+                Info
             </button>
-            <button className={'btn'}>
-              <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={this.handleClickNextImage}></i>
-            </button>
           </div>
-        </div>
-        <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
-          <button type="button" className="btn btn-secondary grey-button m-3 shadow-sm">Info</button>
-        </div>
-        <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice'}>
-          <button className='btn '>
-            <i className={'fas fa-caret-left white fa-5x'} onClick={() => { this.props.decrementRestaurant(); }} ></i>
-          </button>
-          <button className="btn">
+          <div className={'col d-flex justify-content-around brand-blue  pl-0 pr-0 restaurant-button-choice'}>
+            <button className='btn '>
+              <i className={'fas fa-caret-left white fa-5x'} onClick={ this.props.decrementRestaurant } ></i>
+            </button>
+             <button className="btn">
             <i
               className={`fas fa-heart fa-3x ${heartColor}`}
               onClick={() => this.handleHeartClick()}
             >
             </i>
           </button>
-          <button className={'btn'}>
-            <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
-          </button>
+            <button className={'btn'}>
+              <i className={'fas fa-caret-right white fa-5x'} onClick={ this.props.incrementRestaurant }> </i>
+            </button>
+          </div>
         </div>
-      </div>
-    );
-    // } else if (this.state.view === 'info') {
-    //   return (
-    //     <RestaurantDetails restaurants={this.props.restaurant} />
-    //   );
-    // }
+      );
+    } else if (this.state.view === 'info') {
+      return (
+        <div>
+          <MatchConfirmed match={this.state.match} />
+          <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+        </div>
+      );
+    }
   }
 }

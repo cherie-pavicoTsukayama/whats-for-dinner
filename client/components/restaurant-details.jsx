@@ -104,6 +104,12 @@ export default class RestaurantDetail extends React.Component {
           <p className="text-center montserrat-400 lead m-0">Open Now</p>
         </div>
       );
+    } else if (this.state.reviews.length === 0) {
+      return (
+        <div>
+          <img src="./images/loading.gif" alt=""/>
+        </div>
+      );
     } else {
       return (
         <div className="open-closed-feature bg-green p-1">
@@ -218,7 +224,7 @@ export default class RestaurantDetail extends React.Component {
     return (
       <div>
         <div className="d-flex flex-wrap justify-content-center mt-4 container">
-          <h1 className="montserrat-400 brand-blue text-center">{this.props.restaurants.name}</h1>
+          <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
           </div>
@@ -237,7 +243,7 @@ export default class RestaurantDetail extends React.Component {
         </div>
         <div className={'col d-flex justify-content-start align-items-center bg-green pl-5 pr-0 footer'}>
           <button>
-            <i className={'fas fa-caret-left white fa-3x'}></i>
+            <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
           </button>
         </div>
       </div>
