@@ -151,6 +151,14 @@ export default class VotingRoom extends React.Component {
           }
         })
         .catch(err => console.error(err));
+    } else {
+      fetch(`/api/liked-restaurants/${this.props.restaurant.id}`, { method: 'DELETE' })
+        .then(response => {
+          if (response.ok) {
+            this.setState({ isLiked: false });
+          }
+        })
+        .catch(err => console.error(err));
     }
   }
 
