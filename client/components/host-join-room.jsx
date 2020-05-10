@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default function HostJoinRoom(props) {
+  const onClick = () => {
+    props.joinRoom(props.entryKey);
+    // props.setView('voting room');
+  };
 
   return (
     <div className={'host-join-room m-0 d-flex flex-wrap justify-content-center align-items-center'}>
@@ -19,7 +23,12 @@ export default function HostJoinRoom(props) {
           <h2 className={'col-sm-12 text-center montserrat-400 grey-font'}>
             <u>{props.entryKey}</u>
           </h2>
-          <button type="button" className="btn btn-secondary grey-button m-3 lead" onClick={props.joinRoom}>Join Room</button>
+          <button
+            type="button"
+            className="btn btn-secondary grey-button m-3 lead"
+            onClick={onClick}>
+              Join Room
+          </button>
         </div>
       </div>
 

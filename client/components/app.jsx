@@ -2,8 +2,8 @@ import React from 'react';
 import VotingRoom from './voting-room';
 import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
-import HostJoinRoom from './host-join-room';
 import UserJoinRoom from './user-join-room';
+import MatchDetails from './matched-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,9 +13,9 @@ export default class App extends React.Component {
       isLoading: true,
       view: 'landing page',
       currentRestaurant: 0,
-      restaurants: null,
-      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
-
+      restaurants: [],
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
+      errorMessage: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -47,10 +47,15 @@ export default class App extends React.Component {
     fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          restaurants: data.restaurants,
-          view: 'view restaurants'
-        });
+        if (data.error) {
+          this.setState({ errorMessage: 'Invalid Entry Key' });
+        } else {
+          this.setState({
+            restaurants: data.restaurants.businesses,
+            view: 'voting room',
+            errorMessage: ''
+          });
+        }
       })
       .catch(err => console.error(err));
   }
@@ -64,33 +69,43 @@ export default class App extends React.Component {
   }
 
   render() {
+    // const { message, isLoading } = this.state;
+    const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     let currentView;
     switch (this.state.view) {
       case 'landing page':
         currentView = <LandingPage setViewState={this.setView}/>;
         break;
       case 'create room':
-        // need to be create room screen
-        currentView = <HostJoinRoom/>;
+        currentView = <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>;
         break;
       case 'join room':
-        currentView = <UserJoinRoom joinRoom={this.joinRoom}/>;
+        currentView = <UserJoinRoom
+          joinRoom={this.joinRoom}
+          errorMessage={this.state.errorMessage}/>;
+        break;
+      case 'voting room':
+        if (this.state.restaurants.length !== 0) {
+          currentView = <VotingRoom currentRestaurant={currentRestaurant}
+            decrementRestaurant={this.decrementRestaurant}
+            incrementRestaurant={this.incrementRestaurant}
+            restaurant={restaurants[currentRestaurant]}
+            setView={this.setView}
+          />;
+        }
+        break;
+      case 'match details':
+        currentView = <MatchDetails restaurantId={this.state.matchedRestaurantId} />;
+        break;
     }
-    const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
+
     return (
       isLoading
         ? <h1>Testing connections...</h1>
         : <h1>{message.toUpperCase()}</h1>,
-      // <div>
-      //   {currentView}
-      // </div >
-
       <div>
-        <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>
-        {/* <LandingPage /> */}
-        {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-          incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
-      </div >
+        {currentView}
+      </div>
     );
   }
 }
