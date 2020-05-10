@@ -192,7 +192,7 @@ app.post('/api/rooms', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/liked-restaurants', (req, res, next) => {
+app.get('/api/liked-restaurants/:restaurantId', (req, res, next) => {
   const likedRestaurantSql = `
   select *
   from "likedRestaurants"
@@ -200,11 +200,11 @@ app.get('/api/liked-restaurants', (req, res, next) => {
    and "restaurantId" = $2
    and "userId" = $3
   `;
-  const params = [req.session.roomId, req.body.restaurantId, req.session.userId];
+  const params = [req.session.roomId, req.params.restaurantId, req.session.userId];
   db.query(likedRestaurantSql, params)
     .then(result => {
       if (!result.rows[0]) {
-        throw new ClientError(`cannot find entry with 'restaurantId': ${req.body.restaurantId}`, 404);
+        throw new ClientError(`cannot find entry with 'restaurantId': ${req.params.restaurantId}`, 404);
       } else {
         res.sendStatus(200);
       }
