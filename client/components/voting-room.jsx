@@ -11,6 +11,7 @@ export default class VotingRoom extends React.Component {
       view: 'voting room',
       match: false,
       currentImageIndex: 0,
+      isLiked: null,
       images: []
     };
     this.showModal = this.showModal.bind(this);
@@ -58,6 +59,19 @@ export default class VotingRoom extends React.Component {
       .catch(err => console.error(err));
   }
 
+  checkIsLiked() {
+    fetch(`/api/liked-restaurants/${this.props.restaurant.id}`)
+      .then(response => response.json())
+      .then(data => {
+        if (!data.liked) {
+          this.setState({ isLiked: false });
+        } else {
+          this.setState({ isLiked: true });
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
   showModal() {
     this.setState({ match: true });
   }
@@ -85,14 +99,35 @@ export default class VotingRoom extends React.Component {
     return <img src={this.state.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />;
   }
 
+  handleHeartClick() {
+    if (!this.state.isLiked) {
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ restaurantId: this.props.restaurant.id })
+      };
+      fetch('/api/liked-restaurants', request)
+        .then(response => {
+          if (response.ok) {
+            this.setState({ isLiked: true });
+          }
+        })
+        .catch(err => console.error(err));
+    }
+  }
+
   componentDidMount() {
     this.getRestaurantDetails();
+    this.checkIsLiked();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.restaurant !== prevProps.restaurant) {
       this.getRestaurantDetails();
     }
+    if (this.props.restaurant.id !== prevProps.restaurant.id) {
+      this.checkIsLiked();
+    }   
   }
 
   handleClickBackToVotingRoom() {
@@ -108,6 +143,13 @@ export default class VotingRoom extends React.Component {
   }
 
   render() {
+    let heartColor;
+    if (!this.state.isLiked) {
+      heartColor = 'white';
+    } else {
+      heartColor = 'red';
+    }
+        
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
@@ -142,10 +184,17 @@ export default class VotingRoom extends React.Component {
                 Info
             </button>
           </div>
-          <div className={'col d-flex justify-content-center brand-blue  pl-0 pr-0 restaurant-button-choice'}>
+          <div className={'col d-flex justify-content-around brand-blue  pl-0 pr-0 restaurant-button-choice'}>
             <button className='btn '>
               <i className={'fas fa-caret-left white fa-5x'} onClick={ this.props.decrementRestaurant } ></i>
             </button>
+             <button className="btn">
+            <i
+              className={`fas fa-heart fa-3x ${heartColor}`}
+              onClick={() => this.handleHeartClick()}
+            >
+            </i>
+          </button>
             <button className={'btn'}>
               <i className={'fas fa-caret-right white fa-5x'} onClick={ this.props.incrementRestaurant }> </i>
             </button>

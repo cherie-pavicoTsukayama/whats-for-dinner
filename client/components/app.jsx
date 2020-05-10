@@ -71,7 +71,7 @@ export default class App extends React.Component {
   render() {
     const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
     let currentView;
-    switch (this.state.view) {
+    switch (view) {
       case 'landing page':
         currentView = <LandingPage setViewState={this.setView}/>;
         break;
