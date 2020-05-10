@@ -118,6 +118,17 @@ export default class VotingRoom extends React.Component {
     }
   }
 
+  handleHeartClick() {
+    if (!this.state.isLiked) {
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ restaurantId: this.props.restaurant.id })
+      };
+      fetch('/api/liked-restaurants', request);
+    }
+  }
+
   componentDidMount() {
     this.getDetails();
     this.checkIsLiked();
