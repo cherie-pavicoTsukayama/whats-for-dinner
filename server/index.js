@@ -61,7 +61,7 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
     .then(result => {
       req.session.userId = result.userId;
       req.session.roomId = result.roomId;
-      res.json(result);
+      res.status(200).json(result);
     })
     .catch(err => next(err));
 });

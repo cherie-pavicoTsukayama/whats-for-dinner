@@ -400,6 +400,7 @@ display:flex;
   font-family:'Montserrat',sans-serif;
   font-weight: 900;
   height:7vh;
+}
 
 }
 
@@ -409,7 +410,6 @@ display:flex;
   color: rgba(255, 255, 255, .6);
 }
 
-
 .view-restaurant-header {
   max-height:140px;
 }
@@ -417,3 +417,17 @@ display:flex;
 .view-restaurant-button-container {
   min-height:80px;
 }
+
+.view-restaurant-image {
+  object-fit: cover;
+}
+
+.white-button {
+  width:200px;
+  color: #007E77;
+  background-color: white;
+  font-family:'Montserrat', sans-serif;
+  font-weight: 700;
+  border:none;
+  }
+
