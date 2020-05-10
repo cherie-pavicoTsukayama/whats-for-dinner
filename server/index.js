@@ -226,9 +226,24 @@ app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
   `;
   const params = [req.params.roomId];
   db.query(determineMatchSql, params)
-    .then(result => res.status(200).json(result.rows[0]))
+    .then(result => {
+      if (!result.rows.length) {
+        res.status(200).json({ match: null });
+      }
+      // res.status(200).json({ match: result.rows[0].restaurantId });
+      const options = {
+        method: 'GET',
+        headers: {
+          Authorization: process.env.YELP_KEY,
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(`https://api.yelp.com/v3/businesses/${result.rows[0].restaurantId}`, options)
+        .then(response => response.json())
+        .then(details => res.status(200).json(details))
+      ;
+    })
     .catch(err => next(err));
-
   // select count("restaurantId"), "roomId"
   // from "likedRestaurants"
   // where "roomId" = $1
