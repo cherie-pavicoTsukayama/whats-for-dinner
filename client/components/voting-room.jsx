@@ -62,6 +62,10 @@ export default class VotingRoom extends React.Component {
       .catch(err => console.error(err));
   }
 
+  checkIsLiked() {
+    fetch(`/api/liked-restaurants/${this.props.restaurant.id}`);
+  }
+
   showModal() {
     this.setState({ match: true });
   }
