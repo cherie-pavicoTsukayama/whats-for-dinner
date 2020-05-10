@@ -204,9 +204,9 @@ app.get('/api/liked-restaurants/:restaurantId', (req, res, next) => {
   db.query(likedRestaurantSql, params)
     .then(result => {
       if (!result.rows[0]) {
-        throw new ClientError(`cannot find entry with 'restaurantId': ${req.params.restaurantId}`, 404);
+        res.status(200).json({ liked: null });
       } else {
-        res.status(200).json(result.rows[0]);
+        res.status(200).json({ liked: result.rows[0] });
       }
     })
     .catch(err => next(err));

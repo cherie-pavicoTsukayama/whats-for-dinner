@@ -162,6 +162,94 @@ export default class App extends React.Component {
           phone: '+19493333758',
           display_phone: '(949) 333-3758',
           distance: 850.5758617696121
+        },
+        {
+          id: 'S7XAbOskIE7TWKyGge4-VA',
+          alias: 'burger-lounge-irvine',
+          name: 'Burger Lounge',
+          image_url: 'https://s3-media2.fl.yelpcdn.com/bphoto/eXpxiiU7I3C8mHQ_kOexJg/o.jpg',
+          is_closed: false,
+          url: 'https://www.yelp.com/biz/burger-lounge-irvine?adjust_creative=8x-8QWLAQlDHyDYSn04N4g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=8x-8QWLAQlDHyDYSn04N4g',
+          review_count: 461,
+          categories: [
+            {
+              alias: 'burgers',
+              title: 'Burgers'
+            }
+          ],
+          rating: 4.0,
+          coordinates: {
+            latitude: 33.646226,
+            longitude: -117.743422
+          },
+          transactions: [
+            'delivery',
+            'pickup'
+          ],
+          price: '$$',
+          location: {
+            address1: '8553 Irvine Center Dr',
+            address2: '',
+            address3: '',
+            city: 'Irvine',
+            zip_code: '92618',
+            country: 'US',
+            state: 'CA',
+            display_address: [
+              '8553 Irvine Center Dr',
+              'Irvine, CA 92618'
+            ]
+          },
+          phone: '+19494500440',
+          display_phone: '(949) 450-0440',
+          distance: 5857.342764085277
+        },
+        {
+          id: 'TEoLBfiX8eHf_dKDNndU6A',
+          alias: 'the-habit-burger-grill-irvine-2',
+          name: 'The Habit Burger Grill',
+          image_url: 'https://s3-media3.fl.yelpcdn.com/bphoto/dDAYlTQ0H3i10iKtrdSwbA/o.jpg',
+          is_closed: false,
+          url: 'https://www.yelp.com/biz/the-habit-burger-grill-irvine-2?adjust_creative=8x-8QWLAQlDHyDYSn04N4g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=8x-8QWLAQlDHyDYSn04N4g',
+          review_count: 460,
+          categories: [
+            {
+              alias: 'burgers',
+              title: 'Burgers'
+            },
+            {
+              alias: 'salad',
+              title: 'Salad'
+            },
+            {
+              alias: 'sandwiches',
+              title: 'Sandwiches'
+            }
+          ],
+          rating: 4.0,
+          coordinates: {
+            latitude: 33.70473,
+            longitude: -117.787
+          },
+          transactions: [],
+          price: '$',
+          location: {
+            address1: '14474 Culver Dr.',
+            address2: '#A',
+            address3: '',
+            city: 'Irvine',
+            zip_code: '92604',
+            country: 'US',
+            state: 'CA',
+            display_address: [
+              '14474 Culver Dr.',
+              '#A',
+              'Irvine, CA 92604'
+            ]
+          },
+          phone: '+19495525963',
+          display_phone: '(949) 552-5963',
+          distance: 2963.9596335480564
         }],
       matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
       errorMessage: ''
