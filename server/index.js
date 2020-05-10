@@ -212,7 +212,7 @@ app.get('/api/liked-restaurants/:restaurantId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/restaurants/liked', (req, res, next) => {
+app.post('/api/liked-restaurants', (req, res, next) => {
   const likedRestaurantSql = `
   insert into "likedRestaurants" ("roomId", "restaurantId", "userId")
   values ($1, $2, $3)
@@ -223,7 +223,7 @@ app.post('/api/restaurants/liked', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.delete('/api/restaurants/liked/:restaurantId', (req, res, next) => {
+app.delete('/api/liked-restaurants/:restaurantId', (req, res, next) => {
   const deleteSql = `
   delete from "likedRestaurants"
   where "roomId" = $1
