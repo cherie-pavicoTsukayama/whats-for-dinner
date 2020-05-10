@@ -244,11 +244,6 @@ app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
       ;
     })
     .catch(err => next(err));
-  // select count("restaurantId"), "roomId"
-  // from "likedRestaurants"
-  // where "roomId" = $1
-  // group by "roomId"
-  // having count("restaurantId") > 1;
 });
 
 app.use('/api', (req, res, next) => {
