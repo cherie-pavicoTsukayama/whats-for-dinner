@@ -79,7 +79,7 @@ export default class RestaurantDetail extends React.Component {
     return displayAddress;
   }
 
-  getRestaurantDetails(restaurantid) {
+  getRestaurantDetails() {
     const restaurantId = this.props.restaurants.id;
     Promise.all([
       fetch(`/api/restaurants/${restaurantId}`)
@@ -213,10 +213,6 @@ export default class RestaurantDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.getRestaurantDetails();
-  }
-
-  compoenentDidUpdate() {
     this.getRestaurantDetails();
   }
 
