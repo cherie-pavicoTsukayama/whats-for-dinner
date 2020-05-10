@@ -25,7 +25,7 @@ export default function HostJoinRoom(props) {
           </h2>
           <button
             type="button"
-            className="btn btn-secondary grey-button m-3 lead"
+            className="btn btn-secondary white-button m-3 lead"
             onClick={onClick}>
               Join Room
           </button>
