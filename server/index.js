@@ -192,6 +192,10 @@ app.post('/api/rooms', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/liked-restaurants', (req, res, next) => {
+
+});
+
 app.post('/api/restaurants/liked', (req, res, next) => {
   const likedRestaurantSql = `
   insert into "likedRestaurants" ("roomId", "restaurantId", "userId")
