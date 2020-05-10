@@ -46,7 +46,7 @@ export default class UserJoinRoom extends React.Component {
               aria-label="Room Entry Key"/>
             {invalidKeyMessage}
           </div>
-          <button type="submit" className="btn btn-secondary grey-button m-3">Join Room</button>
+          <button type="submit" className="btn btn-secondary white-button m-3">Join Room</button>
         </form>
       </div>
     );
