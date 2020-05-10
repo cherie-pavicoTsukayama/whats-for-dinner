@@ -81,7 +81,8 @@ export default class App extends React.Component {
       case 'join room':
         currentView = <UserJoinRoom
           joinRoom={this.joinRoom}
-          errorMessage={this.state.errorMessage}/>;
+          errorMessage={this.state.errorMessage}
+          setView={this.setView}/>;
         break;
       case 'voting room':
         if (this.state.restaurants.length !== 0) {

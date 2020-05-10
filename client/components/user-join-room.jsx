@@ -28,8 +28,11 @@ export default class UserJoinRoom extends React.Component {
       invalidKeyMessage = <p className="m-0 mt-2 red">{this.props.errorMessage}</p>;
     }
     return (
-      <div className={'user-join-room d-flex align-items-center'}>
+      <div className={'user-join-room d-flex flex-wrap align-items-center'}>
         <div className={'darken-background'}></div>
+        <div>
+          <i className="fas fa-chevron-left back-button fa-2x mt-3 ml-3" onClick={ () => this.props.setView('landing page') }></i>
+        </div>
         <form onSubmit={this.handleSubmit} className={'col-sm-12 p-0 d-flex flex-column align-items-center'}>
           <div className={'col-sm-12 white-transparent-background py-3 mb-5 d-flex flex-column align-items-center'}>
             <input

@@ -1,4 +1,0 @@
-diff a/client/components/matched-details.jsx b/client/components/matched-details.jsx	(rejected hunks)
-@@ -98 +98 @@ export default class MatchedDetails extends React.Component {
--          this.setState({
-+        this.setState({
