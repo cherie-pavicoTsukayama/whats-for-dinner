@@ -4,6 +4,7 @@ import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 import UserJoinRoom from './user-join-room';
 import MatchDetails from './matched-details';
+import LeaveRoom from './leave-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -73,10 +74,10 @@ export default class App extends React.Component {
     let currentView;
     switch (view) {
       case 'landing page':
-        currentView = <LandingPage setViewState={this.setView}/>;
+        currentView = <LandingPage setViewState={this.setView} />;
         break;
       case 'create room':
-        currentView = <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView}/>;
+        currentView = <CreateRoomForm joinRoom={this.joinRoom} setView={this.setView} />;
         break;
       case 'join room':
         currentView = <UserJoinRoom

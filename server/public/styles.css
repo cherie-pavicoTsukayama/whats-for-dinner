@@ -370,6 +370,36 @@ display:flex;
   color: red;
 }
 
+.leave-room-icon {
+  background-image: url('./images/Match-Icon.png');
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position: center;
+  height:20vh;
+  width:45%;
+}
+
+.leave-room-modal-interior-container {
+height:50vh;
+background-color:white;
+border-radius:20px;
+position:fixed;
+background: white;
+width: 80%;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
+display:flex;
+}
+
+.leave-room-modal-button {
+  width: 50%;
+  color: white;
+  border-radius: 25px;
+  font-family:'Montserrat',sans-serif;
+  font-weight: 900;
+  height:7vh;
+
 .back-button {
   position: absolute;
   top: 0px;
