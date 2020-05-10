@@ -186,7 +186,11 @@ export default class VotingRoom extends React.Component {
             <i className={'fas fa-caret-left white fa-5x'} onClick={() => { this.props.decrementRestaurant(); }} ></i>
           </button>
           <button className="btn">
-            <i className={`fas fa-heart fa-3x ${heartColor}`}></i>
+            <i
+              className={`fas fa-heart fa-3x ${heartColor}`}
+              onClick={() => this.handleHeartClick()}
+            >
+            </i>
           </button>
           <button className={'btn'}>
             <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
