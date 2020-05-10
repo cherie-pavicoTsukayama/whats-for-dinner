@@ -105,13 +105,7 @@ export default class App extends React.Component {
         : <h1>{message.toUpperCase()}</h1>,
       <div>
         {currentView}
-      </div >
-
-      // <div>
-      //   <LandingPage />
-      //   {/* <VotingRoom currentRestaurant={currentRestaurant} decrementRestaurant={this.decrementRestaurant}
-      //     incrementRestaurant={this.incrementRestaurant} restaurant={restaurants[currentRestaurant]}/> */}
-      // </div >
+      </div>
     );
   }
 }
