@@ -63,7 +63,16 @@ export default class VotingRoom extends React.Component {
   }
 
   checkIsLiked() {
-    fetch(`/api/liked-restaurants/${this.props.restaurant.id}`);
+    fetch(`/api/liked-restaurants/${this.props.restaurant.id}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          this.setState({ isLiked: false });
+        } else {
+          this.setState({ isLiked: true });
+        }
+      })
+      .catch(err => console.error(err));
   }
 
   showModal() {
