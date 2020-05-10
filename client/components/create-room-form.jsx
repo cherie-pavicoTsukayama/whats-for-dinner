@@ -114,8 +114,9 @@ class CreateRoomForm extends React.Component {
     if (this.state.view === 'form') {
       return (
         <div className='container montserrat-400'>
+          <i className="fas fa-3x fa-chevron-left mt-3" onClick={() => { this.props.setView('landing page'); }}></i>
           <form onSubmit={() => { this.createRoom(this.state); event.preventDefault(); }}>
-            <div className='form-group mt-5 mb-2 d-flex justify-content-center push-down'>
+            <div className='form-group mt-3 mb-2 d-flex justify-content-center push-down'>
               <i className="fas fa-2x fa-map-marker-alt"></i>
               <input required placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
 
@@ -170,15 +171,15 @@ class CreateRoomForm extends React.Component {
 
               </div>
             </div>
-            <div className='form-group mt-2 mb-2 push-down-more'>
+            <div className='form-group mt-5 mb-2 push-down'>
 
               <select
                 required
-                placeholder='Category'
                 className='form-control  color'
                 name="category"
                 id="category"
                 onChange={this.handleCategory}>
+                <option value="">Select a Category</option>
                 <option value="pizza">Pizza</option>
                 <option value="mexican">Mexican</option>
                 <option value="chinese">Chinese</option>
@@ -203,9 +204,9 @@ class CreateRoomForm extends React.Component {
               </select>
 
             </div>
-            <div className='form-group mt-4 mb-4 push-down-more-more'>
+            <div className='form-group mt-4 mb-4 '>
 
-              <div className='d-flex justify-content-around'>
+              <div className='d-flex justify-content-around push-down-more'>
                 <div className={`price shadow text-align-center ${$1}`} onClick={this.handle$}>$</div>
                 <div className={`price shadow text-align-center ${$2}`} onClick={this.handle$$}>$$</div>
                 <div className={`price shadow text-align-center ${$3}`} onClick={this.handle$$$}>$$$</div>
@@ -213,7 +214,7 @@ class CreateRoomForm extends React.Component {
               </div>
 
             </div>
-            <div className='row d-flex justify-content-center mt-4 mb-2 push-down-most'>
+            <div className='row d-flex justify-content-center mt-4 mb-2 push-down-more-more'>
               <button disabled={this.isCreateRoomButtonDisabled()} type='submit' className='btn btn-secondary grey-button shadow'>Create Room</button>
             </div>
           </form>

@@ -284,19 +284,19 @@ display:flex;
   color:#128781;
 }
 
-push-down{
+.push-down{
   position: relative;
   top: 2rem;
 }
 
 .push-down-more{
   position: relative;
-  top: 5rem;
+  top: 4rem;
 }
 
 .push-down-more-more{
   position: relative;
-  top: 7rem;
+  top: 6rem;
 }
 
 .push-down-most{
@@ -399,4 +399,9 @@ display:flex;
   font-family:'Montserrat',sans-serif;
   font-weight: 900;
   height:7vh;
+
+.back-button {
+  position: absolute;
+  top: 0px;
+  color: rgba(255, 255, 255, .6);
 }

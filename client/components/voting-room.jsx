@@ -11,16 +11,16 @@ export default class VotingRoom extends React.Component {
       view: 'voting room',
       match: false,
       currentImageIndex: 0,
-      details: null,
-      photos: []
+      isLiked: null,
+      images: []
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
     this.handleClickBackImage = this.handleClickBackImage.bind(this);
     this.renderStarRating = this.renderStarRating.bind(this);
-    this.getDetails = this.getDetails.bind(this);
-    this.renderPhoto = this.renderPhoto.bind(this);
+    this.getRestaurantDetails = this.getRestaurantDetails.bind(this);
+    this.getCurrentImages = this.getCurrentImages.bind(this);
     this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
     this.handleClickInfo = this.handleClickInfo.bind(this);
   }
@@ -51,14 +51,23 @@ export default class VotingRoom extends React.Component {
     }
   }
 
-  getDetails() {
-    fetch(`/api/restaurants/${this.props.restaurant.id}`)
+  getRestaurantDetails() {
+    const restaurantId = this.props.restaurant.id;
+    fetch(`/api/restaurants/${restaurantId}`)
       .then(result => result.json())
+      .then(data => this.setState({ images: data.photos || [] }))
+      .catch(err => console.error(err));
+  }
+
+  checkIsLiked() {
+    fetch(`/api/liked-restaurants/${this.props.restaurant.id}`)
+      .then(response => response.json())
       .then(data => {
-        this.setState({
-          details: data,
-          photos: data.photos
-        });
+        if (!data.liked) {
+          this.setState({ isLiked: false });
+        } else {
+          this.setState({ isLiked: true });
+        }
       })
       .catch(err => console.error(err));
   }
@@ -73,39 +82,51 @@ export default class VotingRoom extends React.Component {
   }
 
   handleClickNextImage() {
-    const currentImageIndex = this.state.currentImageIndex;
-    let newImageIndex = null;
-    if (currentImageIndex === this.state.photos.length - 1) {
-      newImageIndex = 0;
-    } else {
-      newImageIndex = currentImageIndex + 1;
+    this.setState({ currentImageIndex: this.state.currentImageIndex + 1 });
+    if (this.state.currentImageIndex === this.state.images.length - 1) {
+      this.setState({ currentImageIndex: 0 });
     }
-    this.setState({
-      currentImageIndex: newImageIndex
-    });
   }
 
   handleClickBackImage() {
-    const currentImageIndex = this.state.currentImageIndex;
-    let newImageIndex = null;
-    if (currentImageIndex === 0) {
-      newImageIndex = this.props.images.length - 1;
-    } else {
-      newImageIndex = currentImageIndex - 1;
+    this.setState({ currentImageIndex: this.state.currentImageIndex - 1 });
+    if (this.state.currentImageIndex === 0) {
+      this.setState({ currentImageIndex: this.state.images.length - 1 });
     }
-    this.setState({
-      currentImageIndex: newImageIndex
-    });
   }
 
-  renderPhoto() {
-    if (this.state.photos.length !== 0) {
-      return <img
-        src={this.state.details.photos[this.state.currentImageIndex]}
-        alt="Yelp Restaurant Business Image"
-        className={' h-100 w-100 '} />;
-    } else {
-      return null;
+  getCurrentImages() {
+    return <img src={this.state.images[this.state.currentImageIndex]} alt="Yelp Restaurant Business Image" className={' h-100 w-100 '} />;
+  }
+
+  handleHeartClick() {
+    if (!this.state.isLiked) {
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ restaurantId: this.props.restaurant.id })
+      };
+      fetch('/api/liked-restaurants', request)
+        .then(response => {
+          if (response.ok) {
+            this.setState({ isLiked: true });
+          }
+        })
+        .catch(err => console.error(err));
+    }
+  }
+
+  componentDidMount() {
+    this.getRestaurantDetails();
+    this.checkIsLiked();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.restaurant !== prevProps.restaurant) {
+      this.getRestaurantDetails();
+    }
+    if (this.props.restaurant.id !== prevProps.restaurant.id) {
+      this.checkIsLiked();
     }
   }
 
@@ -121,11 +142,14 @@ export default class VotingRoom extends React.Component {
     });
   }
 
-  componentDidMount() {
-    this.getDetails();
-  }
-
   render() {
+    let heartColor;
+    if (!this.state.isLiked) {
+      heartColor = 'white';
+    } else {
+      heartColor = 'red';
+    }
+
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
@@ -141,14 +165,14 @@ export default class VotingRoom extends React.Component {
           </div>
           <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
             <div className={'col pl-0 pr-0 view-height-forty-five'}>
-              {this.renderPhoto()}
+              {this.getCurrentImages()}
             </div>
             <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
               <button className='btn'>
-                <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={this.handleClickBackImage}></i>
+                <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={ this.handleClickBackImage}></i>
               </button>
               <button className={'btn'}>
-                <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={this.handleClickNextImage}></i>
+                <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={ this.handleClickNextImage}></i>
               </button>
             </div>
           </div>
@@ -160,12 +184,19 @@ export default class VotingRoom extends React.Component {
                 Info
             </button>
           </div>
-          <div className={'col d-flex justify-content-center brand-blue  pl-0 pr-0 restaurant-button-choice'}>
+          <div className={'col d-flex justify-content-around brand-blue  pl-0 pr-0 restaurant-button-choice'}>
             <button className='btn '>
-              <i className={'fas fa-caret-left white fa-5x'} onClick={() => { this.props.decrementRestaurant(); }} ></i>
+              <i className={'fas fa-caret-left white fa-5x'} onClick={ this.props.decrementRestaurant } ></i>
+            </button>
+            <button className="btn">
+              <i
+                className={`fas fa-heart fa-3x ${heartColor}`}
+                onClick={() => this.handleHeartClick()}
+              >
+              </i>
             </button>
             <button className={'btn'}>
-              <i className={'fas fa-caret-right white fa-5x'} onClick={() => { this.props.incrementRestaurant(); }}></i>
+              <i className={'fas fa-caret-right white fa-5x'} onClick={ this.props.incrementRestaurant }> </i>
             </button>
           </div>
         </div>
