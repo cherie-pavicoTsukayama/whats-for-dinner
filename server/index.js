@@ -276,14 +276,24 @@ app.put('/api/rooms/close/:roomId', (req, res, next) => {
   db.query(checkHostSql, params1)
     .then(result => {
       if (result.rows[0].userId === req.session.userId) {
-        const params = [req.session.roomId];
+        const params2 = [req.session.roomId];
         const closeRoomSql = `
         update "rooms"
         set "isActive"=false
         where "roomId"=$1;
         `;
+        db.query(closeRoomSql, params2)
+          .then(data => {
+            console.log(`Room ${req.session.roomId} was closed`);
+          });
       }
-    });
+    })
+    .then(result2 => {
+      const message = req.session.roomId;
+      req.session.roomId = '';
+      res.status(200).json(`You have left Room: ${message}`);
+    })
+    .catch(err => next(err));
 
 });
 
