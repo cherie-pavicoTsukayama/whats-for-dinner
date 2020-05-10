@@ -66,7 +66,7 @@ export default class VotingRoom extends React.Component {
     fetch(`/api/liked-restaurants/${this.props.restaurant.id}`)
       .then(response => response.json())
       .then(data => {
-        if (data.error) {
+        if (!data.liked) {
           this.setState({ isLiked: false });
         } else {
           this.setState({ isLiked: true });
