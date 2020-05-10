@@ -140,8 +140,10 @@ export default class VotingRoom extends React.Component {
     this.checkIsLiked();
   }
 
-  componentDidUpdate() {
-    this.checkIsLiked();
+  componentDidUpdate(prevProps) {
+    if (this.props.restaurant.id !== prevProps.restaurant.id) {
+      this.checkIsLiked();
+    }
   }
 
   render() {
