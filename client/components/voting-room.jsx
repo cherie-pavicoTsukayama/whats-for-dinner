@@ -1,5 +1,6 @@
 import React from 'react';
-// import MatchConfirmed from './match-confirmed';
+import RestaurantDetails from './restaurant-details';
+import MatchConfirmed from './match-confirmed';
 
 export default class VotingRoom extends React.Component {
   constructor(props) {
@@ -7,8 +8,8 @@ export default class VotingRoom extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'restaurantRoom',
-      match: true,
+      view: 'voting room',
+      match: false,
       currentImageIndex: 0,
       images: []
     };
@@ -19,6 +20,8 @@ export default class VotingRoom extends React.Component {
     this.renderStarRating = this.renderStarRating.bind(this);
     this.getRestaurantDetails = this.getRestaurantDetails.bind(this);
     this.getCurrentImages = this.getCurrentImages.bind(this);
+    this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
+    this.handleClickInfo = this.handleClickInfo.bind(this);
   }
 
   renderStarRating() {
@@ -60,6 +63,7 @@ export default class VotingRoom extends React.Component {
   }
 
   hideModal() {
+    this.props.setView('match details');
     this.setState({ match: false });
   }
 
@@ -91,19 +95,33 @@ export default class VotingRoom extends React.Component {
     }
   }
 
-  render() {
+  handleClickBackToVotingRoom() {
+    this.setState({
+      view: 'voting room'
+    });
+  }
 
-    return (
-      <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
-        <div className={'col-sm pl-2 pr-0 mt-3'}>
-          <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
-        </div>
-        <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 mb-2'}>
-          <div className={'restaurant-title'}>{this.props.restaurant.name}</div>
-          <div className={'mt-2'}>
-            {this.renderStarRating()}
+  handleClickInfo() {
+    this.setState({
+      view: 'info'
+    });
+  }
+
+  render() {
+    if (this.state.view === 'voting room') {
+      return (
+        <div className={'container-fluid d-flex flex-column restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
+          <div className={'col-sm pl-2 pr-0 mt-3'}>
+            <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
           </div>
         </div>
+         <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 mb-2'}>
+            <div className={'restaurant-title'}>{this.props.restaurant.name}</div>
+            <div className={'mt-2'}>
+              {this.renderStarRating()}
+            </div>
+          </div>
         <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
           <div className={'col pl-0 pr-0 view-height-forty-five'}>
             {this.getCurrentImages()}
@@ -118,7 +136,12 @@ export default class VotingRoom extends React.Component {
           </div>
         </div>
         <div className={'col-sm d-flex justify-content-center  pl-0 pr-0'}>
-          <button type="button" className="btn btn-secondary grey-button m-3 shadow-sm">Info</button>
+            <button
+              type="button"
+              className="btn btn-secondary grey-button m-3 shadow-sm"
+              onClick={this.handleClickInfo}>
+                Info
+            </button>
         </div>
         <div className={'col d-flex justify-content-center brand-blue  pl-0 pr-0 restaurant-button-choice'}>
           <button className='btn '>
@@ -130,5 +153,13 @@ export default class VotingRoom extends React.Component {
         </div>
       </div>
     );
+    } else if (this.state.view === 'info') {
+      return (
+        <div>
+          <MatchConfirmed match={this.state.match} />
+          <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+        </div>
+      );
+    }
   }
 }

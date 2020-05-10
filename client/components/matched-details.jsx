@@ -1,11 +1,14 @@
 import React from 'react';
+import Carousel from './matched-carousel';
 
-export default class RestaurantDetail extends React.Component {
+export default class MatchedDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hours: [],
-      reviews: []
+      reviews: [],
+      address: [],
+      photos: []
     };
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
@@ -17,10 +20,11 @@ export default class RestaurantDetail extends React.Component {
     this.renderUserStarRating = this.renderUserStarRating.bind(this);
     this.convertDate = this.convertDate.bind(this);
     this.renderReviewText = this.renderReviewText.bind(this);
+    this.renderImageCarousel = this.renderImageCarousel.bind(this);
   }
 
   renderStarRating() {
-    const rating = this.props.restaurants.rating;
+    const rating = this.state.rating;
     switch (rating) {
       case 1:
         return <img className="star-rating" src="./images/1-stars.png" alt="" />;
@@ -72,15 +76,18 @@ export default class RestaurantDetail extends React.Component {
   }
 
   renderAddress() {
-    const address = this.props.restaurants.location.display_address;
-    const displayAddress = address.map((line, index) => {
-      return <p key={index} className="m-0 p-0 montserrat-500 address text-center">{line}</p>;
-    });
+    const address = this.state.address;
+    let displayAddress = null;
+    if (address.length !== 0) {
+      displayAddress = address.map((line, index) => {
+        return <p key={index} className="m-0 p-0 montserrat-500 address text-center">{line}</p>;
+      });
+    }
     return displayAddress;
   }
 
-  getRestaurantDetails(restaurantid) {
-    const restaurantId = this.props.restaurants.id;
+  getRestaurantDetails() {
+    const restaurantId = this.props.restaurantId;
     Promise.all([
       fetch(`/api/restaurants/${restaurantId}`)
         .then(res => res.json()),
@@ -89,9 +96,14 @@ export default class RestaurantDetail extends React.Component {
     ])
       .then(data => {
         this.setState({
+          name: data[0].name,
+          rating: data[0].rating,
+          address: data[0].location.display_address,
           hours: data[0].hours[0].open,
           isOpen: data[0].hours[0].is_open_now,
-          reviews: data[1].reviews
+          reviews: data[1].reviews,
+          photos: data[0].photos,
+          url: data[0].url
         });
       })
       .catch(err => console.error(err));
@@ -104,12 +116,6 @@ export default class RestaurantDetail extends React.Component {
           <p className="text-center montserrat-400 lead m-0">Open Now</p>
         </div>
       );
-    } else if (this.state.reviews.length === 0) {
-      return (
-        <div>
-          <img src="./images/loading.gif" alt=""/>
-        </div>
-      );
     } else {
       return (
         <div className="open-closed-feature bg-green p-1">
@@ -118,6 +124,14 @@ export default class RestaurantDetail extends React.Component {
       );
     }
 
+  }
+
+  renderImageCarousel(photos) {
+    let carousel = null;
+    if (photos.length !== 0) {
+      carousel = <Carousel images={photos} />;
+    }
+    return carousel;
   }
 
   convertDayOfTheWeek(weekDay) {
@@ -191,7 +205,7 @@ export default class RestaurantDetail extends React.Component {
     if (reviews.length !== 0) {
       renderReviews = reviews.map(review => {
         return (
-          <div key={review.id} className="mb-5">
+          <div key={review.id} className="mb-5 container">
             <div className="row align-items-center">
               <img className="user-image mr-2" src={review.user.image_url} alt="" />
               <div className="mt-2">
@@ -221,31 +235,48 @@ export default class RestaurantDetail extends React.Component {
   }
 
   render() {
+    let restaurantDetails = null;
+    if (this.state.photos.length !== 0) {
+      restaurantDetails =
+      (<div className="d-flex flex-wrap justify-content-center mt-4">
+        <h1 className="montserrat-400 brand-blue-text text-center">{this.state.name}</h1>
+        <div className="col-12 d-flex justify-content-center mt-2">
+          {this.renderStarRating()}
+        </div>
+        <div className="pt-4 pb-4">
+          {this.renderAddress()}
+        </div>
+        <div className="d-flex flex-wrap justify-content-center mb-5">
+          {this.renderImageCarousel(this.state.photos)}
+          <form action={this.state.url} target="_blank">
+            <button type="submit" className="btn pointer match-website-button shadow-sm">View on Yelp</button>
+          </form>
+
+        </div>
+        <div className="col-12 d-flex justify-content-center pb-3">
+          {this.renderIsOpen()}
+        </div>
+        <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
+          {this.renderHours(this.state.hours)}
+        </div>
+        <div className="mt-3 mb-5 ml-3 mr-3">
+          {this.renderReviews(this.state.reviews)}
+        </div>
+      </div>);
+    } else {
+      restaurantDetails =
+        (<div className="d-flex h-100 justify-content-center container align-content-center">
+          <img src="./images/loading.gif" alt="" className="align-self-center" />
+        </div>
+        );
+    }
+
     return (
       <div>
-        <div className="d-flex flex-wrap justify-content-center mt-4 container">
-          <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
-          <div className="col-12 d-flex justify-content-center mt-2">
-            {this.renderStarRating()}
-          </div>
-          <div className="pt-4 pb-5">
-            {this.renderAddress()}
-          </div>
-          <div className="col-12 d-flex justify-content-center pb-3">
-            {this.renderIsOpen()}
-          </div>
-          <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
-            {this.renderHours(this.state.hours)}
-          </div>
-          <div className="col-12 mt-3 mb-5">
-            {this.renderReviews(this.state.reviews)}
-          </div>
+        <div className="container">
+          <div className="col match-logo"></div>
         </div>
-        <div className={'col d-flex justify-content-start align-items-center bg-green pl-5 pr-0 footer'}>
-          <button>
-            <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
-          </button>
-        </div>
+        {restaurantDetails}
       </div>
     );
   }
