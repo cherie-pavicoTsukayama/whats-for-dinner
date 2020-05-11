@@ -50,17 +50,12 @@ export default class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         if (data.error) {
-          // this.setState({ errorMessage: 'Invalid Entry Key' });
           return { errorMessage: 'Invalid Entry Key' };
         } else if (!data.isActive) {
-          // this.setState({
-          //   isActive: data.isActive
-          // });
           return { errorMessage: 'The room is no longer active' };
         } else {
           this.setState({
             restaurants: data.restaurants.businesses
-            // view: 'voting room'
           });
           return { errorMessage: '' };
         }
