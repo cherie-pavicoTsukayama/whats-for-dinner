@@ -146,13 +146,20 @@ export default class MatchedDetails extends React.Component {
   convertTime(weekDay) {
     let start = '';
     let end = '';
-    if (start <= 1200) {
+    if (parseInt(weekDay.start) < 1200) {
       const minutes = weekDay.start.slice(2);
       let hours = weekDay.start.slice(0, 2);
       if (hours[0] === '0') {
         hours = hours[1];
       }
       start = `${hours}:${minutes} am`;
+    } else if (parseInt(weekDay.start) === 1200) {
+      const minutes = weekDay.start.slice(2);
+      let hours = weekDay.start.slice(0, 2);
+      if (hours[0] === '0') {
+        hours = hours[1];
+      }
+      start = `${hours}:${minutes} pm`;
     }
     const closingMinutes = weekDay.end.slice(2);
     const closingHours = weekDay.end.slice(0, 2) - 12;
