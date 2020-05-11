@@ -275,6 +275,8 @@ app.put('/api/rooms/close/:roomId', (req, res, next) => {
   `;
   db.query(checkHostSql, params1)
     .then(result => {
+      console.log('user id from table', result.rows[0]);
+      console.log('user on the session', req.session.userId);
       if (result.rows[0].userId === req.session.userId) {
         const params2 = [req.session.roomId];
         const closeRoomSql = `
