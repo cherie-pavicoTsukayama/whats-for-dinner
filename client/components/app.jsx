@@ -16,7 +16,8 @@ export default class App extends React.Component {
       currentRestaurant: 0,
       restaurants: [],
       matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
-      errorMessage: ''
+      errorMessage: '',
+      isActive: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -50,6 +51,10 @@ export default class App extends React.Component {
       .then(data => {
         if (data.error) {
           this.setState({ errorMessage: 'Invalid Entry Key' });
+        } else if (!data.isActive) {
+          this.setState({
+            isActive: data.isActive
+          });
         } else {
           this.setState({
             restaurants: data.restaurants.businesses,
@@ -83,7 +88,8 @@ export default class App extends React.Component {
         currentView = <UserJoinRoom
           joinRoom={this.joinRoom}
           errorMessage={this.state.errorMessage}
-          setView={this.setView}/>;
+          setView={this.setView}
+          isActive={this.state.isActive}/>;
         break;
       case 'voting room':
         if (this.state.restaurants.length !== 0) {
