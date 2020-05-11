@@ -23,6 +23,8 @@ export default class VotingRoom extends React.Component {
     this.getCurrentImages = this.getCurrentImages.bind(this);
     this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
     this.handleClickInfo = this.handleClickInfo.bind(this);
+    this.checkIsLiked = this.checkIsLiked.bind(this);
+    this.handleHeartClick = this.handleHeartClick.bind(this);
   }
 
   renderStarRating() {
