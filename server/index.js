@@ -266,6 +266,34 @@ app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/rooms/close/:roomId', (req, res, next) => {
+  const params1 = [req.session.roomId];
+  const checkHostSql = `
+  select "userId"
+  from "rooms"
+  where "roomId" = $1;
+  `;
+  db.query(checkHostSql, params1)
+    .then(result => {
+      if (result.rows[0].userId === req.session.userId) {
+        const params2 = [req.session.roomId];
+        const closeRoomSql = `
+        update "rooms"
+        set "isActive"=false
+        where "roomId"=$1;
+        `;
+        db.query(closeRoomSql, params2);
+      }
+    })
+    .then(result2 => {
+      const message = req.session.roomId;
+      req.session.roomId = '';
+      res.status(200).json(`You have left Room: ${message}`);
+    })
+    .catch(err => next(err));
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`can not ${req.method} ${req.originalUrl}`, 404));
 });
