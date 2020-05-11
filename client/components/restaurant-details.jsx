@@ -259,6 +259,7 @@ export default class RestaurantDetail extends React.Component {
             <button className="btn">
               <i
                 className={`fas fa-heart fa-3x ${heartColor}`}
+                onClick={this.props.handleHeartClick}
               >
               </i>
             </button>
