@@ -434,3 +434,7 @@ display:flex;
     left: 7%;
     width: 54%;
   }
+
+  .grey-color{
+    color: grey;
+  }
