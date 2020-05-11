@@ -236,7 +236,7 @@ app.delete('/api/liked-restaurants/:restaurantId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
+app.get('/api/likedRestaurants', (req, res, next) => {
   const determineMatchSql = `
   select count("roomId"), "restaurantId"
   from "likedRestaurants"
@@ -244,24 +244,13 @@ app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
   group by "restaurantId"
   having count("roomId") > 1
   `;
-  const params = [req.params.roomId];
+  const params = [req.session.roomId];
   db.query(determineMatchSql, params)
     .then(result => {
       if (!result.rows.length) {
         return res.status(200).json({ match: null });
       }
-      // res.status(200).json({ match: result.rows[0].restaurantId });
-      const options = {
-        method: 'GET',
-        headers: {
-          Authorization: process.env.YELP_KEY,
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(`https://api.yelp.com/v3/businesses/${result.rows[0].restaurantId}`, options)
-        .then(response => response.json())
-        .then(details => res.status(200).json(details))
-      ;
+      res.status(200).json({ match: result.rows[0].restaurantId });
     })
     .catch(err => next(err));
 });

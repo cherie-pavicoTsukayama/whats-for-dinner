@@ -15,6 +15,7 @@ export default class VotingRoom extends React.Component {
       images: [],
       restaurantId: null
     };
+    this.matchFetch = null;
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
@@ -57,15 +58,23 @@ export default class VotingRoom extends React.Component {
     const restaurantId = this.props.restaurant.id;
     fetch(`/api/restaurants/${restaurantId}`)
       .then(result => result.json())
-      .then(data => this.setState({ restaurantId: data.photos || this.props.restaurant.image_url }))
+      .then(data => this.setState({ images: data.photos || this.props.restaurant.image_url }))
       .catch(err => console.error(err));
   }
 
   checkMatch() {
-    fetch('/api/likedRestaurants/7')
-      .then(result => result.json())
-      .then(data => console.log(data))
-      .catch(err => console.error(err));
+    this.matchFetch = setInterval(() => {
+      fetch('/api/likedRestaurants')
+        .then(result => result.json())
+        .then(data => {
+          if (data.match) {
+            this.setState({ restaurantId: data.match });
+            this.setState({ match: true });
+            clearInterval(this.matchFetch);
+          }
+        })
+        .catch(err => console.error(err));
+    }, 3000);
   }
 
   checkIsLiked() {
