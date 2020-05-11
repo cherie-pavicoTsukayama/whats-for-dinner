@@ -248,7 +248,7 @@ app.get('/api/likedRestaurants/:roomId', (req, res, next) => {
   db.query(determineMatchSql, params)
     .then(result => {
       if (!result.rows.length) {
-        res.status(200).json({ match: null });
+        return res.status(200).json({ match: null });
       }
       // res.status(200).json({ match: result.rows[0].restaurantId });
       const options = {
