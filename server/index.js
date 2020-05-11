@@ -47,7 +47,8 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
               return {
                 userId: result2.rows[0].userId,
                 roomId: result.rows[0].roomId,
-                restaurants: result.rows[0].restaurants
+                restaurants: result.rows[0].restaurants,
+                isActive: result.rows[0].isActive
               };
             })
         );
@@ -61,13 +62,12 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
       }
     })
     .then(result => {
-
       if (result.isActive === true) {
         req.session.userId = result.userId;
         req.session.roomId = result.roomId;
         res.status(200).json(result);
       } else {
-        res.status(200).json({ isActive: result.isActive });
+        return res.status(200).json({ isActive: result.isActive });
       }
     })
     .catch(err => next(err));
