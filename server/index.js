@@ -288,6 +288,8 @@ app.put('/api/rooms/close/:roomId', (req, res, next) => {
           .then(data => {
             console.log(`Room ${req.session.roomId} was closed`);
           });
+      } else {
+        console.log('room was not closed, just left');
       }
     })
     .then(result2 => {
