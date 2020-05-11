@@ -245,7 +245,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div>
           <MatchConfirmed match={this.state.match} />
-          <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+          <RestaurantDetails isLiked={this.state.isLiked} handleHeartClick={this.handleHeartClick} checkIsLiked={this.checkIsLiked} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );
     }
