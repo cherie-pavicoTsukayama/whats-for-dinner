@@ -358,7 +358,7 @@ display:flex;
 .footer {
   height: 70px;
   position: fixed;
-  bottom: -2px;
+  bottom: 0;
 }
 
 .figure-image {
@@ -368,7 +368,7 @@ display:flex;
 }
 
 .red{
-  color: red;
+  color: #fe4a3b;
 }
 
 .leave-room-icon {
@@ -427,4 +427,10 @@ display:flex;
   font-family:'Montserrat', sans-serif;
   font-weight: 700;
   border:none;
+  }
+
+  .footer-inner {
+    position: relative;
+    left: 7%;
+    width: 54%;
   }

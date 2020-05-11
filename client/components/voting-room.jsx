@@ -25,6 +25,8 @@ export default class VotingRoom extends React.Component {
     this.getCurrentImages = this.getCurrentImages.bind(this);
     this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
     this.handleClickInfo = this.handleClickInfo.bind(this);
+    this.checkIsLiked = this.checkIsLiked.bind(this);
+    this.handleHeartClick = this.handleHeartClick.bind(this);
     this.checkMatch = this.checkMatch.bind(this);
   }
 
@@ -228,7 +230,7 @@ export default class VotingRoom extends React.Component {
               {this.renderStarRating()}
             </div>
           </div>
-          <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+          <div className={'col d-flex flex-wrap justify-content-center  px-0 match-image-container'}>
             <div className={'col pl-0 pr-0 view-height-forty-five'}>
               {this.getCurrentImages()}
             </div>
@@ -241,7 +243,7 @@ export default class VotingRoom extends React.Component {
                 Info
             </button>
           </div>
-          <div className={'col d-flex justify-content-around brand-blue  pl-0 pr-0 restaurant-button-choice'}>
+          <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice'}>
             <button className='btn '>
               <i className={'fas fa-caret-left white fa-3x'} onClick={ this.props.decrementRestaurant } ></i>
             </button>
@@ -262,7 +264,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div>
           <MatchConfirmed match={this.state.match} />
-          <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+          <RestaurantDetails isLiked={this.state.isLiked} handleHeartClick={this.handleHeartClick} checkIsLiked={this.checkIsLiked} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );
     }
