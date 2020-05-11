@@ -275,8 +275,6 @@ app.put('/api/rooms/close/:roomId', (req, res, next) => {
   `;
   db.query(checkHostSql, params1)
     .then(result => {
-      console.log('user id from table', result.rows[0]);
-      console.log('user on the session', req.session.userId);
       if (result.rows[0].userId === req.session.userId) {
         const params2 = [req.session.roomId];
         const closeRoomSql = `
@@ -284,12 +282,7 @@ app.put('/api/rooms/close/:roomId', (req, res, next) => {
         set "isActive"=false
         where "roomId"=$1;
         `;
-        db.query(closeRoomSql, params2)
-          .then(data => {
-            console.log(`Room ${req.session.roomId} was closed`);
-          });
-      } else {
-        console.log('room was not closed, just left');
+        db.query(closeRoomSql, params2);
       }
     })
     .then(result2 => {
