@@ -25,7 +25,8 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
   const { entryKey } = req.params;
   const getRoom = `
     select "restaurants",
-           "roomId"
+           "roomId",
+           "isActive"
       from "rooms"
      where "entryKey" = $1
   `;
@@ -54,14 +55,20 @@ app.get('/api/rooms/:entryKey', (req, res, next) => {
         return {
           userId: req.session.userId,
           roomId: result.rows[0].roomId,
-          restaurants: result.rows[0].restaurants
+          restaurants: result.rows[0].restaurants,
+          isActive: result.rows[0].isActive
         };
       }
     })
     .then(result => {
-      req.session.userId = result.userId;
-      req.session.roomId = result.roomId;
-      res.status(200).json(result);
+
+      if (result.isActive === true) {
+        req.session.userId = result.userId;
+        req.session.roomId = result.roomId;
+        res.status(200).json(result);
+      } else {
+        res.status(200).json({ isActive: result.isActive });
+      }
     })
     .catch(err => next(err));
 });
