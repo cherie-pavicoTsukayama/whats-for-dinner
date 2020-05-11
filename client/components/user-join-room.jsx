@@ -4,7 +4,10 @@ export default class UserJoinRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: ''
+      input: '',
+      error: '',
+      errorMessage: '',
+      isActive: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -12,21 +15,29 @@ export default class UserJoinRoom extends React.Component {
 
   handleChange(event) {
     this.setState({
-      input: event.target.value
+      input: event.target.value,
+      error: '',
+      errorMessage: '',
+      isActive: ''
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const entryKey = this.state.input;
-    this.props.joinRoom(entryKey);
+    this.props.joinRoom(entryKey)
+      .then(result => {
+        if (result.errorMessage !== '') {
+          this.setState({
+            error: result.errorMessage
+          });
+        } else {
+          this.props.setView('voting room');
+        }
+      });
   }
 
   render() {
-    let invalidKeyMessage;
-    if (this.props.errorMessage) {
-      invalidKeyMessage = <p className="m-0 mt-2 red">{this.props.errorMessage}</p>;
-    }
     return (
       <div className={'user-join-room d-flex flex-wrap align-items-center'}>
         <div className={'darken-background'}></div>
@@ -44,7 +55,7 @@ export default class UserJoinRoom extends React.Component {
               placeholder="Entry Key"
               maxLength="8"
               aria-label="Room Entry Key"/>
-            {invalidKeyMessage}
+            <p className="m-0 mt-2 red">{this.state.error}</p>
           </div>
           <button type="submit" className="btn btn-secondary white-button m-3">Join Room</button>
         </form>
