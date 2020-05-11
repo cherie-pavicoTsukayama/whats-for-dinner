@@ -52,7 +52,7 @@ export default class App extends React.Component {
         if (data.error) {
           return { errorMessage: 'Invalid Entry Key' };
         } else if (!data.isActive) {
-          return { errorMessage: 'The room is no longer active' };
+          return { errorMessage: 'The room has been closed' };
         } else {
           this.setState({
             restaurants: data.restaurants.businesses
