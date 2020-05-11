@@ -251,8 +251,8 @@ export default class RestaurantDetail extends React.Component {
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
-        <div className={'col d-flex justify-content-start align-items-center bg-green pl-5 pr-0 footer'}>
-          <div>
+        <div className={'col bg-green footer d-flex align-items-center'}>
+          <div className="footer-inner d-flex justify-content-between">
             <button>
               <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
             </button>

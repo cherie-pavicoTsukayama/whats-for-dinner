@@ -211,7 +211,7 @@ export default class VotingRoom extends React.Component {
               {this.renderStarRating()}
             </div>
           </div>
-          <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
+          <div className={'col d-flex flex-wrap justify-content-center  px-0 match-image-container'}>
             <div className={'col pl-0 pr-0 view-height-forty-five'}>
               {this.getCurrentImages()}
             </div>
@@ -224,7 +224,7 @@ export default class VotingRoom extends React.Component {
                 Info
             </button>
           </div>
-          <div className={'col d-flex justify-content-around brand-blue  pl-0 pr-0 restaurant-button-choice'}>
+          <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice'}>
             <button className='btn '>
               <i className={'fas fa-caret-left white fa-3x'} onClick={ this.props.decrementRestaurant } ></i>
             </button>
