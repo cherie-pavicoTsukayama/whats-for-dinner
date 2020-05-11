@@ -221,6 +221,7 @@ export default class RestaurantDetail extends React.Component {
 
   componentDidMount() {
     this.getRestaurantDetails();
+    this.props.checkIsLiked();
   }
 
   render() {
