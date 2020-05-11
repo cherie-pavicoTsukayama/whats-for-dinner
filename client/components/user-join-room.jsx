@@ -25,21 +25,16 @@ export default class UserJoinRoom extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const entryKey = this.state.input;
-    this.props.joinRoom(entryKey);
-  }
-
-  componentDidUpdate(prevState) {
-    if (this.props.errorMessage !== prevState.errorMessage) {
-      this.setState({
-        error: 'Invalid Entry Key'
+    this.props.joinRoom(entryKey)
+      .then(result => {
+        if (result.errorMessage !== '') {
+          this.setState({
+            error: result.errorMessage
+          });
+        } else {
+          this.props.setView('voting room');
+        }
       });
-    }
-    if (this.props.isActive !== prevState.isActive) {
-      this.setState({
-        error: 'The room is no longer active'
-      });
-    }
-
   }
 
   render() {

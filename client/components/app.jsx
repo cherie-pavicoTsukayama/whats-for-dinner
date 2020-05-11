@@ -15,9 +15,9 @@ export default class App extends React.Component {
       view: 'landing page',
       currentRestaurant: 0,
       restaurants: [],
-      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
-      errorMessage: '',
-      isActive: ''
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
+      // errorMessage: '',
+      // isActive: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -46,21 +46,23 @@ export default class App extends React.Component {
   }
 
   joinRoom(entryKey) {
-    fetch(`/api/rooms/${entryKey}`)
+    return fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
       .then(data => {
         if (data.error) {
-          this.setState({ errorMessage: 'Invalid Entry Key' });
+          // this.setState({ errorMessage: 'Invalid Entry Key' });
+          return { errorMessage: 'Invalid Entry Key' };
         } else if (!data.isActive) {
-          this.setState({
-            isActive: data.isActive
-          });
+          // this.setState({
+          //   isActive: data.isActive
+          // });
+          return { errorMessage: 'The room is no longer active' };
         } else {
           this.setState({
-            restaurants: data.restaurants.businesses,
-            view: 'voting room',
-            errorMessage: ''
+            restaurants: data.restaurants.businesses
+            // view: 'voting room'
           });
+          return { errorMessage: '' };
         }
       })
       .catch(err => console.error(err));
