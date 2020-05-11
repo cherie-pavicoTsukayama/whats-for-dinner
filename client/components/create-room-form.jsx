@@ -114,7 +114,7 @@ class CreateRoomForm extends React.Component {
     if (this.state.view === 'form') {
       return (
         <div className='container montserrat-400'>
-          <i className="fas fa-3x fa-chevron-left mt-3" onClick={() => { this.props.setView('landing page'); }}></i>
+          <i className="fas fa-2x fa-chevron-left mt-3 grey-color" onClick={() => this.props.setView('landing page')}></i>
           <form onSubmit={() => { this.createRoom(this.state); event.preventDefault(); }}>
             <div className='form-group mt-3 mb-2 d-flex justify-content-center push-down'>
               <i className="fas fa-2x fa-map-marker-alt"></i>
