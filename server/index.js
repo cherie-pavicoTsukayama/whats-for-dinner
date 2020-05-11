@@ -179,7 +179,7 @@ app.post('/api/rooms', (req, res, next) => {
     }
   };
 
-  fetch(`https://api.yelp.com/v3/businesses/search?category=${req.body.category}&location=${req.body.location}&radius=${req.body.radius}&price=${req.body.price}&limit=10`, options)
+  fetch(`https://api.yelp.com/v3/businesses/search?categories=${req.body.category}&location=${req.body.location}&radius=${req.body.radius}&price=${req.body.price}&limit=10`, options)
     .then(response => response.json())
     .then(data => {
       const bytes = crypto.randomBytes(4).toString('hex');
