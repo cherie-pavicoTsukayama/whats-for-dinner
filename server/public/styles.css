@@ -402,8 +402,6 @@ display:flex;
   height:7vh;
 }
 
-}
-
 .back-button {
   position: absolute;
   top: 0px;
@@ -430,4 +428,3 @@ display:flex;
   font-weight: 700;
   border:none;
   }
-
