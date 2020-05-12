@@ -16,7 +16,7 @@ export default class VotingRoom extends React.Component {
       images: [],
       restaurantId: null,
       isRoomClosedIntervalId: null,
-      isRoomClosed: null
+      isRoomClosed: false
     };
     this.matchFetch = null;
     this.showModal = this.showModal.bind(this);
@@ -213,7 +213,7 @@ export default class VotingRoom extends React.Component {
     this.getRestaurantDetails();
     this.checkIsLiked();
     this.checkMatch();
-    this.checkIfRoomIsClosed();
+    // this.checkIfRoomIsClosed();
   }
 
   componentDidUpdate(prevProps) {
@@ -248,7 +248,7 @@ export default class VotingRoom extends React.Component {
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
-          <RoomClosedModal isActive={this.state.isActive} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
+          <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
           <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
           <div className={'col-sm pl-2 pr-0 mt-3'}>
             <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
@@ -292,7 +292,8 @@ export default class VotingRoom extends React.Component {
     } else if (this.state.view === 'info') {
       return (
         <div>
-          <MatchConfirmed match={this.state.match} />
+          <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
+          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal} />
           <RestaurantDetails isLiked={this.state.isLiked} handleHeartClick={this.handleHeartClick} checkIsLiked={this.checkIsLiked} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );
