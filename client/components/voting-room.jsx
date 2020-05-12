@@ -13,7 +13,8 @@ export default class VotingRoom extends React.Component {
       currentImageIndex: 0,
       isLiked: null,
       images: [],
-      restaurantId: null
+      restaurantId: null,
+      isRoomClosed: null
     };
     this.matchFetch = null;
     this.showModal = this.showModal.bind(this);
@@ -28,6 +29,7 @@ export default class VotingRoom extends React.Component {
     this.checkIsLiked = this.checkIsLiked.bind(this);
     this.handleHeartClick = this.handleHeartClick.bind(this);
     this.checkMatch = this.checkMatch.bind(this);
+    this.checkIfRoomIsClosed = this.checkIfRoomIsClosed.bind(this);
   }
 
   renderStarRating() {
@@ -77,6 +79,21 @@ export default class VotingRoom extends React.Component {
         })
         .catch(err => console.error(err));
     }, 3000);
+  }
+
+  checkIfRoomIsClosed() {
+    const isRoomClosed = setInterval(() => {
+      fetch('/api/isActive')
+        .then(result => result.json())
+        .then(data => {
+          if (!data.isActive) {
+            clearInterval(this.state.isRoomClosed);
+          }
+        });
+    }, 2000);
+    this.setState({
+      isRoomClosed: isRoomClosed
+    });
   }
 
   checkIsLiked() {
@@ -186,6 +203,7 @@ export default class VotingRoom extends React.Component {
     this.getRestaurantDetails();
     this.checkIsLiked();
     this.checkMatch();
+    this.checkIfRoomIsClosed();
   }
 
   componentDidUpdate(prevProps) {
