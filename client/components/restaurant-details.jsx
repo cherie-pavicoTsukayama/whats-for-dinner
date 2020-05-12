@@ -1,11 +1,13 @@
 import React from 'react';
+import LeaveRoom from './leave-room';
 
 export default class RestaurantDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hours: [],
-      reviews: []
+      reviews: [],
+      isLeaving: false
     };
     this.getDetails = null;
     this.renderStarRating = this.renderStarRating.bind(this);
@@ -18,6 +20,9 @@ export default class RestaurantDetail extends React.Component {
     this.renderUserStarRating = this.renderUserStarRating.bind(this);
     this.convertDate = this.convertDate.bind(this);
     this.renderReviewText = this.renderReviewText.bind(this);
+    this.showLeaveRoom = this.showLeaveRoom.bind(this);
+    this.hideLeaveRoom = this.hideLeaveRoom.bind(this);
+    this.leaveRoom = this.leaveRoom.bind(this);
   }
 
   renderStarRating() {
@@ -70,6 +75,26 @@ export default class RestaurantDetail extends React.Component {
       default:
         break;
     }
+  }
+
+  showLeaveRoom() {
+    this.setState({ isLeaving: true });
+  }
+
+  hideLeaveRoom() {
+    this.setState({ isLeaving: false });
+  }
+
+  leaveRoom() {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/leave', options)
+      .then(result => result.json())
+      .then(data => clearInterval(this.matchFetch))
+      .then(this.props.setView('landing page'))
+      .catch(err => console.error(err));
   }
 
   renderAddress() {
@@ -258,8 +283,14 @@ export default class RestaurantDetail extends React.Component {
     }
     return (
       <div>
-        <div className="d-flex flex-wrap justify-content-center mt-4 container">
-          <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
+        <div className="d-flex flex-wrap justify-content-center container">
+          <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
+          <div className="col-12 pl-0 pr-0 mb-4 mt-3">
+            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          </div>
+          <div className="col-12">
+            <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
+          </div>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
           </div>

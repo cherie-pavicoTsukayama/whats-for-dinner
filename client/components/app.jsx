@@ -99,7 +99,7 @@ export default class App extends React.Component {
         }
         break;
       case 'match details':
-        currentView = <MatchDetails restaurantId={this.state.matchedRestaurantId} />;
+        currentView = <MatchDetails setView={this.setView} restaurantId={this.state.matchedRestaurantId} />;
         break;
     }
 

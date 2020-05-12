@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from './matched-carousel';
+import LeaveRoom from './leave-room';
 
 export default class MatchedDetails extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class MatchedDetails extends React.Component {
       hours: [],
       reviews: [],
       address: [],
+      isLeaving: false,
       photos: []
     };
     this.renderStarRating = this.renderStarRating.bind(this);
@@ -21,6 +23,9 @@ export default class MatchedDetails extends React.Component {
     this.convertDate = this.convertDate.bind(this);
     this.renderReviewText = this.renderReviewText.bind(this);
     this.renderImageCarousel = this.renderImageCarousel.bind(this);
+    this.showLeaveRoom = this.showLeaveRoom.bind(this);
+    this.hideLeaveRoom = this.hideLeaveRoom.bind(this);
+    this.leaveRoom = this.leaveRoom.bind(this);
   }
 
   renderStarRating() {
@@ -84,6 +89,26 @@ export default class MatchedDetails extends React.Component {
       });
     }
     return displayAddress;
+  }
+
+  showLeaveRoom() {
+    this.setState({ isLeaving: true });
+  }
+
+  hideLeaveRoom() {
+    this.setState({ isLeaving: false });
+  }
+
+  leaveRoom() {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/leave', options)
+      .then(result => result.json())
+      .then(data => clearInterval(this.matchFetch))
+      .then(this.props.setView('landing page'))
+      .catch(err => console.error(err));
   }
 
   getRestaurantDetails() {
@@ -281,6 +306,10 @@ export default class MatchedDetails extends React.Component {
     return (
       <div>
         <div className="container">
+          <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
+          <div className="col-12 pl-0 mt-3">
+            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          </div>
           <div className="col match-logo"></div>
         </div>
         {restaurantDetails}
