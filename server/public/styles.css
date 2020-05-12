@@ -226,6 +226,12 @@ display:flex;
   font-size:2rem;
   color:#007e77;
   text-align:center;
+  line-height:2.25rem;
+  max-width:345px;
+}
+
+.match-line-height {
+    line-height:2rem;
 }
 
 .review-star-image {
