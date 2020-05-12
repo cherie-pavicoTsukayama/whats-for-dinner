@@ -32,6 +32,7 @@ export default class VotingRoom extends React.Component {
     this.handleHeartClick = this.handleHeartClick.bind(this);
     this.checkMatch = this.checkMatch.bind(this);
     this.checkIfRoomIsClosed = this.checkIfRoomIsClosed.bind(this);
+    this.hideRoomClosedModal = this.hideRoomClosedModal.bind(this);
   }
 
   renderStarRating() {
@@ -247,7 +248,7 @@ export default class VotingRoom extends React.Component {
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
-          <RoomClosedModal isActive={this.state.isActive} setView={this.props.setView} />
+          <RoomClosedModal isActive={this.state.isActive} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
           <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
           <div className={'col-sm pl-2 pr-0 mt-3'}>
             <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
