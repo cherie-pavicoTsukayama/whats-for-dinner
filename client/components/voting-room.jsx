@@ -93,7 +93,8 @@ export default class VotingRoom extends React.Component {
             });
             clearInterval(this.state.isRoomClosed);
           }
-        });
+        })
+        .catch(err => console.error(err));
     }, 2000);
     this.setState({
       isRoomClosed: isRoomClosedIntervalId
