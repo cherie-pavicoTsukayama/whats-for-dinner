@@ -7,6 +7,7 @@ export default class RestaurantDetail extends React.Component {
       hours: [],
       reviews: []
     };
+    this.getDetails = null;
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
     this.renderIsOpen = this.renderIsOpen.bind(this);
@@ -81,20 +82,25 @@ export default class RestaurantDetail extends React.Component {
 
   getRestaurantDetails() {
     const restaurantId = this.props.restaurants.id;
-    Promise.all([
-      fetch(`/api/restaurants/${restaurantId}`)
-        .then(res => res.json()),
-      fetch(`/api/restaurants/${restaurantId}/reviews`)
-        .then(res => res.json())
-    ])
-      .then(data => {
-        this.setState({
-          hours: data[0].hours[0].open,
-          isOpen: data[0].hours[0].is_open_now,
-          reviews: data[1].reviews
-        });
-      })
-      .catch(err => console.error(err));
+    this.getDetails = setInterval(() => {
+      Promise.all([
+        fetch(`/api/restaurants/${restaurantId}`)
+          .then(res => res.json()),
+        fetch(`/api/restaurants/${restaurantId}/reviews`)
+          .then(res => res.json())
+      ])
+        .then(data => {
+          if (data) {
+            this.setState({
+              hours: data[0].hours[0].open,
+              isOpen: data[0].hours[0].is_open_now,
+              reviews: data[1].reviews
+            });
+            clearInterval(this.getDetails);
+          }
+        })
+        .catch(err => console.error(err));
+    }, 1000);
   }
 
   renderIsOpen() {
