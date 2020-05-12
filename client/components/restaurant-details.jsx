@@ -9,6 +9,7 @@ export default class RestaurantDetail extends React.Component {
       reviews: [],
       isLeaving: false
     };
+    this.getDetails = null;
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
     this.renderIsOpen = this.renderIsOpen.bind(this);
@@ -106,20 +107,25 @@ export default class RestaurantDetail extends React.Component {
 
   getRestaurantDetails() {
     const restaurantId = this.props.restaurants.id;
-    Promise.all([
-      fetch(`/api/restaurants/${restaurantId}`)
-        .then(res => res.json()),
-      fetch(`/api/restaurants/${restaurantId}/reviews`)
-        .then(res => res.json())
-    ])
-      .then(data => {
-        this.setState({
-          hours: data[0].hours[0].open,
-          isOpen: data[0].hours[0].is_open_now,
-          reviews: data[1].reviews
-        });
-      })
-      .catch(err => console.error(err));
+    this.getDetails = setInterval(() => {
+      Promise.all([
+        fetch(`/api/restaurants/${restaurantId}`)
+          .then(res => res.json()),
+        fetch(`/api/restaurants/${restaurantId}/reviews`)
+          .then(res => res.json())
+      ])
+        .then(data => {
+          if (data) {
+            this.setState({
+              hours: data[0].hours[0].open,
+              isOpen: data[0].hours[0].is_open_now,
+              reviews: data[1].reviews
+            });
+            clearInterval(this.getDetails);
+          }
+        })
+        .catch(err => console.error(err));
+    }, 1000);
   }
 
   renderIsOpen() {
@@ -171,6 +177,10 @@ export default class RestaurantDetail extends React.Component {
         hours = hours[1];
       }
       start = `${hours}:${minutes} pm`;
+    } else if (parseInt(weekDay.start) > 1200) {
+      const minutes = weekDay.start.slice(2);
+      const hours = weekDay.start.slice(0, 2) - 12;
+      start = `${hours}:${minutes} pm`;
     }
     const closingMinutes = weekDay.end.slice(2);
     const closingHours = weekDay.end.slice(0, 2) - 12;
@@ -180,18 +190,33 @@ export default class RestaurantDetail extends React.Component {
   }
 
   renderHours(hours) {
-    const renderHours = hours.map(weekDay => {
-      return (
-        <div key={weekDay.day} className=" col-12 w-80 d-flex justify-content-center">
-          <div className="col-3 ml-2">
-            <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+    const renderHours = hours.map((weekDay, index) => {
+      if (hours.length === 7) {
+        return (
+          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
+            <div className="col-3 ml-2">
+              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+            </div>
+            <div className="col ml-2">
+              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+            </div>
           </div>
-          <div className="col ml-2">
-            <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+        );
+      }
+      if (hours.length === 14) {
+        return (
+          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
+            <div className="col-3 ml-2">
+              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+            </div>
+            <div className="col ml-2">
+              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
+
     return renderHours;
   }
 
@@ -246,9 +271,16 @@ export default class RestaurantDetail extends React.Component {
 
   componentDidMount() {
     this.getRestaurantDetails();
+    this.props.checkIsLiked();
   }
 
   render() {
+    let heartColor;
+    if (!this.props.isLiked) {
+      heartColor = 'white';
+    } else {
+      heartColor = 'red';
+    }
     return (
       <div>
         <div className="d-flex flex-wrap justify-content-center container">
@@ -275,10 +307,19 @@ export default class RestaurantDetail extends React.Component {
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
-        <div className={'col d-flex justify-content-start align-items-center bg-green pl-5 pr-0 footer'}>
-          <button>
-            <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
-          </button>
+        <div className={'col bg-green footer d-flex align-items-center'}>
+          <div className="footer-inner d-flex justify-content-between">
+            <button>
+              <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
+            </button>
+            <button className="btn">
+              <i
+                className={`fas fa-heart fa-3x ${heartColor}`}
+                onClick={this.props.handleHeartClick}
+              >
+              </i>
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -15,8 +15,9 @@ export default class App extends React.Component {
       view: 'landing page',
       currentRestaurant: 0,
       restaurants: [],
-      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
-      errorMessage: ''
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
+      // errorMessage: '',
+      // isActive: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -45,17 +46,18 @@ export default class App extends React.Component {
   }
 
   joinRoom(entryKey) {
-    fetch(`/api/rooms/${entryKey}`)
+    return fetch(`/api/rooms/${entryKey}`)
       .then(response => response.json())
       .then(data => {
         if (data.error) {
-          this.setState({ errorMessage: 'Invalid Entry Key' });
+          return { errorMessage: 'Invalid Entry Key' };
+        } else if (!data.isActive) {
+          return { errorMessage: 'The room has been closed' };
         } else {
           this.setState({
-            restaurants: data.restaurants.businesses,
-            view: 'voting room',
-            errorMessage: ''
+            restaurants: data.restaurants.businesses
           });
+          return { errorMessage: '' };
         }
       })
       .catch(err => console.error(err));
@@ -83,7 +85,8 @@ export default class App extends React.Component {
         currentView = <UserJoinRoom
           joinRoom={this.joinRoom}
           errorMessage={this.state.errorMessage}
-          setView={this.setView}/>;
+          setView={this.setView}
+          isActive={this.state.isActive}/>;
         break;
       case 'voting room':
         if (this.state.restaurants.length !== 0) {

@@ -262,6 +262,18 @@ app.get('/api/likedRestaurants', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/isActive', (req, res, next) => {
+  const params = [req.session.roomId];
+  const isActiveSql = `
+  select "isActive"
+  from "rooms"
+  where "roomId" = $1
+  `;
+  db.query(isActiveSql, params)
+    .then(result => res.status(200).json({ isActive: result.rows[0].isActive }))
+    .catch(err => next(err));
+});
+
 app.put('/api/leave', (req, res, next) => {
   const params1 = [req.session.roomId];
   const checkHostSql = `
