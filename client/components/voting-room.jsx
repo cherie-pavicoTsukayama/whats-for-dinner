@@ -97,8 +97,8 @@ export default class VotingRoom extends React.Component {
         .then(data => {
           if (!data.isActive) {
             this.setState({ isRoomClosed: data.isActive });
+            clearInterval(this.props.checkMatchIntervalId);
             clearInterval(this.isRoomClosedIntervalId);
-            clearInterval(this.matchFetch);
             const options = {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' }

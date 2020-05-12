@@ -1,4 +1,0 @@
-diff a/client/components/app.jsx b/client/components/app.jsx	(rejected hunks)
-@@ -24 +24 @@ export default class App extends React.Component {
--    this.matchIntervalId= null;
-+    this.matchIntervalId = null;
