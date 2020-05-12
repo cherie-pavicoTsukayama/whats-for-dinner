@@ -20,7 +20,7 @@ export default class VotingRoom extends React.Component {
       isRoomClosedIntervalId: null,
       isRoomClosed: null
     };
-    this.matchFetch = null;
+    // this.matchFetch = null;
     this.isRoomClosedIntervalId = null;
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -75,20 +75,20 @@ export default class VotingRoom extends React.Component {
       .catch(err => console.error(err));
   }
 
-  checkMatch() {
-    this.matchFetch = setInterval(() => {
-      fetch('/api/likedRestaurants')
-        .then(result => result.json())
-        .then(data => {
-          if (data.match) {
-            this.setState({ restaurantId: data.match });
-            this.setState({ match: true });
-            clearInterval(this.matchFetch);
-          }
-        })
-        .catch(err => console.error(err));
-    }, 3000);
-  }
+  // checkMatch() {
+  //   this.matchFetch = setInterval(() => {
+  //     fetch('/api/likedRestaurants')
+  //       .then(result => result.json())
+  //       .then(data => {
+  //         if (data.match) {
+  //           this.setState({ restaurantId: data.match });
+  //           this.setState({ match: true });
+  //           clearInterval(this.matchFetch);
+  //         }
+  //       })
+  //       .catch(err => console.error(err));
+  //   }, 3000);
+  // }
 
   checkIfRoomIsClosed() {
     this.isRoomClosedIntervalId = setInterval(() => {

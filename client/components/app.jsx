@@ -15,10 +15,13 @@ export default class App extends React.Component {
       view: 'landing page',
       currentRestaurant: 0,
       restaurants: [],
-      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
+      matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw',
+      isThereAmatch: false
+
       // errorMessage: '',
       // isActive: ''
     };
+    this.matchFetch = null;
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
     this.joinRoom = this.joinRoom.bind(this);
@@ -61,6 +64,21 @@ export default class App extends React.Component {
         }
       })
       .catch(err => console.error(err));
+  }
+
+  checkMatch() {
+    this.matchFetch = setInterval(() => {
+      fetch('/api/likedRestaurants')
+        .then(result => result.json())
+        .then(data => {
+          if (data.match) {
+            this.setState({ matchedRestaurantId: data.match });
+            this.setState({ isThereAmatch: true });
+            clearInterval(this.matchFetch);
+          }
+        })
+        .catch(err => console.error(err));
+    }, 3000);
   }
 
   componentDidMount() {
