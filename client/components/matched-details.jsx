@@ -271,7 +271,7 @@ export default class MatchedDetails extends React.Component {
     if (this.state.photos.length !== 0) {
       restaurantDetails =
       (<div className="d-flex flex-wrap justify-content-center mt-4">
-        <h1 className="montserrat-400 brand-blue-text text-center match-line-height">{this.state.name}</h1>
+        <h1 className="montserrat-400 brand-blue-text text-center restaurant-title">{this.state.name}</h1>
         <div className="col-12 d-flex justify-content-center mt-2">
           {this.renderStarRating()}
         </div>

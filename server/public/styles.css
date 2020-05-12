@@ -223,16 +223,16 @@ display:flex;
 .restaurant-title {
   font-family:'Montserrat', sans-serif;
   font-weight: 400;
-  font-size:2rem;
+  font-size:2.25rem;
   color:#007e77;
   text-align:center;
   line-height:2.25rem;
   max-width:345px;
 }
 
-.match-line-height {
-    line-height:2rem;
-}
+/* .match-line-height {
+    line-height:2.5rem;
+} */
 
 .review-star-image {
   max-width: 200px;
