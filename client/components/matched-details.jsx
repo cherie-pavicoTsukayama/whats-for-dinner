@@ -281,6 +281,9 @@ export default class MatchedDetails extends React.Component {
     return (
       <div>
         <div className="container">
+          <div className="col-12 pl-0 mt-3">
+            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          </div>
           <div className="col match-logo"></div>
         </div>
         {restaurantDetails}

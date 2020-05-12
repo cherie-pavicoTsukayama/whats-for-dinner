@@ -1,6 +1,7 @@
 import React from 'react';
 import RestaurantDetails from './restaurant-details';
 import MatchConfirmed from './match-confirmed';
+import LeaveRoom from './leave-room';
 
 export default class VotingRoom extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class VotingRoom extends React.Component {
       currentImageIndex: 0,
       isLiked: null,
       images: [],
+      isLeaving: false,
       restaurantId: null
     };
     this.matchFetch = null;
@@ -26,6 +28,9 @@ export default class VotingRoom extends React.Component {
     this.handleClickBackToVotingRoom = this.handleClickBackToVotingRoom.bind(this);
     this.handleClickInfo = this.handleClickInfo.bind(this);
     this.checkMatch = this.checkMatch.bind(this);
+    this.showLeaveRoom = this.showLeaveRoom.bind(this);
+    this.hideLeaveRoom = this.hideLeaveRoom.bind(this);
+    this.leaveRoom = this.leaveRoom.bind(this);
   }
 
   renderStarRating() {
@@ -97,6 +102,26 @@ export default class VotingRoom extends React.Component {
   hideModal() {
     this.props.setView('match details');
     this.setState({ match: false });
+  }
+
+  showLeaveRoom() {
+    this.setState({ isLeaving: true });
+  }
+
+  hideLeaveRoom() {
+    this.setState({ isLeaving: false });
+  }
+
+  leaveRoom() {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/leave', options)
+      .then(result => result.json())
+      .then(data => clearInterval(this.matchFetch))
+      .then(this.props.setView('landing page'))
+      .catch(err => console.error(err));
   }
 
   handleClickNextImage() {
@@ -195,6 +220,10 @@ export default class VotingRoom extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.matchFetch);
+  }
+
   handleClickBackToVotingRoom() {
     this.setState({
       view: 'voting room'
@@ -219,8 +248,9 @@ export default class VotingRoom extends React.Component {
       return (
         <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
           <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
-          <div className={'col-sm pl-2 pr-0 mt-3'}>
-            <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
+          <div className={'col-sm pl-3 pr-0 mt-3'}>
+            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
           </div>
           <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header'}>
             <div className={'restaurant-title'}>{this.props.restaurant.name}</div>
@@ -262,6 +292,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div>
           <MatchConfirmed match={this.state.match} />
+          <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
           <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );

@@ -262,7 +262,7 @@ app.get('/api/likedRestaurants', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/rooms/close/:roomId', (req, res, next) => {
+app.put('/api/leave', (req, res, next) => {
   const params1 = [req.session.roomId];
   const checkHostSql = `
   select "userId"
