@@ -269,8 +269,8 @@ export default class VotingRoom extends React.Component {
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
           <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal}/>
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
-          <div className={'col-sm pl-3 pr-0 mt-3'}>
-            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          <div className={'col-sm pl-3 pr-0'}>
+            <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room"/>
           </div>
           <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header'}>
             <div className={'restaurant-title'}>{this.props.restaurant.name}</div>

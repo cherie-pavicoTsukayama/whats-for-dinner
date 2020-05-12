@@ -285,8 +285,8 @@ export default class RestaurantDetail extends React.Component {
       <div>
         <div className="d-flex flex-wrap justify-content-center container">
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
-          <div className="col-12 pl-0 pr-0 mb-4 mt-3">
-            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          <div className="col-12 pl-0 pr-0 mb-4">
+            <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
           <div className="col-12">
             <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
