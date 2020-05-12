@@ -99,14 +99,12 @@ export default class VotingRoom extends React.Component {
             this.setState({ isRoomClosed: data.isActive });
             clearInterval(this.isRoomClosedIntervalId);
             clearInterval(this.matchFetch);
-            // const options = {
-            //   method: 'PUT',
-            //   headers: { 'Content-Type': 'application/json' }
-            // };
-            // fetch('/api/leave', options)
-            //   .then(result => result.json())
-            //   .then(data => console.log(data))
-            //   .catch(err => console.error(err));
+            const options = {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' }
+            };
+            fetch('/api/leave', options)
+              .catch(err => console.error(err));
           }
         })
         .catch(err => console.error(err));
