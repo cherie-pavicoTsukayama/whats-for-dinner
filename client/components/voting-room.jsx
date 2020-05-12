@@ -14,6 +14,7 @@ export default class VotingRoom extends React.Component {
       isLiked: null,
       images: [],
       restaurantId: null,
+      isRoomClosedIntervalId: null,
       isRoomClosed: null
     };
     this.matchFetch = null;
@@ -82,17 +83,20 @@ export default class VotingRoom extends React.Component {
   }
 
   checkIfRoomIsClosed() {
-    const isRoomClosed = setInterval(() => {
+    const isRoomClosedIntervalId = setInterval(() => {
       fetch('/api/isActive')
         .then(result => result.json())
         .then(data => {
           if (!data.isActive) {
+            this.setState({
+              isRoomClosed: data.isActive
+            });
             clearInterval(this.state.isRoomClosed);
           }
         });
     }, 2000);
     this.setState({
-      isRoomClosed: isRoomClosed
+      isRoomClosed: isRoomClosedIntervalId
     });
   }
 
