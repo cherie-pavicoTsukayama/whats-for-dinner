@@ -18,7 +18,7 @@ height:7vh;
 .orange-rounded-button {
 background-color:#fe4a3b;
 border-radius:  25px;
-width:200px;
+width:150px;
 font-family:Montserrat;
 font-weight: 700;
 height:7vh;
@@ -35,6 +35,14 @@ color:#fe4a3b;
   background-image: url('./images/match-logo.png');
   background-size:cover;
   background-repeat:no-repeat;
+  background-position: center;
+  height:20vh;
+}
+
+.match-icon {
+  background-image: url('./images/match-Icon.png');
+  background-size: 30%;
+  background-repeat :no-repeat;
   background-position: center;
   height:20vh;
 }
