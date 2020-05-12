@@ -20,7 +20,7 @@ export default function LeaveRoom(props) {
           <div className="col-12 d-flex justify-content-center">
             <button type="button"
               onClick={props.leave}
-              className="btn btn-danger leave-room-decision-button lead mr-2">Yes</button>
+              className="btn bg-orange leave-room-decision-button lead mr-2">Yes</button>
             <button type="button"
               onClick={props.hide}
               className="btn btn-secondary leave-room-decision-button brand-blue lead ml-2">No</button>
