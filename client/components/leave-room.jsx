@@ -9,16 +9,6 @@ export default function LeaveRoom(props) {
     className = 'display-modal';
   }
 
-  // let classText = null;
-  // if (this.props.match === false) {
-  //   classText = 'Room Closed Successfully';
-  // } else {
-  //   classText = 'You have left the room';
-  // } else {
-  //   classText = 'Host has closed the room';
-  // }
-
-  // Must use classNames or put in 'display modal' into first div class to see the component rendered
   return (
     <div className={`match-modal container pb-5 justify-content-center flex-column align-items-center ${className}`}>
       <div className="justify-content-center flex-column match-modal-interior-container shadow d-flex">

@@ -292,8 +292,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div>
           <MatchConfirmed match={this.state.match} />
-          <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
-          <RestaurantDetails restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
+          <RestaurantDetails setView={this.props.setView} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );
     }

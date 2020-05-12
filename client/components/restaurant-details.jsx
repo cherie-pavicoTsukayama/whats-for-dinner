@@ -91,7 +91,8 @@ export default class RestaurantDetail extends React.Component {
     };
     fetch('/api/leave', options)
       .then(result => result.json())
-      // .then(data => console.log(data))
+      .then(data => clearInterval(this.matchFetch))
+      .then(this.props.setView('landing page'))
       .catch(err => console.error(err));
   }
 
