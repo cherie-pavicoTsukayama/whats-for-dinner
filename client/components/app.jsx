@@ -4,7 +4,6 @@ import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 import UserJoinRoom from './user-join-room';
 import MatchDetails from './matched-details';
-// import LeaveRoom from './leave-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,9 +16,6 @@ export default class App extends React.Component {
       restaurants: [],
       matchedRestaurantId: null,
       isThereAmatch: false
-
-      // errorMessage: '',
-      // isActive: ''
     };
 
     this.checkMatchIntervalId = null;
@@ -74,8 +70,10 @@ export default class App extends React.Component {
         .then(result => result.json())
         .then(data => {
           if (data.match) {
-            this.setState({ matchedRestaurantId: data.match });
-            this.setState({ isThereAmatch: true });
+            this.setState({
+              matchedRestaurantId: data.match,
+              isThereAmatch: true
+            });
             clearInterval(this.checkMatchIntervalId);
           }
         })

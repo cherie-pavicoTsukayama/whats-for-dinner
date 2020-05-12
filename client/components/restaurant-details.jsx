@@ -107,7 +107,7 @@ export default class RestaurantDetail extends React.Component {
 
   getRestaurantDetails() {
     const restaurantId = this.props.restaurants.id;
-    this.getDetails = setInterval(() => {
+    this.getDetails = setTimeout(() => {
       Promise.all([
         fetch(`/api/restaurants/${restaurantId}`)
           .then(res => res.json()),
@@ -121,7 +121,7 @@ export default class RestaurantDetail extends React.Component {
               isOpen: data[0].hours[0].is_open_now,
               reviews: data[1].reviews
             });
-            clearInterval(this.getDetails);
+            clearTimeout(this.getDetails);
           }
         })
         .catch(err => console.error(err));
