@@ -7,6 +7,7 @@ export default class RestaurantDetail extends React.Component {
       hours: [],
       reviews: []
     };
+    this.getDetails = null;
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
     this.renderIsOpen = this.renderIsOpen.bind(this);
@@ -81,20 +82,25 @@ export default class RestaurantDetail extends React.Component {
 
   getRestaurantDetails() {
     const restaurantId = this.props.restaurants.id;
-    Promise.all([
-      fetch(`/api/restaurants/${restaurantId}`)
-        .then(res => res.json()),
-      fetch(`/api/restaurants/${restaurantId}/reviews`)
-        .then(res => res.json())
-    ])
-      .then(data => {
-        this.setState({
-          hours: data[0].hours[0].open,
-          isOpen: data[0].hours[0].is_open_now,
-          reviews: data[1].reviews
-        });
-      })
-      .catch(err => console.error(err));
+    this.getDetails = setInterval(() => {
+      Promise.all([
+        fetch(`/api/restaurants/${restaurantId}`)
+          .then(res => res.json()),
+        fetch(`/api/restaurants/${restaurantId}/reviews`)
+          .then(res => res.json())
+      ])
+        .then(data => {
+          if (data) {
+            this.setState({
+              hours: data[0].hours[0].open,
+              isOpen: data[0].hours[0].is_open_now,
+              reviews: data[1].reviews
+            });
+            clearInterval(this.getDetails);
+          }
+        })
+        .catch(err => console.error(err));
+    }, 1000);
   }
 
   renderIsOpen() {
@@ -146,6 +152,10 @@ export default class RestaurantDetail extends React.Component {
         hours = hours[1];
       }
       start = `${hours}:${minutes} pm`;
+    } else if (parseInt(weekDay.start) > 1200) {
+      const minutes = weekDay.start.slice(2);
+      const hours = weekDay.start.slice(0, 2) - 12;
+      start = `${hours}:${minutes} pm`;
     }
     const closingMinutes = weekDay.end.slice(2);
     const closingHours = weekDay.end.slice(0, 2) - 12;
@@ -155,18 +165,33 @@ export default class RestaurantDetail extends React.Component {
   }
 
   renderHours(hours) {
-    const renderHours = hours.map(weekDay => {
-      return (
-        <div key={weekDay.day} className=" col-12 w-80 d-flex justify-content-center">
-          <div className="col-3 ml-2">
-            <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+    const renderHours = hours.map((weekDay, index) => {
+      if (hours.length === 7) {
+        return (
+          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
+            <div className="col-3 ml-2">
+              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+            </div>
+            <div className="col ml-2">
+              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+            </div>
           </div>
-          <div className="col ml-2">
-            <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+        );
+      }
+      if (hours.length === 14) {
+        return (
+          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
+            <div className="col-3 ml-2">
+              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+            </div>
+            <div className="col ml-2">
+              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
+
     return renderHours;
   }
 
