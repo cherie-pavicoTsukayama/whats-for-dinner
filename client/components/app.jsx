@@ -4,7 +4,6 @@ import CreateRoomForm from './create-room-form';
 import LandingPage from './landing-page';
 import UserJoinRoom from './user-join-room';
 import MatchDetails from './matched-details';
-// import LeaveRoom from './leave-room';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,8 +15,6 @@ export default class App extends React.Component {
       currentRestaurant: 0,
       restaurants: [],
       matchedRestaurantId: 'DGy688y4F0WAj2-CpxRALw'
-      // errorMessage: '',
-      // isActive: ''
     };
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
