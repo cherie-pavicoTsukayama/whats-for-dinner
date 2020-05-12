@@ -22,6 +22,7 @@ export default class App extends React.Component {
       // isActive: ''
     };
     this.matchFetch = null;
+    this.checkMatch = this.checkMatch.bind(this);
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
     this.joinRoom = this.joinRoom.bind(this);
