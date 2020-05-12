@@ -185,17 +185,14 @@ class CreateRoomForm extends React.Component {
                 <option value="chinese">Chinese</option>
                 <option value="japanese">Japanese</option>
                 <option value="korean">Korean</option>
-                <option value="indian">Indian</option>
                 <option value="thai">Thai</option>
                 <option value="burgers">Burgers</option>
                 <option value="breakfast">Breakfast</option>
                 <option value="pancakes">Pancakes</option>
                 <option value="coffee">Coffee</option>
-                <option value="bubble tea">Boba</option>
                 <option value="icecream">Ice Cream</option>
                 <option value="acaibowls">Acai Bowls</option>
                 <option value="seafood">Seafood</option>
-                <option value="carribean">Carribean</option>
                 <option value="italian">Italian</option>
                 <option value="greek">Greek</option>
                 <option value="french">French</option>

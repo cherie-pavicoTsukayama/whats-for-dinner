@@ -99,6 +99,12 @@ export default class VotingRoom extends React.Component {
             this.setState({ isRoomClosed: data.isActive });
             clearInterval(this.isRoomClosedIntervalId);
             clearInterval(this.matchFetch);
+            const options = {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' }
+            };
+            fetch('/api/leave', options)
+              .catch(err => console.error(err));
           }
         })
         .catch(err => console.error(err));
@@ -149,9 +155,9 @@ export default class VotingRoom extends React.Component {
 
   hideRoomClosedModal() {
     this.props.setView('landing page');
-    this.setState({ isRooomClosed: null });  
-  }    
-        
+    this.setState({ isRooomClosed: null });
+  }
+
   handleClickNextImage() {
     this.setState({ currentImageIndex: this.state.currentImageIndex + 1 });
     if (this.state.currentImageIndex === this.state.images.length - 1) {
@@ -251,6 +257,7 @@ export default class VotingRoom extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.matchFetch);
+    clearInterval(this.isRoomClosedIntervalId);
   }
 
   handleClickBackToVotingRoom() {
