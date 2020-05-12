@@ -33,7 +33,7 @@ export default class VotingRoom extends React.Component {
     this.handleClickInfo = this.handleClickInfo.bind(this);
     this.checkIsLiked = this.checkIsLiked.bind(this);
     this.handleHeartClick = this.handleHeartClick.bind(this);
-    this.checkMatch = this.checkMatch.bind(this);
+    // this.checkMatch = this.checkMatch.bind(this);
     this.showLeaveRoom = this.showLeaveRoom.bind(this);
     this.hideLeaveRoom = this.hideLeaveRoom.bind(this);
     this.leaveRoom = this.leaveRoom.bind(this);
@@ -242,7 +242,7 @@ export default class VotingRoom extends React.Component {
   componentDidMount() {
     this.getRestaurantDetails();
     this.checkIsLiked();
-    this.checkMatch();
+    this.props.checkMatch();
     this.checkIfRoomIsClosed();
   }
 
@@ -256,7 +256,7 @@ export default class VotingRoom extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.matchFetch);
+    clearInterval(this.props.checkMatchIntervalId);
     clearInterval(this.isRoomClosedIntervalId);
   }
 
@@ -284,7 +284,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
-          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
+          <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal}/>
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
           <div className={'col-sm pl-3 pr-0 mt-3'}>
             <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
@@ -329,7 +329,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div>
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
-          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal} />
+          <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal} />
           <RestaurantDetails setView={this.props.setView} isLiked={this.state.isLiked} handleHeartClick={this.handleHeartClick} checkIsLiked={this.checkIsLiked} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );

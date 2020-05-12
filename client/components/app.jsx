@@ -21,7 +21,7 @@ export default class App extends React.Component {
       // errorMessage: '',
       // isActive: ''
     };
-    this.matchFetch = null;
+    this.matchIntervalId = null;
     this.checkMatch = this.checkMatch.bind(this);
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
@@ -68,7 +68,7 @@ export default class App extends React.Component {
   }
 
   checkMatch() {
-    this.matchFetch = setInterval(() => {
+    this.matchIntervalId = setInterval(() => {
       fetch('/api/likedRestaurants')
         .then(result => result.json())
         .then(data => {
@@ -115,6 +115,8 @@ export default class App extends React.Component {
             restaurant={restaurants[currentRestaurant]}
             setView={this.setView}
             checkMatch={this.checkMatch}
+            checkMatchIntervalId={this.matchIntervalId}
+            isThereAmatch={this.state.isThereAmatch}
           />;
         }
         break;
