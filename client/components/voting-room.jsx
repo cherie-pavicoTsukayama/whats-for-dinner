@@ -1,6 +1,7 @@
 import React from 'react';
 import RestaurantDetails from './restaurant-details';
 import MatchConfirmed from './match-confirmed';
+import RoomClosedModal from './room-closed-modal';
 
 export default class VotingRoom extends React.Component {
   constructor(props) {
@@ -13,9 +14,12 @@ export default class VotingRoom extends React.Component {
       currentImageIndex: 0,
       isLiked: null,
       images: [],
-      restaurantId: null
+      restaurantId: null,
+      isRoomClosedIntervalId: null,
+      isRoomClosed: null
     };
     this.matchFetch = null;
+    this.isRoomClosedIntervalId = null;
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
@@ -28,6 +32,8 @@ export default class VotingRoom extends React.Component {
     this.checkIsLiked = this.checkIsLiked.bind(this);
     this.handleHeartClick = this.handleHeartClick.bind(this);
     this.checkMatch = this.checkMatch.bind(this);
+    this.checkIfRoomIsClosed = this.checkIfRoomIsClosed.bind(this);
+    this.hideRoomClosedModal = this.hideRoomClosedModal.bind(this);
   }
 
   renderStarRating() {
@@ -79,6 +85,21 @@ export default class VotingRoom extends React.Component {
     }, 3000);
   }
 
+  checkIfRoomIsClosed() {
+    this.isRoomClosedIntervalId = setInterval(() => {
+      fetch('/api/isActive')
+        .then(result => result.json())
+        .then(data => {
+          if (!data.isActive) {
+            this.setState({ isRoomClosed: data.isActive });
+            clearInterval(this.isRoomClosedIntervalId);
+            clearInterval(this.matchFetch);
+          }
+        })
+        .catch(err => console.error(err));
+    }, 5000);
+  }
+
   checkIsLiked() {
     fetch(`/api/liked-restaurants/${this.props.restaurant.id}`)
       .then(response => response.json())
@@ -99,6 +120,11 @@ export default class VotingRoom extends React.Component {
   hideModal() {
     this.props.setView('match details');
     this.setState({ match: false });
+  }
+
+  hideRoomClosedModal() {
+    this.props.setView('landing page');
+    this.setState({ isRooomClosed: null });
   }
 
   handleClickNextImage() {
@@ -186,6 +212,7 @@ export default class VotingRoom extends React.Component {
     this.getRestaurantDetails();
     this.checkIsLiked();
     this.checkMatch();
+    this.checkIfRoomIsClosed();
   }
 
   componentDidUpdate(prevProps) {
@@ -220,6 +247,7 @@ export default class VotingRoom extends React.Component {
     if (this.state.view === 'voting room') {
       return (
         <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+          <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
           <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
           <div className={'col-sm pl-2 pr-0 mt-3'}>
             <button type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
@@ -263,7 +291,8 @@ export default class VotingRoom extends React.Component {
     } else if (this.state.view === 'info') {
       return (
         <div>
-          <MatchConfirmed match={this.state.match} />
+          <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
+          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal} />
           <RestaurantDetails isLiked={this.state.isLiked} handleHeartClick={this.handleHeartClick} checkIsLiked={this.checkIsLiked} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );
