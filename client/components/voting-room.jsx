@@ -16,9 +16,10 @@ export default class VotingRoom extends React.Component {
       images: [],
       restaurantId: null,
       isRoomClosedIntervalId: null,
-      isRoomClosed: false
+      isRoomClosed: null
     };
     this.matchFetch = null;
+    this.isRoomClosedIntervalId = null;
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleClickNextImage = this.handleClickNextImage.bind(this);
@@ -85,20 +86,18 @@ export default class VotingRoom extends React.Component {
   }
 
   checkIfRoomIsClosed() {
-    const isRoomClosedIntervalId = setInterval(() => {
+    this.isRoomClosedIntervalId = setInterval(() => {
       fetch('/api/isActive')
         .then(result => result.json())
         .then(data => {
           if (!data.isActive) {
             this.setState({ isRoomClosed: data.isActive });
-            clearInterval(this.state.isRoomClosed);
+            clearInterval(this.isRoomClosedIntervalId);
+            clearInterval(this.matchFetch);
           }
         })
         .catch(err => console.error(err));
     }, 5000);
-    this.setState({
-      isRoomClosed: isRoomClosedIntervalId
-    });
   }
 
   checkIsLiked() {
@@ -213,7 +212,7 @@ export default class VotingRoom extends React.Component {
     this.getRestaurantDetails();
     this.checkIsLiked();
     this.checkMatch();
-    // this.checkIfRoomIsClosed();
+    this.checkIfRoomIsClosed();
   }
 
   componentDidUpdate(prevProps) {
