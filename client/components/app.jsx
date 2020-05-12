@@ -114,6 +114,7 @@ export default class App extends React.Component {
             incrementRestaurant={this.incrementRestaurant}
             restaurant={restaurants[currentRestaurant]}
             setView={this.setView}
+            checkMatch={this.checkMatch}
           />;
         }
         break;
