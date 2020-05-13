@@ -122,7 +122,6 @@ export default class MatchedDetails extends React.Component {
         .then(res => res.json())
     ])
       .then(data => {
-        console.log(data);
         // if (data[0].error.code === 'INTERNAL_ERROR') {
         //   Promise.reject(new Error('Yelp fucking up'));
         // }
