@@ -73,7 +73,6 @@ export default class App extends React.Component {
               matchedRestaurantId: data.match,
               isThereAmatch: true
             });
-            console.log('stopping in checkmatch', this.checkMatchIntervalId);
             clearInterval(this.state.checkMatchIntervalId);
           }
         })

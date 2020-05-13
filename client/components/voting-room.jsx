@@ -240,7 +240,6 @@ export default class VotingRoom extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log(this.props.checkMatchIntervalId);
     clearInterval(this.props.checkMatchIntervalId);
     clearInterval(this.isRoomClosedIntervalId);
   }
@@ -258,7 +257,6 @@ export default class VotingRoom extends React.Component {
   }
 
   render() {
-    console.log('in voting room', this.props.checkMatchIntervalId);
     let heartColor;
     if (!this.state.isLiked) {
       heartColor = 'white';
