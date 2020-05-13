@@ -120,6 +120,10 @@ export default class MatchedDetails extends React.Component {
         .then(res => res.json())
     ])
       .then(data => {
+        console.log(data);
+        if (data[0].error.code === 'INTERNAL_ERROR') {
+          new Promise.reject(new Error('Yelp fucking up'));
+        }
         this.setState({
           name: data[0].name,
           rating: data[0].rating,
@@ -131,7 +135,12 @@ export default class MatchedDetails extends React.Component {
           url: data[0].url
         });
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        if (err instanceof Error) {
+          // do something for your users to know that its yelp fucking up
+        }
+      });
   }
 
   renderIsOpen() {
@@ -262,8 +271,8 @@ export default class MatchedDetails extends React.Component {
     this.getRestaurantDetails();
   }
 
-  compoenentDidUpdate() {
-    this.getRestaurantDetails();
+  componentWillUnmount() {
+    this.props.reset();
   }
 
   render() {

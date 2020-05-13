@@ -37,6 +37,10 @@ export default class Carousel extends React.Component {
     this.startCarousel();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.autoStartId);
+  }
+
   render() {
     return (
       <div className={'d-felx flex-wrap justify-content-center'}>

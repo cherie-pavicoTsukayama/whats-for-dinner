@@ -15,15 +15,15 @@ export default class App extends React.Component {
       currentRestaurant: 0,
       restaurants: [],
       matchedRestaurantId: null,
-      isThereAmatch: false
+      isThereAmatch: false,
+      checkMatchIntervalId: null
     };
-
-    this.checkMatchIntervalId = null;
     this.checkMatch = this.checkMatch.bind(this);
     this.incrementRestaurant = this.incrementRestaurant.bind(this);
     this.decrementRestaurant = this.decrementRestaurant.bind(this);
     this.joinRoom = this.joinRoom.bind(this);
     this.setView = this.setView.bind(this);
+    this.resetMatchState = this.resetMatchState.bind(this);
   }
 
   setView(screen) {
@@ -60,12 +60,11 @@ export default class App extends React.Component {
           });
           return { errorMessage: '' };
         }
-      })
-      .catch(err => console.error(err));
+      });
   }
 
   checkMatch() {
-    this.checkMatchIntervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       fetch('/api/likedRestaurants')
         .then(result => result.json())
         .then(data => {
@@ -74,11 +73,14 @@ export default class App extends React.Component {
               matchedRestaurantId: data.match,
               isThereAmatch: true
             });
-            clearInterval(this.checkMatchIntervalId);
+            console.log('stopping in checkmatch', this.checkMatchIntervalId);
+            clearInterval(this.state.checkMatchIntervalId);
           }
         })
         .catch(err => console.error(err));
     }, 3000);
+
+    this.setState({ checkMatchIntervalId: intervalId });
   }
 
   componentDidMount() {
@@ -89,8 +91,22 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
+  resetMatchState() {
+    this.setState({
+      matchedRestaurantId: null,
+      isThereAmatch: false
+    });
+  }
+
   render() {
-    const { message, isLoading, view, currentRestaurant, restaurants } = this.state;
+    const {
+      message,
+      isLoading,
+      view,
+      currentRestaurant,
+      checkMatchIntervalId,
+      restaurants
+    } = this.state;
     let currentView;
     switch (view) {
       case 'landing page':
@@ -114,13 +130,13 @@ export default class App extends React.Component {
             restaurant={restaurants[currentRestaurant]}
             setView={this.setView}
             checkMatch={this.checkMatch}
-            checkMatchIntervalId={this.checkMatchIntervalId}
+            checkMatchIntervalId={checkMatchIntervalId}
             isThereAmatch={this.state.isThereAmatch}
           />;
         }
         break;
       case 'match details':
-        currentView = <MatchDetails setView={this.setView} restaurantId={this.state.matchedRestaurantId} />;
+        currentView = <MatchDetails reset={this.resetMatchState} setView={this.setView} restaurantId={this.state.matchedRestaurantId} />;
         break;
     }
 

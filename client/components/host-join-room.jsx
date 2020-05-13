@@ -2,8 +2,10 @@ import React from 'react';
 
 export default function HostJoinRoom(props) {
   const onClick = () => {
-    props.joinRoom(props.entryKey);
-    props.setView('voting room');
+    props.joinRoom(props.entryKey)
+      .then(() => props.setView('voting room'))
+      .catch(err => console.error(err));
+
   };
 
   return (
