@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './matched-carousel';
 import LeaveRoom from './leave-room';
+// import ErrorModal from './error-modal';
 
 export default class MatchedDetails extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ export default class MatchedDetails extends React.Component {
       reviews: [],
       address: [],
       isLeaving: false,
-      photos: []
+      photos: [],
+      error: false
     };
     this.renderStarRating = this.renderStarRating.bind(this);
     this.renderAddress = this.renderAddress.bind(this);
@@ -120,6 +122,10 @@ export default class MatchedDetails extends React.Component {
         .then(res => res.json())
     ])
       .then(data => {
+        console.log(data);
+        // if (data[0].error.code === 'INTERNAL_ERROR') {
+        //   Promise.reject(new Error('Yelp fucking up'));
+        // }
         this.setState({
           name: data[0].name,
           rating: data[0].rating,
@@ -131,7 +137,16 @@ export default class MatchedDetails extends React.Component {
           url: data[0].url
         });
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        // if (err instanceof Error) {
+        //   this.setState({ error: true });
+        //   // do something for your users to know that its yelp fucking up
+        //   // pop a modal
+        //   // click something
+        //   // hit the reset
+        // }
+      });
   }
 
   renderIsOpen() {
@@ -262,8 +277,8 @@ export default class MatchedDetails extends React.Component {
     this.getRestaurantDetails();
   }
 
-  compoenentDidUpdate() {
-    this.getRestaurantDetails();
+  componentWillUnmount() {
+    this.props.reset();
   }
 
   render() {
@@ -307,6 +322,7 @@ export default class MatchedDetails extends React.Component {
       <div>
         <div className="container">
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
+          {/* <ErrorModal error={this.state.error}/> */}
           <div className="col-12 pl-0">
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
