@@ -29,23 +29,23 @@ export default class RestaurantDetail extends React.Component {
     const rating = this.props.restaurants.rating;
     switch (rating) {
       case 1:
-        return <img className="star-rating" src="./images/1-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/1-stars.png" alt="" />;
       case 1.5:
-        return <img className="star-rating" src="./images/1-and-a-half-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/1-and-a-half-stars.png" alt="" />;
       case 2:
-        return <img className="star-rating" src="./images/2-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/2-stars.png" alt="" />;
       case 2.5:
-        return <img className="star-rating" src="./images/2-and-a-half-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/2-and-a-half-stars.png" alt="" />;
       case 3:
-        return <img className="star-rating" src="./images/3-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/3-stars.png" alt="" />;
       case 3.5:
-        return <img className="star-rating" src="./images/3-and-a-half-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/3-and-a-half-stars.png" alt="" />;
       case 4:
-        return <img className="star-rating" src="./images/4-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/4-stars.png" alt="" />;
       case 4.5 :
-        return <img className="star-rating" src="./images/4-and-a-half-stars.png" alt=""/>;
+        return <img className="img-fluid review-star-image pb-1" src="./images/4-and-a-half-stars.png" alt=""/>;
       case 5 :
-        return <img className="star-rating" src="./images/5-stars.png" alt="" />;
+        return <img className="img-fluid review-star-image pb-1" src="./images/5-stars.png" alt="" />;
       default :
         break;
     }
@@ -288,8 +288,8 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 pl-0 pr-0 mb-4">
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
-          <div className="col-12">
-            <h1 className="montserrat-400 brand-blue-text text-center">{this.props.restaurants.name}</h1>
+          <div className="col-12 mb-2 pl-0 pr-0">
+            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title mt-3">{this.props.restaurants.name}</h1>
           </div>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
