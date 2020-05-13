@@ -139,6 +139,9 @@ export default class MatchedDetails extends React.Component {
         console.error(err);
         if (err instanceof Error) {
           // do something for your users to know that its yelp fucking up
+          // pop a modal
+          // click something
+          // hit the reset
         }
       });
   }
