@@ -16,7 +16,7 @@ export default function LeaveRoom(props) {
           <div className="col-12 d-flex justify-content-end align-items-center flex-column">
             <div className="leave-room-icon "></div>
           </div>
-          <div className="col-12 text-align-center color montserrat-700 mb-4"><h4>Are you sure you want to leave?</h4></div>
+          <div className="col-12 text-align-center color montserrat-700 mb-4"><h4>Are you sure you want to leave the room?</h4></div>
           <div className="col-12 d-flex justify-content-center">
             <button type="button"
               onClick={props.leave}

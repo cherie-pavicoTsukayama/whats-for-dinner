@@ -20,7 +20,6 @@ export default class VotingRoom extends React.Component {
       isRoomClosedIntervalId: null,
       isRoomClosed: null
     };
-    this.matchFetch = null;
     this.isRoomClosedIntervalId = null;
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -33,7 +32,6 @@ export default class VotingRoom extends React.Component {
     this.handleClickInfo = this.handleClickInfo.bind(this);
     this.checkIsLiked = this.checkIsLiked.bind(this);
     this.handleHeartClick = this.handleHeartClick.bind(this);
-    this.checkMatch = this.checkMatch.bind(this);
     this.showLeaveRoom = this.showLeaveRoom.bind(this);
     this.hideLeaveRoom = this.hideLeaveRoom.bind(this);
     this.leaveRoom = this.leaveRoom.bind(this);
@@ -75,21 +73,6 @@ export default class VotingRoom extends React.Component {
       .catch(err => console.error(err));
   }
 
-  checkMatch() {
-    this.matchFetch = setInterval(() => {
-      fetch('/api/likedRestaurants')
-        .then(result => result.json())
-        .then(data => {
-          if (data.match) {
-            this.setState({ restaurantId: data.match });
-            this.setState({ match: true });
-            clearInterval(this.matchFetch);
-          }
-        })
-        .catch(err => console.error(err));
-    }, 3000);
-  }
-
   checkIfRoomIsClosed() {
     this.isRoomClosedIntervalId = setInterval(() => {
       fetch('/api/isActive')
@@ -97,12 +80,18 @@ export default class VotingRoom extends React.Component {
         .then(data => {
           if (!data.isActive) {
             this.setState({ isRoomClosed: data.isActive });
+            clearInterval(this.props.checkMatchIntervalId);
             clearInterval(this.isRoomClosedIntervalId);
-            clearInterval(this.matchFetch);
+            const options = {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' }
+            };
+            fetch('/api/leave', options)
+              .catch(err => console.error(err));
           }
         })
         .catch(err => console.error(err));
-    }, 5000);
+    }, 3000);
   }
 
   checkIsLiked() {
@@ -236,7 +225,7 @@ export default class VotingRoom extends React.Component {
   componentDidMount() {
     this.getRestaurantDetails();
     this.checkIsLiked();
-    this.checkMatch();
+    this.props.checkMatch();
     this.checkIfRoomIsClosed();
   }
 
@@ -250,7 +239,8 @@ export default class VotingRoom extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.matchFetch);
+    clearInterval(this.props.checkMatchIntervalId);
+    clearInterval(this.isRoomClosedIntervalId);
   }
 
   handleClickBackToVotingRoom() {
@@ -277,10 +267,10 @@ export default class VotingRoom extends React.Component {
       return (
         <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
-          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal}/>
+          <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal}/>
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
-          <div className={'col-sm pl-3 pr-0 mt-3'}>
-            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          <div className={'col-sm pl-3 pr-0'}>
+            <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room"/>
           </div>
           <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header mt-2'}>
             <div className={'restaurant-title mb-4'}>{this.props.restaurant.name}</div>
@@ -322,7 +312,7 @@ export default class VotingRoom extends React.Component {
       return (
         <div>
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
-          <MatchConfirmed match={this.state.match} setView={this.props.setView} hide={this.hideModal} />
+          <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal} />
           <RestaurantDetails setView={this.props.setView} isLiked={this.state.isLiked} handleHeartClick={this.handleHeartClick} checkIsLiked={this.checkIsLiked} restaurants={this.props.restaurant} onClick={this.handleClickBackToVotingRoom} />
         </div>
       );

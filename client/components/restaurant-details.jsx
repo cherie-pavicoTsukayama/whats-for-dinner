@@ -107,7 +107,7 @@ export default class RestaurantDetail extends React.Component {
 
   getRestaurantDetails() {
     const restaurantId = this.props.restaurants.id;
-    this.getDetails = setInterval(() => {
+    this.getDetails = setTimeout(() => {
       Promise.all([
         fetch(`/api/restaurants/${restaurantId}`)
           .then(res => res.json()),
@@ -121,7 +121,7 @@ export default class RestaurantDetail extends React.Component {
               isOpen: data[0].hours[0].is_open_now,
               reviews: data[1].reviews
             });
-            clearInterval(this.getDetails);
+            clearTimeout(this.getDetails);
           }
         })
         .catch(err => console.error(err));
@@ -285,8 +285,8 @@ export default class RestaurantDetail extends React.Component {
       <div>
         <div className="d-flex flex-wrap justify-content-center container">
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
-          <div className="col-12 pl-0 pr-0 mb-4 mt-3">
-            <button onClick={this.showLeaveRoom} type="button" className="btn btn-secondary leave-room-button shadow view-height-four">Leave Room</button>
+          <div className="col-12 pl-0 pr-0 mb-4">
+            <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
           <div className="col-12 mb-2 pl-0 pr-0">
             <h1 className="montserrat-400 brand-blue-text text-center restaurant-title mt-3">{this.props.restaurants.name}</h1>
