@@ -309,7 +309,7 @@ export default class RestaurantDetail extends React.Component {
         </div>
         <div className={'col bg-green footer d-flex align-items-center'}>
           <div className="footer-inner d-flex justify-content-between">
-            <button>
+            <button className="btn">
               <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
             </button>
             <button className="btn">
