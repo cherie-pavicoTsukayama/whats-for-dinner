@@ -5,7 +5,6 @@ export default class Carousel extends React.Component {
     super(props);
     this.state = {
       currentImageIndex: 0,
-      // currentImageUrl: '../src/images/Image1.jpg',
       autoStartId: null
     };
     this.loopThroughImages = this.loopThroughImages.bind(this);
