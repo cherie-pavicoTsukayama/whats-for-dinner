@@ -199,6 +199,10 @@ export default class MatchedDetails extends React.Component {
         hours = hours[1];
       }
       start = `${hours}:${minutes} pm`;
+    } else if (parseInt(weekDay.start) > 1200) {
+      const minutes = weekDay.start.slice(2);
+      const hours = weekDay.start.slice(0, 2) - 12;
+      start = `${hours}:${minutes} pm`;
     }
     const closingMinutes = weekDay.end.slice(2);
     const closingHours = weekDay.end.slice(0, 2) - 12;
