@@ -118,7 +118,7 @@ class CreateRoomForm extends React.Component {
           <form onSubmit={() => { this.createRoom(this.state); event.preventDefault(); }}>
             <div className='form-group mt-3 mb-2 d-flex justify-content-center push-down'>
               <i className="fas fa-2x fa-map-marker-alt"></i>
-              <input required placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
+              <input placeholder='City or Zip' type="text" className='form-control user-join-input' id='location' onChange={this.handleLocation} />
 
             </div>
             <div className='form-group mt-5 mb-2 push-down'>
@@ -174,7 +174,6 @@ class CreateRoomForm extends React.Component {
             <div className='form-group mt-5 mb-2 push-down'>
 
               <select
-                required
                 className='form-control  color'
                 name="category"
                 id="category"
