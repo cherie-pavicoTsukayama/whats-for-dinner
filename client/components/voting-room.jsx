@@ -273,8 +273,8 @@ export default class VotingRoom extends React.Component {
           <div className={'col-sm pl-3 pr-0'}>
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room"/>
           </div>
-          <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header mt-2'}>
-            <div className={'restaurant-title mb-4'}>{this.props.restaurant.name}</div>
+          <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header'}>
+            <div className={'restaurant-title mb-4 mt-2'}>{this.props.restaurant.name}</div>
             <div>
               {this.renderStarRating()}
             </div>

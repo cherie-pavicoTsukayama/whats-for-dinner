@@ -288,8 +288,8 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 pl-0 pr-0 mb-4">
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
-          <div className="col-12 mb-2 pl-0 pr-0">
-            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title mt-3">{this.props.restaurants.name}</h1>
+          <div className="col-12 mb-2 pl-0 pr-0 mt-1">
+            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title">{this.props.restaurants.name}</h1>
           </div>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
