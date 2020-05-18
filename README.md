@@ -31,4 +31,4 @@ https://whats-for-dinner.cheriepavico.com/
  1. Guest can close the room.
 
  ## Preview
- <img src"server/public/images/whats-for-dinner.gif">
+ <img src="server/public/images/whats-for-dinner.gif">
