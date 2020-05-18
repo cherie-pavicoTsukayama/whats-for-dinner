@@ -9,10 +9,9 @@ function MatchConfirmed(props) {
   }
 
   return (
-
-    <div className={`match-modal container pb-5 justify-content-center flex-column align-items-center ${className}`}>
+    <div className={`match-modal container-fluid justify-content-center flex-column align-items-center pl-0 pr-0 ${className}`}>
       <div className="justify-content-center flex-column align-items-center match-modal-interior-container shadow">
-        <div className="row w-100">
+        <div className="row w-100 d-flex justify-content-center">
           <div className="col match-logo"></div>
         </div>
         <div className="row mt-3">

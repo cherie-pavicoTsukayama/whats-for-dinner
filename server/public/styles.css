@@ -446,7 +446,7 @@ display:flex;
 }
 
 .view-restaurant-header {
-  max-height:140px;
+  max-height:130px;
 }
 
 .view-restaurant-button-container {
@@ -500,4 +500,41 @@ display:flex;
   height: 100px;
   position: absolute;
   top: 90px;
+}
+
+
+@media screen and (min-width: 667px) {
+.match-modal-interior-container {
+  width: 50%;
+  }
+    .match-logo {
+    height:30vh;
+  }
+.blue-rounded-button {
+height:10vh;
+  }
+}
+
+@media screen and (min-width: 768px) {
+.blue-rounded-button {
+height:5vh;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .match-logo {
+  max-width:500px;
+  }
+  .blue-rounded-button {
+  height:7vh;
+  }
+}
+
+
+
+@media screen and (min-height: 1024px) {
+  .match-logo {
+  height:20vh;
+  max-width:500px;
+  }
 }
