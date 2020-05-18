@@ -1,8 +1,5 @@
 # whats-for-dinner
-> - Maintained by: `cherie-pavicoTsukayama`
-> -                `michaelzhu23`
-> -                `kusholhuq`
-> -                `Loganmulvihill`
+> - Maintained by: `cherie-pavicoTsukayama`, `michaelzhu23`, `kusholhuq`, `Loganmulvihill`
 
 ## Description
 A dynamic restaurant matching web application for two hungry users who want to agree on a place to eat.
