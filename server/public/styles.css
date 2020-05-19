@@ -399,13 +399,19 @@ display:flex;
   color: #fe4a3b;
 }
 
-.leave-room-icon {
+/* .leave-room-icon {
   background-image: url('./images/Match-Icon.png');
   background-size:cover;
   background-repeat:no-repeat;
   background-position: center;
   height:20vh;
   width:45%;
+} */
+
+.leave-room-image {
+    height:20vh;
+    width:45%;
+  object-fit: cover;
 }
 
 .leave-room-modal-interior-container {
@@ -541,5 +547,51 @@ height:5vh;
   .match-logo {
   height:20vh;
   max-width:500px;
+  }
+}
+
+@media screen and (min-width: 667px) {
+.leave-room-modal-interior-container {
+  width: 50%;
+  height:70%
+  }
+
+  .leave-room-image {
+  height: 125px;
+  width: 125px;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .leave-room-modal-interior-container {
+  width: 45%;
+  height:50%
+  }
+
+    .leave-room-image {
+  height: 175px;
+  width: 175px;
+  }
+
+  .leave-room-decision-button {
+  width: 20%;
+  }
+}
+
+@media screen and (min-height: 1024px) {
+  .leave-room-modal-interior-container {
+  width: 50%;
+  height:30%
+  }
+
+    .leave-room-decision-button {
+  height: 5vh;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+    .leave-room-modal-interior-container {
+  width: 30%;
   }
 }

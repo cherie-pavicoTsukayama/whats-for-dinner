@@ -10,13 +10,13 @@ export default function LeaveRoom(props) {
   }
 
   return (
-    <div className={`match-modal container pb-5 justify-content-center flex-column align-items-center ${className}`}>
-      <div className="justify-content-center flex-column match-modal-interior-container shadow d-flex">
+    <div className={`match-modal container-fluid justify-content-center flex-column align-items-center ${className}`}>
+      <div className="justify-content-center flex-column leave-room-modal-interior-container shadow d-flex">
         <div className="row d-flex justify-content-center h-100">
           <div className="col-12 d-flex justify-content-end align-items-center flex-column">
-            <div className="leave-room-icon "></div>
+            <img className="leave-room-image" src='/images/Match-Icon.png' alt="" />
           </div>
-          <div className="col-12 text-align-center color montserrat-700 mb-4"><h4>Are you sure you want to leave the room?</h4></div>
+          <div className="col-12 text-align-center color montserrat-700"><h4>Are you sure you want to leave the room?</h4></div>
           <div className="col-12 d-flex justify-content-center">
             <button type="button"
               onClick={props.leave}
