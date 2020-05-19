@@ -18,6 +18,8 @@ https://whats-for-dinner.cheriepavico.com/
   - PostgreSQL
   - express-session
   - node-fetch
+  - babel
+  - webpack
 
   ## Features
  1. User can create a room and become a host of the room.
@@ -28,7 +30,7 @@ https://whats-for-dinner.cheriepavico.com/
  1. The app polls the database of liked restaurants for matches.
  1. The app lets users know that there is a matched restaurant.
  1. Host can close the room.
- 1. Guest can close the room.
+ 1. Guest can leave the room.
 
  ## Preview
  <img src="server/public/images/whats-for-dinner.gif">
