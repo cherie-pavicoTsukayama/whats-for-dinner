@@ -530,6 +530,19 @@ height:10vh;
   }
 }
 
+/* Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .open-closed-feature {
+    width: 20%;
+    color: white;
+    border-radius: 25px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .match-logo {
   max-width:500px;
@@ -565,12 +578,7 @@ height:10vh;
   width: 125px;
   }
 
-  .open-closed-feature {
-    width: 40%;
-    color: white;
-    border-radius: 25px;
   }
-}
 
 
 @media screen and (min-width: 1024px) {
@@ -668,5 +676,10 @@ height:10vh;
   and (orientation: landscape) {
   .display-hours-container {
     width: 80%;
+  }
+  .open-closed-feature {
+    width: 50%;
+    color: white;
+    border-radius: 25px;
   }
 }
