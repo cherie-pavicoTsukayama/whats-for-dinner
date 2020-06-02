@@ -10,7 +10,7 @@ export default class VotingRoom extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'voting room',
+      view: 'info',
       match: false,
       currentImageIndex: 0,
       isLiked: null,

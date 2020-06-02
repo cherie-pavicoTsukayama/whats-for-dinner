@@ -193,12 +193,14 @@ export default class RestaurantDetail extends React.Component {
     const renderHours = hours.map((weekDay, index) => {
       if (hours.length === 7) {
         return (
-          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
-            <div className="col-3 ml-2">
-              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
-            </div>
-            <div className="col ml-2">
-              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+          <div className="col-12 d-flex justify-content-center">
+            <div key={weekDay.day + index} className=" col-lg-4 w-80 d-flex justify-content-center">
+              <div className="col-3 ml-2">
+                <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+              </div>
+              <div className="col ml-2">
+                <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+              </div>
             </div>
           </div>
         );
@@ -288,8 +290,8 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 pl-0 pr-0 mb-4">
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
-          <div className="col-12 mb-2 pl-0 pr-0 mt-1">
-            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title">{this.props.restaurants.name}</h1>
+          <div className="col-12 mb-2 pl-0 pr-0 mt-1 d-flex justify-content-center">
+            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title ">{this.props.restaurants.name}</h1>
           </div>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
