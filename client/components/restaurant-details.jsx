@@ -199,7 +199,7 @@ export default class RestaurantDetail extends React.Component {
                 <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
               </div>
               <div className="col ml-2">
-                <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+                <p className="montserrat-500 m-0 text-right">{this.convertTime(weekDay)}</p>
               </div>
             </div>
           </div>
@@ -208,10 +208,10 @@ export default class RestaurantDetail extends React.Component {
       if (hours.length === 14) {
         return (
           <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
-            <div className="col-3 ml-2">
+            <div className="col-3">
               <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
             </div>
-            <div className="col ml-2">
+            <div className="col">
               <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
             </div>
           </div>
