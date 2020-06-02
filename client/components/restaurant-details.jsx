@@ -309,8 +309,7 @@ export default class RestaurantDetail extends React.Component {
               {this.renderHours(this.state.hours)}
             </div>
           </div>
-
-          <div className="col-12 mt-3 mb-5">
+          <div className="col-lg-8 mt-3 mb-5">
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
