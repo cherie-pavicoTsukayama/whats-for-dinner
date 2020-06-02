@@ -313,18 +313,23 @@ export default class RestaurantDetail extends React.Component {
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
-        <div className={'col bg-green footer d-flex align-items-center'}>
-          <div className="footer-inner d-flex justify-content-between">
-            <button className="btn">
-              <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
-            </button>
-            <button className="btn">
-              <i
-                className={`fas fa-heart fa-3x ${heartColor}`}
-                onClick={this.props.handleHeartClick}
-              >
-              </i>
-            </button>
+        <div className={'col bg-green footer d-flex justify-content-center'}>
+          <div className=" col-lg-6 row justify-content-center align-items-center">
+            <div className="col-4 ">
+              <button className="btn">
+                <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
+              </button>
+            </div>
+            <div className="col-4 d-flex justify-content-center">
+              <button className="btn">
+                <i
+                  className={`fas fa-heart fa-3x ${heartColor}`}
+                  onClick={this.props.handleHeartClick}
+                >
+                </i>
+              </button>
+            </div>
+            <div className="col-4"></div>
           </div>
         </div>
       </div>
