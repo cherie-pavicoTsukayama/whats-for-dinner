@@ -349,7 +349,7 @@ display:flex;
 }
 
 .open-closed-feature {
-  width: 50%;
+  width: 15%;
   color: white;
   border-radius: 25px;
 }
@@ -522,8 +522,14 @@ height:10vh;
 }
 
 @media screen and (min-width: 768px) {
-.blue-rounded-button {
-height:5vh;
+  .blue-rounded-button {
+    height:5vh;
+  }
+
+  .open-closed-feature {
+    width: 40%;
+    color: white;
+    border-radius: 25px;
   }
 }
 
@@ -593,5 +599,19 @@ height:5vh;
 @media screen and (min-width: 1100px) {
     .leave-room-modal-interior-container {
   width: 30%;
+  }
+}
+
+
+/* ----------- iPhone X ----------- */
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+  .open-closed-feature {
+    width: 50%;
+    color: white;
+    border-radius: 25px;
   }
 }
