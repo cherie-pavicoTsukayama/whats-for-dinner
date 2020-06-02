@@ -564,6 +564,12 @@ height:10vh;
   height: 125px;
   width: 125px;
   }
+
+  .open-closed-feature {
+    width: 40%;
+    color: white;
+    border-radius: 25px;
+  }
 }
 
 
@@ -624,4 +630,43 @@ height:10vh;
     .display-hours-container {
       width: 80%;
     }
+}
+
+/* ----------- iPhone 6, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+    .open-closed-feature {
+    width: 40%;
+    color: white;
+    border-radius: 25px;
+  }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+  .open-closed-feature {
+    width: 50%;
+    color: white;
+    border-radius: 25px;
+  }
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+  .display-hours-container {
+    width: 80%;
+  }
 }
