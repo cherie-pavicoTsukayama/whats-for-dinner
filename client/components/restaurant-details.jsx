@@ -193,12 +193,12 @@ export default class RestaurantDetail extends React.Component {
     const renderHours = hours.map((weekDay, index) => {
       if (hours.length === 7) {
         return (
-          <div className="col-12 d-flex justify-content-center">
-            <div key={weekDay.day + index} className=" col-lg-4 w-80 d-flex justify-content-center">
-              <div className="col-3 ml-2">
+          <div className="col-12 row justify-content-center">
+            <div key={weekDay.day + index} className=" col-lg-3 w-80 d-flex justify-content-center">
+              <div className=" col-2 col-md-1 col-lg-3">
                 <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
               </div>
-              <div className="col ml-2">
+              <div className=" col-sm col-md-4 col-lg-12 ">
                 <p className="montserrat-500 m-0 text-right">{this.convertTime(weekDay)}</p>
               </div>
             </div>

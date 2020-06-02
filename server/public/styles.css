@@ -537,12 +537,6 @@ height:10vh;
   .blue-rounded-button {
   height:7vh;
   }
-
-  .open-closed-feature {
-    width: 40%;
-    color: white;
-    border-radius: 25px;
-  }
 }
 
 
@@ -618,4 +612,16 @@ height:10vh;
     color: white;
     border-radius: 25px;
   }
+}
+
+/* ----------- iPhone X ----------- *
+/* Portrait */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+    .display-hours-container {
+      width: 80%;
+    }
 }
