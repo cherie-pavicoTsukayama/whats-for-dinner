@@ -319,7 +319,7 @@ export default class MatchedDetails extends React.Component {
               {this.renderHours(this.state.hours)}
             </div>
           </div>
-          <div className="mt-3 mb-5 ml-3 mr-3">
+          <div className="col-lg-8 mt-3 mb-5">
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>);
