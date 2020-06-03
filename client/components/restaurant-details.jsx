@@ -193,24 +193,28 @@ export default class RestaurantDetail extends React.Component {
     const renderHours = hours.map((weekDay, index) => {
       if (hours.length === 7) {
         return (
-          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
-            <div className="col-3 ml-2">
-              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
-            </div>
-            <div className="col ml-2">
-              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+          <div key={weekDay.day + index} className="col-12 row justify-content-center display-hours-container">
+            <div className=" col-lg-3 w-80 d-flex justify-content-center ">
+              <div className=" col-2 col-md-1 col-lg-3">
+                <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+              </div>
+              <div className=" col-sm col-md-4 col-lg-12 ">
+                <p className="montserrat-500 m-0 text-right">{this.convertTime(weekDay)}</p>
+              </div>
             </div>
           </div>
         );
       }
       if (hours.length === 14) {
         return (
-          <div key={weekDay.day + index} className=" col-12 w-80 d-flex justify-content-center">
-            <div className="col-3 ml-2">
-              <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
-            </div>
-            <div className="col ml-2">
-              <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+          <div key={weekDay.day + index} className="col-12 row justify-content-center">
+            <div className=" col-lg-3 w-80 d-flex justify-content-center">
+              <div className=" col-2 col-md-1 col-lg-3">
+                <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+              </div>
+              <div className=" col-sm col-md-4 col-lg-12 ">
+                <p className="montserrat-500 m-0 text-right">{this.convertTime(weekDay)}</p>
+              </div>
             </div>
           </div>
         );
@@ -288,8 +292,8 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 pl-0 pr-0 mb-4">
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
-          <div className="col-12 mb-2 pl-0 pr-0 mt-1">
-            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title">{this.props.restaurants.name}</h1>
+          <div className="col-12 mb-2 pl-0 pr-0 mt-1 d-flex justify-content-center">
+            <h1 className="montserrat-400 brand-blue-text text-center restaurant-title ">{this.props.restaurants.name}</h1>
           </div>
           <div className="col-12 d-flex justify-content-center mt-2">
             {this.renderStarRating()}
@@ -300,25 +304,32 @@ export default class RestaurantDetail extends React.Component {
           <div className="col-12 d-flex justify-content-center pb-3">
             {this.renderIsOpen()}
           </div>
-          <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
-            {this.renderHours(this.state.hours)}
+          <div className="d-flex justify-content-center">
+            <div className=" col-sm-9 col-12 col-md-12 d-flex flex-wrap justify-content-center pb-5">
+              {this.renderHours(this.state.hours)}
+            </div>
           </div>
-          <div className="col-12 mt-3 mb-5">
+          <div className="col-lg-8 mt-3 mb-5">
             {this.renderReviews(this.state.reviews)}
           </div>
         </div>
-        <div className={'col bg-green footer d-flex align-items-center'}>
-          <div className="footer-inner d-flex justify-content-between">
-            <button className="btn">
-              <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
-            </button>
-            <button className="btn">
-              <i
-                className={`fas fa-heart fa-3x ${heartColor}`}
-                onClick={this.props.handleHeartClick}
-              >
-              </i>
-            </button>
+        <div className={'col bg-green footer d-flex justify-content-center'}>
+          <div className="col-lg-6 row justify-content-center align-items-center">
+            <div className="col-4 ">
+              <button className="btn">
+                <i className={'fas fa-caret-left white fa-3x'} onClick={this.props.onClick}></i>
+              </button>
+            </div>
+            <div className="col-4 d-flex justify-content-center">
+              <button className="btn">
+                <i
+                  className={`fas fa-heart fa-3x ${heartColor}`}
+                  onClick={this.props.handleHeartClick}
+                >
+                </i>
+              </button>
+            </div>
+            <div className="col-4"></div>
           </div>
         </div>
       </div>
