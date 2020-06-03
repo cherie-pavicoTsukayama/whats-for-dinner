@@ -338,7 +338,7 @@ export default class MatchedDetails extends React.Component {
           <div className="col-12 pl-0">
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
           </div>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mb-4">
             <div className="col match-logo"></div>
           </div>
         </div>

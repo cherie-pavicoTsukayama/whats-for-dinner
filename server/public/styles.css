@@ -33,10 +33,10 @@ color:#fe4a3b;
 
 .match-logo {
   background-image: url('./images/match-logo.png');
-  background-size:cover;
-  background-repeat:no-repeat;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
-  height:20vh;
+  height: 20vh;
 }
 
 .match-icon {
@@ -44,7 +44,7 @@ color:#fe4a3b;
   background-size: 30%;
   background-repeat :no-repeat;
   background-position: center;
-  height:20vh;
+  height: 20vh;
 }
 
 .match-modal-interior-container {
