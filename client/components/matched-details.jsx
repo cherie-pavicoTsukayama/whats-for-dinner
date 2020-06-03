@@ -201,18 +201,37 @@ export default class MatchedDetails extends React.Component {
   }
 
   renderHours(hours) {
-    const renderHours = hours.map(weekDay => {
-      return (
-        <div key={weekDay.day} className=" col-12 w-80 d-flex justify-content-center">
-          <div className="col-3 ml-2">
-            <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+    const renderHours = hours.map((weekDay, index) => {
+      if (hours.length === 7) {
+        return (
+          <div key={weekDay.day + index} className="col-12 row justify-content-center display-hours-container">
+            <div className=" col-lg-3 w-80 d-flex justify-content-center ">
+              <div className=" col-2 col-md-1 col-lg-3">
+                <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+              </div>
+              <div className=" col-sm col-md-4 col-lg-12 ">
+                <p className="montserrat-500 m-0 text-right">{this.convertTime(weekDay)}</p>
+              </div>
+            </div>
           </div>
-          <div className="col ml-2">
-            <p className="montserrat-500 m-0">{this.convertTime(weekDay)}</p>
+        );
+      }
+      if (hours.length === 14) {
+        return (
+          <div key={weekDay.day + index} className="col-12 row justify-content-center">
+            <div className=" col-lg-3 w-80 d-flex justify-content-center">
+              <div className=" col-2 col-md-1 col-lg-3">
+                <p className="montserrat-700 m-0">{this.convertDayOfTheWeek(weekDay)}</p>
+              </div>
+              <div className=" col-sm col-md-4 col-lg-12 ">
+                <p className="montserrat-500 m-0 text-right">{this.convertTime(weekDay)}</p>
+              </div>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
+
     return renderHours;
   }
 
@@ -277,31 +296,33 @@ export default class MatchedDetails extends React.Component {
     let restaurantDetails = null;
     if (this.state.photos.length !== 0) {
       restaurantDetails =
-      (<div className="d-flex flex-wrap justify-content-center mt-4">
-        <h1 className="montserrat-400 brand-blue-text text-center restaurant-title">{this.state.name}</h1>
-        <div className="col-12 d-flex justify-content-center mt-2">
-          {this.renderStarRating()}
-        </div>
-        <div className="pt-4 pb-4">
-          {this.renderAddress()}
-        </div>
-        <div className="d-flex flex-wrap justify-content-center mb-5">
-          {this.renderImageCarousel(this.state.photos)}
-          <form action={this.state.url} target="_blank">
-            <button type="submit" className="btn pointer match-website-button shadow-sm">View on Yelp</button>
-          </form>
+        (<div className="d-flex flex-wrap justify-content-center container">
+          <h1 className="montserrat-400 brand-blue-text text-center restaurant-title">{this.state.name}</h1>
+          <div className="col-12 d-flex justify-content-center mt-2">
+            {this.renderStarRating()}
+          </div>
+          <div className="pt-4 pb-4">
+            {this.renderAddress()}
+          </div>
+          <div className="d-flex flex-wrap justify-content-center mb-5">
+            {this.renderImageCarousel(this.state.photos)}
+            <form action={this.state.url} target="_blank">
+              <button type="submit" className="btn pointer match-website-button shadow-sm">View on Yelp</button>
+            </form>
 
-        </div>
-        <div className="col-12 d-flex justify-content-center pb-3">
-          {this.renderIsOpen()}
-        </div>
-        <div className="col-12 d-flex flex-wrap justify-content-center pb-5">
-          {this.renderHours(this.state.hours)}
-        </div>
-        <div className="mt-3 mb-5 ml-3 mr-3">
-          {this.renderReviews(this.state.reviews)}
-        </div>
-      </div>);
+          </div>
+          <div className="col-12 d-flex justify-content-center pb-3">
+            {this.renderIsOpen()}
+          </div>
+          <div className="d-flex justify-content-center">
+            <div className=" col-sm-9 col-12 col-md-12 d-flex flex-wrap justify-content-center pb-5">
+              {this.renderHours(this.state.hours)}
+            </div>
+          </div>
+          <div className="mt-3 mb-5 ml-3 mr-3">
+            {this.renderReviews(this.state.reviews)}
+          </div>
+        </div>);
     } else {
       restaurantDetails =
         (<div className="d-flex h-100 justify-content-center container align-content-center">
