@@ -138,7 +138,6 @@ display:flex;
   background-position:center;
   display:flex;
   align-items:center;
-  justify-content: flex-end;
   flex-direction:column;
 }
 
@@ -481,6 +480,12 @@ display:flex;
   font-size: 1.7rem;
 }
 
+.header-container{
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
 .landing-page-logo {
   background-image: url("./images/wfd-logo.png");
   background-repeat: no-repeat;
@@ -495,8 +500,7 @@ display:flex;
   background-color: rgba(255, 255, 255, .7);
   width: 100%;
   height: 100px;
-  position: absolute;
-  top: 90px;
+  position: relative;
 }
 
 .instruction-container {
@@ -507,6 +511,11 @@ display:flex;
 
 .instruction-text {
   font-size: .75rem;
+}
+
+.landing-page-layout {
+  width: 100%;
+  height: 80%;
 }
 
 @media screen and (min-width: 667px) {
@@ -699,6 +708,22 @@ height:10vh;
     width: 50%;
     color: white;
     border-radius: 25px;
+  }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -40px;
+  }
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
   }
 }
 
