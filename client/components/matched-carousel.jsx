@@ -43,8 +43,8 @@ export default class Carousel extends React.Component {
   render() {
     return (
       <div className={'d-felx flex-wrap justify-content-center'}>
-        <div className={'d-flex flex-nowrap'}>
-          <figure className={'figure '}>
+        <div className={'d-flex flex-nowrap justify-content-center'}>
+          <figure className={'figure col-md-8 col-lg-9'}>
             <img src={this.props.images[this.state.currentImageIndex]}
               alt="" className={'figure-image'} />
           </figure>
