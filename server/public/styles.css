@@ -725,6 +725,9 @@ height:10vh;
     position: absolute;
     top: -40px;
   }
+  .instruction-container {
+    background-color: rgba(255, 255, 255, .9);
+  }
 }
 
 /* ----------- iPhone 6, 7 and 8 ----------- */
@@ -792,7 +795,7 @@ height:10vh;
     width: 150px;
     height: 150px;
     position: absolute;
-    top: -40px;
+    top: -50px;
   }
   .transparent-white-bg {
     background-color: rgba(255, 255, 255, .7);
@@ -801,4 +804,6 @@ height:10vh;
     position: absolute;
     top: 50px;
   }
-}
+  .instruction-container {
+    background-color: rgba(255, 255, 255, .9);
+  }

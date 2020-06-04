@@ -11,21 +11,21 @@ export default function LandingPage(props) {
       </div>
       <div className="my-2 d-flex flex-wrap align-content-between justify-content-center landing-page-layout">
         <div className="col-md-8 col-lg-5 d-flex flex-nowrap justify-content-around mt-3">
-          <div className=" p-1 py-2 mx-1 brand-blue-text montserrat-500 instruction-container">
+          <div className=" p-2  py-2 mx-1 brand-blue-text montserrat-500 instruction-container shadow">
             <h5 className="text-center">1</h5>
-            <p className="m-0 text-center instruction-text">
+            <p className=" text-center instruction-text">
               Make a room  and share your entry key with a friend.
             </p>
           </div>
-          <div className=" p-1 py-2 mx-1 brand-blue-text montserrat-500 instruction-container">
+          <div className=" p-2  py-2 mx-1 brand-blue-text montserrat-500 instruction-container shadow">
             <h5 className="text-center">2</h5>
-            <p className="m-0 text-center instruction-text">
+            <p className=" text-center instruction-text">
               Already have an entry key? Join your friend&apos;s room!
             </p>
           </div>
-          <div className=" p-1 m py-2 mx-1 brand-blue-text montserrat-500 instruction-container">
+          <div className=" p-2  m py-2 mx-1 brand-blue-text montserrat-500 instruction-container shadow">
             <h5 className="text-center">3</h5>
-            <p className="m-0 text-center instruction-text">
+            <p className=" text-center instruction-text">
               Start liking restaurant and match with a friend!
             </p>
           </div>
