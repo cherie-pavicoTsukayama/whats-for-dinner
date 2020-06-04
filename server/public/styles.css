@@ -499,6 +499,15 @@ display:flex;
   top: 90px;
 }
 
+.instruction-container {
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 30px;
+  width: 33%;
+}
+
+.instruction-text {
+  font-size: .75rem;
+}
 
 @media screen and (min-width: 667px) {
 .match-modal-interior-container {
