@@ -11,10 +11,10 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: 'match details',
+      view: 'landing page',
       currentRestaurant: 0,
       restaurants: [],
-      matchedRestaurantId: 'WqHPB51wrjn1exIs-s9UXw',
+      matchedRestaurantId: null,
       isThereAmatch: false,
       checkMatchIntervalId: null
     };

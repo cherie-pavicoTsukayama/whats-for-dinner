@@ -138,7 +138,6 @@ display:flex;
   background-position:center;
   display:flex;
   align-items:center;
-  justify-content: flex-end;
   flex-direction:column;
 }
 
@@ -481,6 +480,12 @@ display:flex;
   font-size: 1.7rem;
 }
 
+.header-container{
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
 .landing-page-logo {
   background-image: url("./images/wfd-logo.png");
   background-repeat: no-repeat;
@@ -495,10 +500,23 @@ display:flex;
   background-color: rgba(255, 255, 255, .7);
   width: 100%;
   height: 100px;
-  position: absolute;
-  top: 90px;
+  position: relative;
 }
 
+.instruction-container {
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 30px;
+  width: 33%;
+}
+
+.instruction-text {
+  font-size: .75rem;
+}
+
+.landing-page-layout {
+  width: 100%;
+  height: 80%;
+}
 
 @media screen and (min-width: 667px) {
 .match-modal-interior-container {
@@ -528,6 +546,18 @@ height:10vh;
     color: white;
     border-radius: 25px;
   }
+  .header-container{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    top: 70px;
+  }
+  .landing-page-layout {
+    width: 100%;
+    height: 80%;
+    padding-top: 30px;
+
+  }
 }
 
 /* Landscape */
@@ -540,6 +570,22 @@ height:10vh;
     width: 20%;
     color: white;
     border-radius: 25px;
+  }
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
+  }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -40px;
   }
 }
 
@@ -556,6 +602,22 @@ height:10vh;
 @media screen and (min-width: 1100px) {
 .match-modal-interior-container {
   width: 30%;
+  }
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
+  }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -40px;
   }
 }
 
@@ -640,6 +702,34 @@ height:10vh;
     }
 }
 
+/* ----------- iPhone X ----------- *
+/* Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) {
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
+  }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -50px;
+  }
+  .instruction-container {
+    background-color: rgba(255, 255, 255, .9);
+  }
+}
+
 /* ----------- iPhone 6, 7 and 8 ----------- */
 
 /* Portrait and Landscape */
@@ -666,6 +756,22 @@ height:10vh;
     color: white;
     border-radius: 25px;
   }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -40px;
+  }
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
+  }
 }
 
 /* Landscape */
@@ -682,4 +788,22 @@ height:10vh;
     color: white;
     border-radius: 25px;
   }
-}
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -50px;
+  }
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
+  }
+  .instruction-container {
+    background-color: rgba(255, 255, 255, .9);
+  }
