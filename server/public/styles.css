@@ -640,6 +640,31 @@ height:10vh;
     }
 }
 
+/* ----------- iPhone X ----------- *
+/* Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) {
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
+  }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -40px;
+  }
+}
+
 /* ----------- iPhone 6, 7 and 8 ----------- */
 
 /* Portrait and Landscape */
@@ -681,5 +706,21 @@ height:10vh;
     width: 50%;
     color: white;
     border-radius: 25px;
+  }
+  .landing-page-logo {
+    background-image: url("./images/wfd-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -40px;
+  }
+  .transparent-white-bg {
+    background-color: rgba(255, 255, 255, .7);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    top: 50px;
   }
 }
