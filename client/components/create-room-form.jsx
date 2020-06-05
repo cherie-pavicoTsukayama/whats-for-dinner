@@ -171,10 +171,10 @@ class CreateRoomForm extends React.Component {
 
               </div>
             </div>
-            <div className='form-group mt-5 mb-2 push-down'>
+            <div className='form-group mt-5 mb-2 push-down d-flex justify-content-center'>
 
               <select
-                className='form-control  color'
+                className='form-control  color col-md-5 col-lg-4'
                 name="category"
                 id="category"
                 onChange={this.handleCategory}>
@@ -200,9 +200,9 @@ class CreateRoomForm extends React.Component {
               </select>
 
             </div>
-            <div className='form-group mt-4 mb-4 '>
+            <div className='form-group mt-4 mb-4 d-flex justify-content-center'>
 
-              <div className='d-flex justify-content-around push-down-more'>
+              <div className='d-flex justify-content-around push-down-more col-md-9 col-lg-6'>
                 <div className={`price shadow text-align-center ${$1}`} onClick={this.handle$}>$</div>
                 <div className={`price shadow text-align-center ${$2}`} onClick={this.handle$$}>$$</div>
                 <div className={`price shadow text-align-center ${$3}`} onClick={this.handle$$$}>$$$</div>
