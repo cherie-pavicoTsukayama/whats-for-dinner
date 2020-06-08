@@ -10,9 +10,9 @@ function RoomClosedModal(props) {
 
   return (
 
-    <div className={`match-modal d-flex justify-content-center align-items-center ${className}`}>
+    <div className={`room-close-modal-container ${className} justify-content-center align-items-center` }>
       <div className=" pb-4 d-flex justify-content-center flex-column align-content-around room-closed-modal shadow">
-        <div className="w-100 match-icon">
+        <div className="match-icon">
         </div>
         <p className="text-center montserrat-500 lead brand-blue-text">Sorry this room <br/> has been closed</p>
         <button

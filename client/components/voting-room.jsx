@@ -18,7 +18,7 @@ export default class VotingRoom extends React.Component {
       isLeaving: false,
       restaurantId: null,
       isRoomClosedIntervalId: null,
-      isRoomClosed: false
+      isRoomClosed: null
     };
     this.isRoomClosedIntervalId = null;
     this.showModal = this.showModal.bind(this);
