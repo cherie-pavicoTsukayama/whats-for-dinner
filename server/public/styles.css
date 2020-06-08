@@ -255,8 +255,18 @@ display:flex;
 }
 
 .match-image-container {
-  position:relative;
-  max-height:45vh;
+  position: relative;
+  height: 60vh;
+  /* background-color: green; */
+}
+
+.voting-room-image {
+  width: 100%;
+  height: 100%;
+}
+
+.cover {
+  object-fit: cover;
 }
 
 .match-button-container {
@@ -466,9 +476,6 @@ display:flex;
   min-height:80px;
 }
 
-.view-restaurant-image {
-  object-fit: cover;
-}
 
 .white-button {
   width:200px;
@@ -866,5 +873,22 @@ height:10vh;
   }
   .orange-rounded-button {
     height: 10vh;
+  }
+  .view-height-forty-five {
+    height: 100vh;
+  }
+  .review-star-image {
+    max-width: 100px;
+  }
+
+  .restaurant-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #007e77;
+    text-align: center;
+    line-height: 1rem;
+    max-width: 345px;
+    margin-bottom: 0;
   }
 }

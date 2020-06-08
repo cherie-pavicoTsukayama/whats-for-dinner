@@ -166,25 +166,19 @@ export default class VotingRoom extends React.Component {
     } else if (this.state.images.length === 1 || typeof this.state.images === 'string') {
       return (
         <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
-          <div className={'col pl-0 pr-0 view-height-forty-five'}>
-            <div className={'col pl-0 pr-0 view-height-forty-five'}>
-              <img src={this.state.images}
-                alt="Yelp Restaurant Business Image"
-                className={' h-100 w-100 view-restaurant-image'} />
-            </div>
+          <div className={'col pl-0 pr-0 '}>
+            <img src={this.state.images}
+              alt="Yelp Restaurant Business Image"
+              className={'voting-room-image cover'} />
           </div>
         </div>
       );
     } else if (typeof this.state.images !== 'string') {
       return (
         <div className={'col d-flex flex-wrap justify-content-center  pl-0 pr-0 match-image-container'}>
-          <div className={'col pl-0 pr-0 view-height-forty-five'}>
-            <div className={'col pl-0 pr-0 view-height-forty-five'}>
-              <img src={this.state.images[this.state.currentImageIndex]}
-                alt="Yelp Restaurant Business Image"
-                className={' h-100 w-100 view-restaurant-image'} />
-            </div>
-          </div>
+          <img src={this.state.images[this.state.currentImageIndex]}
+            alt="Yelp Restaurant Business Image"
+            className={'voting-room-image cover'} />
           <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
             <button className='btn'>
               <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={this.handleClickBackImage}></i>
@@ -266,7 +260,7 @@ export default class VotingRoom extends React.Component {
 
     if (this.state.view === 'voting room') {
       return (
-        <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room min-vh-100 min-vw-100  pl-0 pr-0'}>
+        <div className={'container-fluid d-flex flex-column justify-content-between restaurant-room  pl-0 pr-0'}>
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
           <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal}/>
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
@@ -274,15 +268,15 @@ export default class VotingRoom extends React.Component {
             <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room"/>
           </div>
           <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header'}>
-            <div className={'restaurant-title mb-4 mt-2'}>{this.props.restaurant.name}</div>
-            <div>
+            <div className={'restaurant-title mb-2 mt-2'}>{this.props.restaurant.name}</div>
+            <div className='mb-5'>
               {this.renderStarRating()}
             </div>
           </div>
-          <div className={'col d-flex flex-wrap justify-content-center  px-0 match-image-container'}>
-            <div className={'col pl-0 pr-0 view-height-forty-five'}>
-              {this.getCurrentImages()}
-            </div>
+          <div className={'col col-sm-6 col-md-8 d-flex flex-wrap align-self-center px-0 match-image-container'}>
+
+            {this.getCurrentImages()}
+
           </div>
           <div className={'col-sm d-flex justify-content-center  pl-0 pr-0 view-restaurant-button-container'}>
             <button
@@ -292,7 +286,7 @@ export default class VotingRoom extends React.Component {
                 Info
             </button>
           </div>
-          <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice'}>
+          <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice footer'}>
             <button className='btn '>
               <i className={'fas fa-caret-left white fa-3x'} onClick={ this.props.decrementRestaurant } ></i>
             </button>
