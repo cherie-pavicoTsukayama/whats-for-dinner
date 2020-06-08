@@ -60,6 +60,13 @@ transform: translate(-50%,-50%);
 display:flex;
 }
 
+.room-closed-modal {
+height:50vh;
+background-color:white;
+border-radius:20px;
+width: 80%;
+}
+
 .match-modal {
   display:flex;
   position: fixed;
@@ -807,3 +814,10 @@ height:10vh;
   .instruction-container {
     background-color: rgba(255, 255, 255, .9);
   }
+  .room-closed-modal {
+    height: 70vh;
+    background-color:white;
+    border-radius: 20px;
+    width: 40%;
+  }
+}
