@@ -256,8 +256,7 @@ display:flex;
 
 .match-image-container {
   position: relative;
-  height: 60vh;
-  /* background-color: green; */
+  height: 50vh;
 }
 
 .voting-room-image {
@@ -410,6 +409,12 @@ display:flex;
 }
 
 .footer {
+  height: 70px;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-voting-room {
   height: 70px;
   position: fixed;
   bottom: 0;
@@ -878,7 +883,7 @@ height:10vh;
     height: 100vh;
   }
   .review-star-image {
-    max-width: 100px;
+    max-width: 150px;
   }
 
   .restaurant-title {
@@ -890,5 +895,14 @@ height:10vh;
     line-height: 1rem;
     max-width: 345px;
     margin-bottom: 0;
+  }
+  .footer-voting-room {
+    height: 70px;
+    position: static;
+    bottom: 0;
+  }
+  .match-image-container {
+    position: relative;
+    height: 80vh;
   }
 }
