@@ -181,10 +181,10 @@ export default class VotingRoom extends React.Component {
             className={'voting-room-image cover'} />
           <div className={'match-button-container d-flex justify-content-between align-items-center h-100 w-100'}>
             <button className='btn'>
-              <i className={'fas fa-chevron-left fa-4x food-choice-arrow'} onClick={this.handleClickBackImage}></i>
+              <i className={'fas fa-chevron-left fa-3x food-choice-arrow'} onClick={this.handleClickBackImage}></i>
             </button>
             <button className={'btn'}>
-              <i className={'fas fa-chevron-right fa-4x food-choice-arrow'} onClick={this.handleClickNextImage}></i>
+              <i className={'fas fa-chevron-right fa-3x food-choice-arrow'} onClick={this.handleClickNextImage}></i>
             </button>
           </div>
         </div>
@@ -264,16 +264,19 @@ export default class VotingRoom extends React.Component {
           <RoomClosedModal isRoomClosed={this.state.isRoomClosed} setView={this.props.setView} hideRoomClosedModal={this.hideRoomClosedModal} />
           <MatchConfirmed match={this.props.isThereAmatch} setView={this.props.setView} hide={this.hideModal}/>
           <LeaveRoom isLeaving={this.state.isLeaving} hide={this.hideLeaveRoom} leave={this.leaveRoom} />
-          <div className={'col-sm pl-3 pr-0'}>
-            <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room"/>
+          <div className="container">
+            <div className="col-12 col-lg-8 mb-4 pl-0 pr-0">
+              <img src="./images/leaveRoom.png" onClick={this.showLeaveRoom} className="door-icon mt-2" alt="Leave room" />
+            </div>
           </div>
+
           <div className={'col d-flex justify-content-center align-items-center flex-column pl-0 pr-0 view-restaurant-header'}>
             <div className={'restaurant-title mb-2 mt-2'}>{this.props.restaurant.name}</div>
-            <div className='mb-5'>
+            <div className='mb-4'>
               {this.renderStarRating()}
             </div>
           </div>
-          <div className={'col col-sm-6 col-md-8 d-flex flex-wrap align-self-center px-0 match-image-container'}>
+          <div className={'col col-sm-6 col-md-8 col-lg-6 d-flex flex-wrap align-self-center px-0 match-image-container'}>
 
             {this.getCurrentImages()}
 
@@ -287,19 +290,28 @@ export default class VotingRoom extends React.Component {
             </button>
           </div>
           <div className={'col d-flex justify-content-around brand-blue pl-0 pr-0 restaurant-button-choice footer-voting-room'}>
-            <button className='btn '>
-              <i className={'fas fa-caret-left white fa-3x'} onClick={ this.props.decrementRestaurant } ></i>
-            </button>
-            <button className="btn">
-              <i
-                className={`fas fa-heart fa-3x ${heartColor}`}
-                onClick={() => this.handleHeartClick()}
-              >
-              </i>
-            </button>
-            <button className={'btn'}>
-              <i className={'fas fa-caret-right white fa-3x'} onClick={ this.props.incrementRestaurant }> </i>
-            </button>
+            <div className='col-lg-6 row justify-content-center align-items-center'>
+              <div className='col-4'>
+                <button className='btn '>
+                  <i className={'fas fa-caret-left white fa-3x '} onClick={this.props.decrementRestaurant} ></i>
+                </button>
+              </div>
+              <div className='col-4 d-flex justify-content-center'>
+                <button className="btn">
+                  <i
+                    className={`fas fa-heart fa-3x ${heartColor}`}
+                    onClick={() => this.handleHeartClick()}
+                  >
+                  </i>
+                </button>
+              </div>
+              <div className="col-4 d-flex justify-content-end">
+                <button className={'btn'}>
+                  <i className={'fas fa-caret-right white fa-3x'} onClick={this.props.incrementRestaurant}> </i>
+                </button>
+              </div>
+
+            </div>
           </div>
         </div>
       );

@@ -256,7 +256,7 @@ display:flex;
 
 .match-image-container {
   position: relative;
-  height: 50vh;
+  height: 60vh;
 }
 
 .voting-room-image {
@@ -594,6 +594,11 @@ height:10vh;
   .orange-rounded-button {
     height: 5vh;
   }
+
+  .match-image-container {
+    position: relative;
+    height: 65vh;
+  }
 }
 
 /* Landscape */
@@ -634,6 +639,11 @@ height:10vh;
   .room-closed-modal {
     height: 30vh;
     width: 40%;
+  }
+
+  .match-image-container {
+    position: relative;
+    height: 55vh;
   }
 }
 
@@ -788,6 +798,15 @@ height:10vh;
   .match-icon {
     height: 30vh;
   }
+    .footer-voting-room {
+    height: 70px;
+    position: static;
+    bottom: 0;
+  }
+  .match-image-container {
+    position: relative;
+    height: 80vh;
+  }
 }
 
 /* ----------- iPhone 6, 7 and 8 ----------- */
@@ -835,6 +854,10 @@ height:10vh;
   .room-closed-modal {
     height: 50vh;
     width: 80%;
+  }
+  .match-image-container {
+    position: relative;
+    height: 45vh;
   }
 }
 
