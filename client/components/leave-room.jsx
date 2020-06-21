@@ -29,5 +29,4 @@ export default function LeaveRoom(props) {
       </div>
     </div>
   );
-
 }

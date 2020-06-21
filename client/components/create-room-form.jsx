@@ -226,9 +226,7 @@ class CreateRoomForm extends React.Component {
         </div>
       );
     }
-
   }
-
 }
 
 export default CreateRoomForm;
