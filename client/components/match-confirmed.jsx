@@ -24,6 +24,6 @@ function MatchConfirmed(props) {
       </div>
     </div>
   );
-
 }
+
 export default MatchConfirmed;

@@ -26,7 +26,7 @@ export default function LandingPage(props) {
           <div className=" p-2  m py-2 mx-1 brand-blue-text montserrat-500 instruction-container shadow">
             <h5 className="text-center">3</h5>
             <p className=" text-center instruction-text">
-              Start liking restaurant and match with a friend!
+              Start liking restaurants and match with a friend!
             </p>
           </div>
         </div>
